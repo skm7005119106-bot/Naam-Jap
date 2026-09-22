@@ -1,0 +1,10 @@
+{
+  "name": "Naam Jap",
+  "short_name": "Naam Jap",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fffaf3",
+  "theme_color": "#8b5e34",
+  "description": "An offline companion for Naam Jap and Naam Smaran.",
+  "icons": []
+}
