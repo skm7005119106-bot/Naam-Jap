@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -223,8 +223,20 @@
 <script>
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    window.addEventListener('load', async () => {
+      try {
+        const reg = await navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });
+        await reg.update();
+        // If an older cached UI was shown once, reload exactly once after the
+        // new service worker takes control so the user immediately gets the
+        // current stylesheet instead of needing to refresh manually.
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!sessionStorage.getItem('naam-jap-sw30-reloaded')) {
+            sessionStorage.setItem('naam-jap-sw30-reloaded', '1');
+            window.location.reload();
+          }
+        }, { once: true });
+      } catch (e) {}
     });
   }
   // When launched from the home-screen icon (standalone/fullscreen display),
