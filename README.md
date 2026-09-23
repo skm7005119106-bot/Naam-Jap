@@ -98,3 +98,11 @@ Retained:
 - Home, Jap, Profile, Sankalp, Naam and Settings now use the full phone width.
 - Increased typography and tap controls while preserving responsive six-tab navigation.
 - Added a fresh stylesheet/cache version to prevent stale CSS from masking the update.
+
+## v28 — Large Reference-Style UI
+- Rebuilt the visible typography and Jap screen sizing to closely match the requested large-text reference.
+- Increased Naam heading, session counter, buttons, instruction text and bottom navigation.
+- Enlarged the central Jap circle substantially.
+- Kept six-tab navigation responsive and non-overlapping.
+- Removed the Jap card's forced tall empty minimum height.
+- Bumped stylesheet and service-worker versions to v28.
