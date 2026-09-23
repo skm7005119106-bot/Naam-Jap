@@ -70,3 +70,24 @@ Retained:
 
 ## v23 update
 - Enlarged the central Naam Jap circle substantially to use the phone width better.
+
+
+## v24 update
+- Increased app-wide readable typography and card text.
+- Larger header, headings, counters, buttons and bottom navigation labels.
+- Prevented navigation/button labels from wrapping into each other.
+- Preserved responsive layout for phone screens.
+
+
+## v25 update
+- Clearly increased typography across Home, Jap, cards, stats and navigation.
+- Corrected selectors for the actual stat/card elements.
+- Preserved six-tab navigation without overlap/wrapping.
+- Bumped service-worker/cache version to v25.
+
+
+## v26 update
+- Changed the layout to use the full phone width instead of a narrow centered content column.
+- Cards, home sections and Jap screen now expand across the available viewport.
+- Bottom navigation remains full-width and fixed.
+- Preserved readable typography and the large Jap circle.
