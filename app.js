@@ -160,7 +160,42 @@ function showMilestoneUnlocked(m){openModal(`<div style="text-align:center"><div
 function checkGoalsForCertificate(){state.goals.forEach(g=>{if(g.active&&totalFor(g.naamId)>=g.target&&!state.certificates.some(c=>c.goalId===g.id)){g.active=false;const id=`NJ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;state.certificates.push({id,goalId:g.id,naamId:g.naamId,target:g.target,date:todayKey()});showCertificateUnlocked(g)}})}
 function checkCertificate(g){if(totalFor(g.naamId)>=g.target){checkGoalsForCertificate();render();toast(state.lang==="hi"?"Sankalp poora — certificate unlock ho gaya":"Sankalp complete — certificate unlocked")}else{toast(state.lang==="hi"?`Abhi ${(g.target-totalFor(g.naamId)).toLocaleString()} Jap baaki hain.`:`${(g.target-totalFor(g.naamId)).toLocaleString()} Jap remaining.`)}}
 function showCertificateUnlocked(g){openModal(`<div style="text-align:center"><div style="font-size:48px">🪷</div><h2>${state.lang==="hi"?"Sankalp poorn":"Sankalp Complete"}</h2><p>${displayNaam(naamObj(g.naamId))} · ${g.target.toLocaleString()} Jap</p><p class="muted">${state.lang==="hi"?"Aapka in-app completion certificate tayyar hai.":"Your in-app completion certificate is ready."}</p><button id="viewCert" class="primary wide">${state.lang==="hi"?"Certificate dekhein":"View Certificate"}</button></div>`);document.getElementById("viewCert").onclick=()=>{closeModal();showPage("certificate")}}
-function printCertificate(id){const c=state.certificates.find(x=>x.id===id);if(!c)return;const n=c.naamId==="all"?(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleEn||"Naam Jap Milestone"):displayNaam(naamObj(c.naamId));const w=window.open("","_blank");if(!w){toast(state.lang==="hi"?"Popup allow karein":"Allow popups");return}w.document.write(`<html><head><title>Naam Jap Certificate</title><style>body{font-family:Georgia,serif;background:#f5efe6;padding:30px}.cert{max-width:700px;margin:40px auto;background:#fffdf8;border:8px double #b58a5d;padding:55px;text-align:center}.id{font:12px system-ui;color:#777}</style></head><body><div class="cert"><div style="font-size:55px">🪷</div><h1>Naam Jap</h1><h2>Completion Certificate</h2><p>This acknowledges completion of a self-recorded Naam Jap practice.</p><h2>${escapeHtml(state.profile.name||"Naam Sadhak")}</h2><p>Naam Jap: <b>${escapeHtml(n)}</b></p><h3>${c.target.toLocaleString()} Jap</h3><p>Completed: ${c.date}</p><p class="id">Certificate ID: ${c.id}</p></div><script>window.print()<\/script></body></html>`);w.document.close()}
+function printCertificate(id){
+ const c=state.certificates.find(x=>x.id===id);if(!c)return;
+ const n=c.naamId==="all"?(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleEn||"Naam Jap Milestone"):displayNaam(naamObj(c.naamId));
+ const w=window.open("","_blank");if(!w){toast(state.lang==="hi"?"Popup allow karein":"Allow popups");return}
+ w.document.write(`<html><head><title>Naam Jap Certificate</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+ @page{size:A4;margin:12mm}
+ *{box-sizing:border-box}
+ body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef6ff;color:#172033;padding:18px}
+ .cert{max-width:760px;margin:10px auto;background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 52%,#f0fdf4 100%);border:3px solid #2563eb;border-radius:24px;padding:42px 38px;text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 36px rgba(15,23,42,.14)}
+ .cert:before{content:"";position:absolute;inset:10px;border:2px solid #16a34a;border-radius:18px;pointer-events:none}
+ .top{position:relative;z-index:1;color:#1d4ed8;font:800 13px system-ui;letter-spacing:4px}
+ .lotus{position:relative;z-index:1;font-size:64px;margin:8px 0}
+ h1{position:relative;z-index:1;margin:4px 0;color:#1d4ed8;font-size:38px}
+ h2{position:relative;z-index:1;margin:8px 0;color:#15803d;font-size:22px}
+ .intro{position:relative;z-index:1;color:#475569}
+ .person{position:relative;z-index:1;font-size:28px;font-weight:800;color:#172033;margin:20px 0 8px}
+ .naam-label{position:relative;z-index:1;display:inline-block;padding:8px 18px;border-radius:999px;background:#dcfce7;color:#166534;font:800 16px system-ui;margin:4px 0 14px}
+ .count{position:relative;z-index:1;font-size:30px;font-weight:900;color:#b45309;margin:10px}
+ .date{position:relative;z-index:1;color:#475569}
+ .id{position:relative;z-index:1;font:12px system-ui;color:#64748b;margin-top:22px}
+ .footer{position:relative;z-index:1;margin-top:18px;color:#1d4ed8;font:700 12px system-ui;letter-spacing:1px}
+ @media print{body{background:#fff;padding:0}.cert{box-shadow:none;margin:0;max-width:none}}
+ </style></head><body><div class="cert">
+ <div class="top">✦ NAAM JAP • NAAM SMARAN ✦</div>
+ <div class="lotus">🪷</div>
+ <h1>Naam Jap</h1><h2>Completion Certificate</h2>
+ <p class="intro">This acknowledges completion of a self-recorded Naam Jap practice.</p>
+ <div class="person">${escapeHtml(state.profile.name||"Naam Sadhak")}</div>
+ <div class="naam-label">🙏 Naam Jap: ${escapeHtml(n)}</div>
+ <div class="count">${c.target.toLocaleString()} Jap</div>
+ <div class="date">Completed: ${c.date}</div>
+ <div class="id">Certificate ID: ${c.id}</div>
+ <div class="footer">श्रद्धा • नियमितता • नाम स्मरण</div>
+ </div><script>window.print()<\/script></body></html>`);
+ w.document.close()
+}
 function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`naam-jap-backup-${todayKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
@@ -263,3 +298,9 @@ function init(){
  try{render();}catch(e){console.error("Naam Jap render error:",e)}
  setTimeout(finishSplash,100);
 }init();
+/* v18: certificate Naam label helper. Existing certificate records remain untouched. */
+window.formatCertificateNaam = function(record){
+  if (!record) return "";
+  const naam = record.naam || record.name || record.japNaam || record.japName || record.selectedNaam || "";
+  return naam ? `Naam Jap: ${naam}` : "";
+};

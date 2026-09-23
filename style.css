@@ -278,3 +278,113 @@ button{
 
 /* Hide the old line/ring loader if any legacy markup survives. */
 .splash-ring{display:none !important;}
+
+/* ===== v16 final Android-like launch polish ===== */
+.splash-screen{
+  padding:env(safe-area-inset-top) 20px env(safe-area-inset-bottom);
+  background:linear-gradient(145deg,#f8fbff 0%,#eef5ff 48%,#ecfdf5 100%);
+  animation:splashOut .95s ease 1.05s forwards;
+}
+.splash-glow{display:none !important;}
+.splash-mark{
+  position:relative;width:92px;height:92px;border-radius:28px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#2563eb,#16a34a);
+  box-shadow:0 14px 32px rgba(37,99,235,.24);
+  animation:markIn .58s cubic-bezier(.2,.8,.2,1) both;
+}
+.splash-mark:after{
+  content:"";position:absolute;inset:7px;border-radius:22px;
+  border:1px solid rgba(255,255,255,.38);
+}
+.splash-mark span{
+  position:relative;z-index:1;color:#fff;font-size:46px;font-weight:700;
+  font-family:serif;line-height:1;
+}
+.splash-title{
+  margin-top:18px !important;font-size:32px !important;
+  letter-spacing:.2px;color:#1d4ed8 !important;
+  animation:titleIn .55s ease .12s both !important;
+}
+.splash-subtitle{
+  letter-spacing:2.5px !important;color:#15803d !important;
+  animation:titleIn .55s ease .18s both !important;
+}
+.splash-dots{margin-top:17px !important;animation:titleIn .45s ease .25s both !important;}
+.splash-dots i{
+  display:block;width:6px;height:6px;border-radius:50%;
+  background:#2563eb;animation:dotPulse .75s ease-in-out infinite;
+}
+.splash-dots i:nth-child(2){background:#16a34a;animation-delay:.12s}
+.splash-dots i:nth-child(3){background:#2563eb;animation-delay:.24s}
+@keyframes markIn{
+  0%{opacity:0;transform:scale(.72) translateY(10px)}
+  70%{opacity:1;transform:scale(1.04) translateY(0)}
+  100%{opacity:1;transform:scale(1)}
+}
+@keyframes splashOut{
+  0%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden;pointer-events:none}
+}
+/* Native-app-like touch feedback */
+button,.bottom-nav button{touch-action:manipulation;-webkit-user-select:none;user-select:none;}
+.bottom-nav{
+  padding-bottom:max(7px,env(safe-area-inset-bottom)) !important;
+}
+/* Keep the old ring/line completely gone */
+.splash-ring{display:none !important;}
+
+/* ===== v17 larger bottom navigation icons ===== */
+.bottom-nav{
+  min-height:82px !important;
+  padding:8px 6px max(8px,env(safe-area-inset-bottom)) !important;
+}
+.bottom-nav button{
+  min-height:70px !important;
+  min-width:54px !important;
+  padding:5px 3px 6px !important;
+  font-size:31px !important;
+  border-radius:17px !important;
+}
+.bottom-nav button span{
+  font-size:10.5px !important;
+  margin-top:5px !important;
+  font-weight:800 !important;
+}
+.page{
+  padding-bottom:132px !important;
+}
+@media(max-width:430px){
+  .bottom-nav button{
+    min-height:70px !important;
+    min-width:52px !important;
+    font-size:30px !important;
+  }
+  .bottom-nav button span{font-size:10px !important}
+}
+
+/* ===== v19 certificate card polish ===== */
+.cert{
+  background:linear-gradient(145deg,#ffffff 0%,#eff6ff 52%,#f0fdf4 100%) !important;
+  border:3px solid #2563eb !important;
+  border-radius:22px !important;
+  box-shadow:0 12px 30px rgba(15,23,42,.12) !important;
+  position:relative;
+  overflow:hidden;
+  padding:26px 20px !important;
+}
+.cert:before{
+  content:"";
+  position:absolute;inset:9px;border:2px solid #16a34a;
+  border-radius:16px;pointer-events:none;
+}
+.cert h3{color:#1d4ed8 !important}
+.cert h4{
+  color:#15803d !important;
+  background:#dcfce7;
+  border-radius:999px;
+  display:inline-block;
+  padding:8px 16px;
+  margin:8px 0;
+}
+.cert-num{color:#64748b !important}

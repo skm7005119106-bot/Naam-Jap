@@ -28,3 +28,23 @@ Retained:
 - Refined cards, shadows, header polish and blue/green accents.
 - Added service-worker cache version 15 to force the updated UI instead of stale cached CSS.
 - Added CSS cache-busting for style.css.
+
+
+## v16 final polish
+- Refined branded startup animation with Om mark, short fade and blue/green accents.
+- Removed the remaining line/ring loader styling.
+- Added v16 cache-busting for reliable rollout.
+
+
+## v17 update
+- Increased bottom navigation icon size and touch area while keeping labels readable.
+
+
+## v18 update
+- Colourful certificate styling with blue/green/gold accents.
+- Added a certificate Naam label helper so the Naam Jap used can be shown in certificate output when present in the certificate record.
+
+
+## v19 update
+- Certificate now prominently names the specific Naam Jap completed.
+- Print/Save PDF certificate redesigned with blue, green and gold accents and a clear Naam Jap badge.
