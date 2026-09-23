@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "io.github.skm7005119106_bot.twa",
+    "sha256_cert_fingerprints": [
+      "4B:4A:AA:A3:63:13:DF:2A:DE:64:46:E9:9C:75:ED:7A:F7:A8:77:C7:13:32:0E:AE:3D:45:16:1F:A1:DB:AD:0C"
+    ]
+  }
+}]
