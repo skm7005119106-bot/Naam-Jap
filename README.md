@@ -54,3 +54,9 @@ Retained:
 - Larger Naam Jap headings and counter.
 - Larger central tap/jap button and Naam label.
 - Increased usable screen width and reduced empty margins/space.
+
+
+## v21 update
+- Jap screen card and tap button enlarged to use the available phone screen better.
+- Naam and Jap counter increased further for a more immersive counting screen.
+- Reduced unused vertical space while keeping controls accessible.

@@ -465,3 +465,73 @@ button,.bottom-nav button{touch-action:manipulation;-webkit-user-select:none;use
     font-size:38px !important;
   }
 }
+
+/* ===== v21 Jap screen fills the phone beautifully ===== */
+#jap.page{
+  min-height:calc(100vh - 125px) !important;
+  padding-top:10px !important;
+}
+#jap .jap-card{
+  min-height:calc(100vh - 205px) !important;
+  padding:24px 14px 28px !important;
+  justify-content:flex-start !important;
+}
+#jap #japNaam{
+  font-size:38px !important;
+  margin:10px 0 8px !important;
+  letter-spacing:.1px;
+}
+#jap #sessionCount{
+  font-size:84px !important;
+  margin:8px 0 8px !important;
+  line-height:.98 !important;
+}
+#jap .progress{
+  width:100% !important;
+  height:9px !important;
+  margin:12px 0 8px !important;
+}
+#jap #japButton{
+  width:min(88vw,360px) !important;
+  height:min(88vw,360px) !important;
+  max-width:360px !important;
+  max-height:360px !important;
+  min-width:290px !important;
+  min-height:290px !important;
+  font-size:44px !important;
+  border-width:10px !important;
+  margin:22px auto 20px !important;
+  flex-shrink:0 !important;
+}
+#jap .jap-actions{
+  gap:10px !important;
+  margin-top:2px !important;
+}
+#jap .jap-actions button{
+  min-height:46px !important;
+  padding:8px 14px !important;
+}
+#jap #sessionSoundBtn{
+  min-height:40px !important;
+  margin-top:8px !important;
+}
+#jap #sessionStatus{
+  margin:8px 0 0 !important;
+}
+#jap .jap-card + .card{
+  margin-top:10px !important;
+}
+@media(max-width:430px){
+  #jap .jap-card{
+    min-height:calc(100vh - 200px) !important;
+    padding-top:22px !important;
+  }
+  #jap #japNaam{font-size:36px !important;}
+  #jap #sessionCount{font-size:78px !important;}
+  #jap #japButton{
+    width:min(86vw,340px) !important;
+    height:min(86vw,340px) !important;
+    min-width:280px !important;
+    min-height:280px !important;
+  }
+}
