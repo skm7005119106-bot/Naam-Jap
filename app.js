@@ -1,307 +1,161 @@
-const KEY="naam_jap_v7";
-const NAAMS=[
- {id:"radha",hi:"राधा",en:"Radha",group:"Radha"},
- {id:"radhe",hi:"राधे राधे",en:"Radhe Radhe",group:"Radha"},
- {id:"shri-radha",hi:"श्री राधा",en:"Shri Radha",group:"Radha"},
- {id:"krishna",hi:"कृष्ण",en:"Krishna",group:"Krishna"},
- {id:"govind",hi:"गोविंद",en:"Govind",group:"Krishna"},
- {id:"gopal",hi:"गोपाल",en:"Gopal",group:"Krishna"},
- {id:"shyam",hi:"श्याम",en:"Shyam",group:"Krishna"},
- {id:"madhav",hi:"माधव",en:"Madhav",group:"Krishna"},
- {id:"hari",hi:"हरि",en:"Hari",group:"Hari"},
- {id:"ram",hi:"राम",en:"Ram",group:"Ram"},
- {id:"shri-ram",hi:"श्री राम",en:"Shri Ram",group:"Ram"},
- {id:"siyaram",hi:"सिया राम",en:"Siya Ram",group:"Ram"},
- {id:"om",hi:"ॐ",en:"Om",group:"Mantra"},
- {id:"om-namah-shivaya",hi:"ॐ नमः शिवाय",en:"Om Namah Shivaya",group:"Shiva"},
- {id:"shiv",hi:"शिव",en:"Shiv",group:"Shiva"},
- {id:"mahadev",hi:"महादेव",en:"Mahadev",group:"Shiva"},
- {id:"narayan",hi:"नारायण",en:"Narayan",group:"Vishnu"},
- {id:"hare-krishna",hi:"हरे कृष्ण हरे कृष्ण",en:"Hare Krishna Hare Krishna",group:"Maha Mantra"},
- {id:"hare-rama",hi:"हरे राम हरे राम",en:"Hare Rama Hare Rama",group:"Maha Mantra"},
- {id:"full-mahamantra",hi:"हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे\nहरे राम हरे राम, राम राम हरे हरे",en:"Hare Krishna Hare Krishna, Krishna Krishna Hare Hare\nHare Rama Hare Rama, Rama Rama Hare Hare",group:"Maha Mantra"}
-];
+/* Naam Jap v3 — clean offline-first application core. */
+(() => {
+  'use strict';
+  const APP_VERSION = '3.0.0';
+  const DB_NAME = 'naam-jap-db';
+  const DB_VERSION = 1;
+  const STORE = 'app';
+  const KEY = 'state';
+  const MALA = 108;
+  const MILESTONES = [108, 1008, 10008, 108000];
+  const NAV = ['home','jap','naam','profile','sankalp','settings'];
+  const NAV_ICONS = {home:'⌂', jap:'◉', naam:'ॐ', profile:'◯', sankalp:'◇', settings:'⚙'};
+  const I18N = {
+    en: {
+      appName:'Naam Jap', intro:'A peaceful space for remembering the Divine Name, one Jap at a time.', language:'Language', preferredNaam:'Preferred Jap Naam', customNaamOptional:'Custom Naam (optional)', continue:'Continue', home:'Home', jap:'Jap', naam:'Naam', profile:'Profile', sankalp:'Sankalp', settings:'Settings', todayJap:"Today's Jap", todayMala:"Today's Mala", nextMala:'Next Mala', totalJap:'Total Jap', totalMala:'Total Mala', startJap:'Start Jap', thought:'Daily Smaran', beforeJap:'Jap se pehle', beforeText:'Settle your breath, remember the Divine Name, and begin gently.', selectedNaam:'Selected Naam', session:'Session', undo:'Undo', pause:'Pause', resume:'Resume', finish:'Finish', sound:'Sound', malaComplete:'108 Jap complete — 1 Mala completed.', chooseNaam:'Choose Naam', addCustom:'Add Custom Naam', search:'Search Naam', select:'Select', favourite:'Favourite', unfavourite:'Unfavourite', daysPracticed:'Days Practiced', mostUsed:'Most-used Naam', streak:'Current Streak', history:'Sadhana History', today:'Today', yesterday:'Yesterday', sevenDays:'7 Days', thirtyDays:'30 Days', all:'All', noHistory:'No Jap history yet.', sankalpTitle:'Sankalp', createSankalp:'Create Sankalp', target:'Target Jap', deadline:'Deadline (optional)', progress:'Progress', remaining:'Remaining', active:'Active', completed:'Completed', noSankalp:'No active Sankalp.', certificates:'Certificates', unlocked:'Unlocked', locked:'Locked', exportBackup:'Export Backup', importBackup:'Import / Restore Backup', profileName:'Your Name', started:'Started', save:'Save', saved:'Saved', languageSetting:'Language', soundSetting:'Sound & Vibration', masterSound:'Master Sound', tapSound:'Tap Sound', malaSound:'Mala Completion Sound', vibration:'Vibration', tapProtection:'Tap Protection', strict:'Strict', normal:'Normal', off:'Off', volume:'Volume', display:'Display', darkMode:'Dark Mode', keepAwake:'Keep Screen Awake During Jap', data:'Data & Privacy', reset:'Reset App Data', resetWarning:'This permanently clears local Naam Jap data. Export a backup first if needed.', cancel:'Cancel', confirm:'Confirm', certificateNote:'App-generated local achievement. It is not externally verified.', downloadPrint:'Print / Save PDF', close:'Close', firstMala:'First Mala', sadhanaStep:'Sadhana Step', deepSadhana:'Deep Sadhana', naamSankalp:'Naam Sankalp', addNaamPrompt:'Enter your custom Naam', noNaamFound:'No Naam found.', dailyGoal:'Daily Goal', targetPlaceholder:'e.g. 1008', certificate:'Certificate', certFor:'Certificate for', certificateId:'Certificate ID', date:'Date', naamCount:'Naam count', stats:'Statistics', backupSuccess:'Backup exported.', restoreSuccess:'Backup restored successfully.', invalidBackup:'Invalid or incompatible backup file.', confirmRestore:'Restore this backup and replace current data?', resetDone:'App data cleared.', selected:'Selected', total:'Total', perNaam:'Naam-wise Summary', noCertificates:'No certificates unlocked yet.'
+    },
+    hi: {
+      appName:'नाम जाप', intro:'ईश्वर के नाम का शांत स्मरण — एक-एक जाप के साथ।', language:'भाषा', preferredNaam:'पसंदीदा जाप नाम', customNaamOptional:'कस्टम नाम (वैकल्पिक)', continue:'जारी रखें', home:'होम', jap:'जाप', naam:'नाम', profile:'प्रोफ़ाइल', sankalp:'संकल्प', settings:'सेटिंग्स', todayJap:'आज का जाप', todayMala:'आज की माला', nextMala:'अगली माला', totalJap:'कुल जाप', totalMala:'कुल माला', startJap:'जाप शुरू करें', thought:'आज का स्मरण', beforeJap:'जाप से पहले', beforeText:'श्वास को शांत करें, ईश्वर के नाम का स्मरण करें और सहज भाव से शुरू करें।', selectedNaam:'चयनित नाम', session:'सत्र', undo:'वापस', pause:'रोकें', resume:'जारी रखें', finish:'समाप्त', sound:'ध्वनि', malaComplete:'108 जाप पूर्ण — 1 माला पूरी हुई।', chooseNaam:'नाम चुनें', addCustom:'कस्टम नाम जोड़ें', search:'नाम खोजें', select:'चुनें', favourite:'पसंदीदा', unfavourite:'पसंदीदा हटाएँ', daysPracticed:'जाप किए दिन', mostUsed:'सबसे अधिक जाप', streak:'वर्तमान स्ट्रीक', history:'साधना इतिहास', today:'आज', yesterday:'कल', sevenDays:'7 दिन', thirtyDays:'30 दिन', all:'सभी', noHistory:'अभी जाप इतिहास नहीं है।', sankalpTitle:'संकल्प', createSankalp:'संकल्प बनाएँ', target:'लक्ष्य जाप', deadline:'अंतिम तारीख (वैकल्पिक)', progress:'प्रगति', remaining:'बाकी', active:'सक्रिय', completed:'पूर्ण', noSankalp:'कोई सक्रिय संकल्प नहीं है।', certificates:'प्रमाणपत्र', unlocked:'प्राप्त', locked:'लॉक', exportBackup:'बैकअप एक्सपोर्ट करें', importBackup:'बैकअप इम्पोर्ट / रिस्टोर', profileName:'आपका नाम', started:'आरंभ', save:'सहेजें', saved:'सहेजा गया', languageSetting:'भाषा', soundSetting:'ध्वनि और कंपन', masterSound:'मुख्य ध्वनि', tapSound:'टैप ध्वनि', malaSound:'माला पूर्ण ध्वनि', vibration:'कंपन', tapProtection:'टैप सुरक्षा', strict:'सख्त', normal:'सामान्य', off:'बंद', volume:'वॉल्यूम', display:'दिखावट', darkMode:'डार्क मोड', keepAwake:'जाप के दौरान स्क्रीन चालू रखें', data:'डेटा और गोपनीयता', reset:'ऐप डेटा रीसेट करें', resetWarning:'यह डिवाइस पर मौजूद नाम जाप डेटा मिटा देगा। पहले बैकअप लें।', cancel:'रद्द करें', confirm:'पुष्टि करें', certificateNote:'यह ऐप द्वारा बनाया गया स्थानीय उपलब्धि प्रमाणपत्र है। इसकी बाहरी पुष्टि नहीं होती।', downloadPrint:'प्रिंट / PDF सेव करें', close:'बंद करें', firstMala:'पहली माला', sadhanaStep:'साधना चरण', deepSadhana:'गहन साधना', naamSankalp:'नाम संकल्प', addNaamPrompt:'अपना कस्टम नाम लिखें', noNaamFound:'कोई नाम नहीं मिला।', dailyGoal:'दैनिक लक्ष्य', targetPlaceholder:'जैसे 1008', certificate:'प्रमाणपत्र', certFor:'प्रमाणपत्र', certificateId:'प्रमाणपत्र आईडी', date:'तारीख', naamCount:'नाम जाप', stats:'आँकड़े', backupSuccess:'बैकअप एक्सपोर्ट हो गया।', restoreSuccess:'बैकअप सफलतापूर्वक रिस्टोर हो गया।', invalidBackup:'अमान्य या असंगत बैकअप फ़ाइल।', confirmRestore:'क्या इस बैकअप से वर्तमान डेटा बदलना है?', resetDone:'ऐप डेटा साफ़ कर दिया गया।', selected:'चयनित', total:'कुल', perNaam:'नाम के अनुसार सारांश', noCertificates:'अभी कोई प्रमाणपत्र प्राप्त नहीं हुआ।'
+    }
+  };
+  const NAAMS = [
+    ['radha','Radha','राधा','Radha'], ['radhe-radhe','Radhe Radhe','राधे राधे','Radha'], ['shri-radha','Shri Radha','श्री राधा','Radha'],
+    ['krishna','Krishna','कृष्ण','Krishna'], ['govind','Govind','गोविंद','Krishna'], ['gopal','Gopal','गोपाल','Krishna'], ['shyam','Shyam','श्याम','Krishna'], ['madhav','Madhav','माधव','Krishna'],
+    ['hari','Hari','हरि','Vishnu'], ['ram','Ram','राम','Ram'], ['shri-ram','Shri Ram','श्री राम','Ram'], ['siya-ram','Siya Ram','सिया राम','Ram'],
+    ['om','Om','ॐ','Shiva'], ['om-namah-shivaya','Om Namah Shivaya','ॐ नमः शिवाय','Shiva'], ['shiv','Shiv','शिव','Shiva'], ['mahadev','Mahadev','महादेव','Shiva'], ['narayan','Narayan','नारायण','Vishnu'],
+    ['hare-krishna','Hare Krishna Hare Krishna','हरे कृष्ण हरे कृष्ण','Maha Mantra'], ['hare-rama','Hare Rama Hare Rama','हरे राम हरे राम','Maha Mantra'],
+    ['maha-mantra-krishna','Hare Krishna Hare Krishna, Krishna Krishna Hare Hare','हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे','Maha Mantra'],
+    ['maha-mantra-rama','Hare Rama Hare Rama, Rama Rama Hare Hare','हरे राम हरे राम, राम राम हरे हरे','Maha Mantra']
+  ];
+  const DEFAULT_SETTINGS = { masterSound:true, tapSound:true, malaSound:true, vibration:true, volume:45, tapProtection:'normal', darkMode:false, keepAwake:true };
+  const todayKey = () => new Date().toISOString().slice(0,10);
+  const nowISO = () => new Date().toISOString();
+  const uid = () => (crypto && crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+  const clampInt = (n, min=0, max=Number.MAX_SAFE_INTEGER) => Number.isFinite(Number(n)) ? Math.min(max, Math.max(min, Math.floor(Number(n)))) : min;
+  const esc = (s) => String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const t = k => (I18N[state.lang] || I18N.en)[k] || I18N.en[k] || k;
+  const fmt = n => new Intl.NumberFormat(state.lang === 'hi' ? 'en-IN' : 'en-US').format(clampInt(n));
+  const defaultNaam = id => NAAMS.find(x=>x[0]===id) || NAAMS[1];
+  const displayNaam = naam => state.lang === 'hi' ? (naam.hi || naam.name) : naam.name;
+  function makeNaam(id,name,hi,group,custom=false) { return {id,name,hi,group,custom}; }
+  function freshState() {
+    const counts = {};
+    NAAMS.forEach(x => counts[x[0]] = 0);
+    return { schemaVersion:1, onboarded:false, lang:'en', profile:{name:'', startedAt:todayKey()}, selectedNaamId:'radhe-radhe', customNaams:[], favourites:['radhe-radhe'], counts, daily:{}, sessions:[], sankalps:[], certificates:[], settings:{...DEFAULT_SETTINGS} };
+  }
+  let state = freshState();
+  let db;
+  let saveTimer;
+  let currentView = 'home';
+  let historyFilter = 'all';
+  let activeSession = null;
+  let isPaused = false;
+  let lastTapAt = 0;
+  let wakeLock = null;
 
-const I={
- en:{
-  welcome:"A simple offline companion for Naam Jap.",chooseLanguage:"Choose your language",chooseNaam:"Choose your Jap Naam",continue:"Continue",changeLater:"You can change these anytime in Settings.",
-  selectedNaam:"Selected Naam",todayJap:"Today's Jap",mala:"Mala",startJap:"Start Jap",totalJap:"Total Jap",totalMala:"Total Mala",goal:"Current Goal",dailySmaran:"Aaj ka Smaran",beforeJap:"Jap se pehle",japWith:"Jap with",back:"Back",undo:"Undo",pause:"Pause",finish:"Finish",reminder:"Smaran",countReminder:"Ginti se zyada bhav aur niyamit Naam Smaran par dhyan dein.",myNaam:"My Naam",addNaam:"Add",sankalp:"Sankalp",goalNaam:"Jap Naam",target:"Target Jap",deadline:"Deadline (optional)",saveGoal:"Save Sankalp",history:"Sadhana History",export:"Export",certificate:"Certificates",settings:"Settings",language:"Language",defaultNaam:"Default Jap Naam",tapGuard:"Fast-tap protection",volumeNote:"Volume buttons",volumeNoteText:"Web preview cannot reliably capture Android volume keys. The native Android version can add this bridge later.",data:"Local Data",dataText:"All practice data in this MVP stays on this device/browser.",reset:"Reset all local data",home:"Home",naam:"Naam",naamJap:"Jap",profile:"Profile",myProfile:"My Profile",edit:"Edit",summary:"Summary",daysPracticed:"Days",naamSummary:"Naam Jap Summary",goalSummary:"Sankalp Summary",profileName:"Your name",saveProfile:"Save Profile",sound:"Jap Sound",soundOn:"Sound On",soundOff:"Sound Off",profileHint:"Your profile stays on this device.",certificateSystem:"Certificate Milestones",certificateSystemText:"Certificates unlock automatically when the required Naam Jap total is genuinely completed.",certificateProgress:"Certificate Progress",unlocked:"Unlocked",remaining:"remaining",nextCertificate:"Next certificate"
- },
- hi:{
-  welcome:"Naam Jap ke liye ek saral offline saathi.",chooseLanguage:"Apni bhasha chunen",chooseNaam:"Apna Jap Naam chunen",continue:"Aage badhein",changeLater:"In settings ko baad mein bhi badla ja sakta hai.",
-  selectedNaam:"Chuna hua Naam",todayJap:"Aaj ka Jap",mala:"Mala",startJap:"Jap shuru karein",totalJap:"Kul Jap",totalMala:"Kul Mala",goal:"Vartaman Sankalp",dailySmaran:"Aaj ka Smaran",beforeJap:"Jap se pehle",japWith:"Jap",back:"Wapas",undo:"Undo",pause:"Rokein",finish:"Samapt",reminder:"Smaran",countReminder:"Ginti se zyada bhav aur niyamit Naam Smaran par dhyan dein.",myNaam:"Mere Naam",addNaam:"Joden",sankalp:"Sankalp",goalNaam:"Jap Naam",target:"Lakshya Jap",deadline:"Antim din (optional)",saveGoal:"Sankalp save karein",history:"Sadhana History",export:"Export",certificate:"Certificates",settings:"Settings",language:"Bhasha",defaultNaam:"Default Jap Naam",tapGuard:"Tez tap suraksha",volumeNote:"Volume buttons",volumeNoteText:"Web preview mein Android volume keys reliably capture nahi hote. Native Android version mein baad mein bridge add kiya ja sakta hai.",data:"Local Data",dataText:"Is MVP ka practice data isi device/browser mein rehta hai.",reset:"Sabhi local data reset karein",home:"Home",naam:"Naam",naamJap:"Jap",profile:"Profile",myProfile:"Mera Profile",edit:"Badlein",summary:"Saar",daysPracticed:"Din",naamSummary:"Naam Jap Saar",goalSummary:"Sankalp Saar",profileName:"Aapka naam",saveProfile:"Profile Save Karein",sound:"Jap Sound",soundOn:"Sound On",soundOff:"Sound Off",profileHint:"Aapka profile isi device par save rahega.",certificateSystem:"Certificate Milestones",certificateSystemText:"Required Naam Jap sach mein poora hone par certificate automatically unlock hoga.",certificateProgress:"Certificate Progress",unlocked:"Unlock ho gaya",remaining:"baaki",nextCertificate:"Agla certificate"
- }
-};
+  function openDB() {
+    return new Promise((resolve,reject) => {
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = () => {
+        const d = req.result;
+        if (!d.objectStoreNames.contains(STORE)) d.createObjectStore(STORE);
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  function dbGet() { return new Promise((res,rej)=>{ const tx=db.transaction(STORE,'readonly'); const r=tx.objectStore(STORE).get(KEY); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+  function dbSet(value) { return new Promise((res,rej)=>{ const tx=db.transaction(STORE,'readwrite'); const r=tx.objectStore(STORE).put(value,KEY); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }); }
+  function normalize(raw) {
+    const base=freshState(); if (!raw || typeof raw!=='object') return base;
+    const s={...base,...raw, profile:{...base.profile,...(raw.profile||{})}, settings:{...base.settings,...(raw.settings||{})}};
+    s.counts={...base.counts,...(raw.counts||{})}; s.daily=raw.daily&&typeof raw.daily==='object'?raw.daily:{};
+    s.customNaams=Array.isArray(raw.customNaams)?raw.customNaams.filter(x=>x&&x.id&&x.name):[];
+    s.favourites=Array.isArray(raw.favourites)?raw.favourites.filter(Boolean):[];
+    s.sessions=Array.isArray(raw.sessions)?raw.sessions:[]; s.sankalps=Array.isArray(raw.sankalps)?raw.sankalps:[]; s.certificates=Array.isArray(raw.certificates)?raw.certificates:[];
+    if (!NAAMS.some(x=>x[0]===s.selectedNaamId) && !s.customNaams.some(x=>x.id===s.selectedNaamId)) s.selectedNaamId='radhe-radhe';
+    return s;
+  }
+  async function persist(immediate=false) { clearTimeout(saveTimer); if (immediate) return dbSet(state); saveTimer=setTimeout(()=>dbSet(state).catch(()=>{}),80); }
+  function allNaams() { return [...NAAMS.map(x=>makeNaam(x[0],x[1],x[2],x[3])),...state.customNaams.map(x=>makeNaam(x.id,x.name,x.hi||x.name,x.group||'Custom',true))]; }
+  function selectedNaam() { return allNaams().find(x=>x.id===state.selectedNaamId) || allNaams()[1]; }
+  function countFor(id) { return clampInt(state.counts[id]||0); }
+  function dailyFor(date=todayKey()) { return state.daily[date] || {}; }
+  function dailyTotal(date=todayKey()) { return Object.values(dailyFor(date)).reduce((a,b)=>a+clampInt(b),0); }
+  function totalJap() { return allNaams().reduce((a,n)=>a+countFor(n.id),0); }
+  function totalMala() { return Math.floor(totalJap()/MALA); }
+  function dateLabel(k) { const d=new Date(k+'T00:00:00'); return new Intl.DateTimeFormat(state.lang==='hi'?'hi-IN':'en-IN',{day:'numeric',month:'short',year:'numeric'}).format(d); }
+  function milestoneLabel(n) { return ({108:t('firstMala'),1008:t('sadhanaStep'),10008:t('deepSadhana'),108000:t('naamSankalp')})[n] || `${fmt(n)} ${t('naamCount')}`; }
+  function progressPct(a,b) { return b>0 ? Math.min(100,(a/b)*100) : 0; }
+  function toast(msg) { const el=document.createElement('div'); el.className='toast'; el.textContent=msg; document.getElementById('toast-region').appendChild(el); setTimeout(()=>el.remove(),2300); }
+  function setView(view) { if(!NAV.includes(view)) view='home'; currentView=view; document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(`view-${view}`).classList.add('active'); renderTopbar(); renderNav(); renderView(); window.scrollTo({top:0,behavior:'instant'}); }
+  function renderTopbar(){ const title=t(currentView); document.getElementById('topbar-title').textContent=title; document.getElementById('topbar-action').style.visibility=currentView==='home'?'visible':'hidden'; }
+  function renderNav(){ document.getElementById('bottom-nav').innerHTML=NAV.map(n=>`<button class="nav-item ${currentView===n?'active':''}" data-nav="${n}" aria-label="${esc(t(n))}"><span class="nav-icon" aria-hidden="true">${NAV_ICONS[n]}</span><span class="nav-label">${esc(t(n))}</span></button>`).join(''); }
+  function renderView(){ ({home:renderHome,jap:renderJap,naam:renderNaam,profile:renderProfile,sankalp:renderSankalp,settings:renderSettings}[currentView])(); }
+  function renderHome(){ const id=selectedNaam().id, today=dailyFor(), nToday=countForDailyNaam(today,id), next=today[id]?today[id]%MALA:0, total=countFor(id); const active=state.sankalps.find(s=>s.status==='active'); document.getElementById('view-home').innerHTML=`
+    <div class="card hero-card"><div class="eyebrow">${esc(t('selectedNaam'))}</div><div class="naam-display">${esc(displayNaam(selectedNaam()))}</div><div class="stats-grid"><div class="stat"><div class="label">${esc(t('todayJap'))}</div><div class="value">${fmt(dailyTotal())}</div></div><div class="stat"><div class="label">${esc(t('todayMala'))}</div><div class="value">${fmt(Math.floor(dailyTotal()/MALA))}</div></div></div><div class="section-title">${esc(t('nextMala'))}</div><div class="progress-track"><div class="progress-fill" style="width:${(next/MALA)*100}%"></div></div><div class="progress-meta"><span>${fmt(next)} / ${MALA}</span><span>${fmt(MALA-next)} ${esc(t('remaining'))}</span></div><button class="primary-btn full" data-action="start-jap">${esc(t('startJap'))}</button></div>
+    <div class="section-title">${esc(t('stats'))}</div><div class="stats-grid"><div class="stat"><div class="label">${esc(t('totalJap'))}</div><div class="value">${fmt(total)}</div></div><div class="stat"><div class="label">${esc(t('totalMala'))}</div><div class="value">${fmt(Math.floor(total/MALA))}</div></div></div>
+    ${active?`<div class="section-title">${esc(t('sankalpTitle'))}</div><div class="card"><div class="row"><strong>${esc(naamNameById(active.naamId))}</strong><span>${fmt(active.progress)} / ${fmt(active.target)}</span></div><div class="progress-track" style="margin-top:12px"><div class="progress-fill" style="width:${progressPct(active.progress,active.target)}%"></div></div></div>`:''}
+    <div class="section-title">${esc(t('thought'))}</div><div class="card thought"><span class="quote-mark">“</span> ${esc(state.lang==='hi'?'नाम स्मरण मन को स्थिरता और सरलता की ओर ले जाने का एक शांत अभ्यास है।':'Naam Smaran is a gentle practice of bringing the mind back to a peaceful remembrance.')}</div>
+    <div class="section-title">${esc(t('beforeJap'))}</div><div class="card muted">${esc(t('beforeText'))}</div>`; }
+  function countForDailyNaam(day,id){return clampInt(day[id]||0);}
+  function renderJap(){ if(!activeSession){ document.getElementById('view-jap').innerHTML=`<div class="card jap-wrap"><div class="session-badge">${esc(t('selectedNaam'))}</div><div class="naam-display">${esc(displayNaam(selectedNaam()))}</div><p class="muted">${esc(t('beforeText'))}</p><button class="primary-btn full" data-action="start-session">${esc(t('startJap'))}</button></div>`; return; }
+    const n=selectedNaam(); const session=activeSession; const current=countFor(n.id); const malaProgress=current%MALA; document.getElementById('view-jap').innerHTML=`<div class="jap-wrap"><div class="jap-header"><button class="secondary-btn" data-action="exit-session">← ${esc(t('home'))}</button><span class="session-badge">${esc(isPaused?t('pause'):t('session'))}</span><button class="secondary-btn" data-action="toggle-sound" aria-label="${esc(t('sound'))}">🔊</button></div><div class="eyebrow">${esc(t('selectedNaam'))}</div><div class="naam-display">${esc(displayNaam(n))}</div><div class="jap-counter" id="session-count">${fmt(session.count)}</div><div class="jap-sub">${esc(t('totalJap'))}: ${fmt(current)} · ${esc(t('totalMala'))}: ${fmt(Math.floor(current/MALA))}</div><div class="progress-track" style="margin:18px 8px 0"><div class="progress-fill" style="width:${(malaProgress/MALA)*100}%"></div></div><div class="progress-meta"><span>${fmt(malaProgress)} / ${MALA}</span><span>${fmt(MALA-malaProgress)} ${esc(t('remaining'))}</span></div><button id="jap-tap" class="jap-button" aria-label="${esc(displayNaam(n))}">${esc(state.lang==='hi'?(n.hi||n.name):n.name)}</button><div class="jap-controls"><button data-action="undo">↶ ${esc(t('undo'))}</button><button data-action="pause">${isPaused?'▶ '+esc(t('resume')):'Ⅱ '+esc(t('pause'))}</button><button class="finish" data-action="finish">✓ ${esc(t('finish'))}</button></div></div>`; }
+  function renderNaam(){ const filter=document.getElementById('naam-search')?.value||''; const q=filter.trim().toLowerCase(); const groups={}; allNaams().filter(n=>(n.name+' '+n.hi).toLowerCase().includes(q)).forEach(n=>(groups[n.group]??=[]).push(n)); const body=Object.entries(groups).map(([group,items])=>`<div class="section-title">${esc(group)}</div><div class="list">${items.map(n=>`<div class="list-item"><div class="list-main"><div class="list-name">${esc(displayNaam(n))}</div><div class="list-meta">${fmt(countFor(n.id))} ${esc(t('naamCount'))} · ${fmt(Math.floor(countFor(n.id)/MALA))} ${esc(t('totalMala'))}</div></div><button class="icon-action ${state.favourites.includes(n.id)?'active':''}" data-fav="${esc(n.id)}" aria-label="${esc(state.favourites.includes(n.id)?t('unfavourite'):t('favourite'))}">${state.favourites.includes(n.id)?'★':'☆'}</button><button class="secondary-btn" data-select-naam="${esc(n.id)}">${state.selectedNaamId===n.id?esc(t('selected')):esc(t('select'))}</button></div>`).join('')}</div>`).join(''); document.getElementById('view-naam').innerHTML=`<div class="card"><div class="row"><strong>${esc(t('chooseNaam'))}</strong><button class="primary-btn" data-action="add-custom">+ ${esc(t('addCustom'))}</button></div><div class="field-group"><input id="naam-search" maxlength="80" placeholder="${esc(t('search'))}" value="${esc(filter)}"></div></div>${body||`<div class="empty">${esc(t('noNaamFound'))}</div>`}`; }
+  function renderProfile(){ const total=totalJap(), days=Object.keys(state.daily).filter(k=>dailyTotal(k)>0).length; const rows=allNaams().filter(n=>countFor(n.id)>0).sort((a,b)=>countFor(b.id)-countFor(a.id)).slice(0,10); document.getElementById('view-profile').innerHTML=`<div class="card hero-card"><div class="row"><div><div class="eyebrow">${esc(t('profile'))}</div><h2 style="margin:5px 0">${esc(state.profile.name||'—')}</h2><div class="muted">${esc(t('started'))}: ${esc(dateLabel(state.profile.startedAt))}</div></div><span class="brand-mark small" aria-hidden="true">ॐ</span></div></div><div class="section-title">${esc(t('stats'))}</div><div class="stats-grid"><div class="stat"><div class="label">${esc(t('totalJap'))}</div><div class="value">${fmt(total)}</div></div><div class="stat"><div class="label">${esc(t('totalMala'))}</div><div class="value">${fmt(Math.floor(total/MALA))}</div></div><div class="stat"><div class="label">${esc(t('daysPracticed'))}</div><div class="value">${fmt(days)}</div></div><div class="stat"><div class="label">${esc(t('streak'))}</div><div class="value">${fmt(calcStreak())}</div></div></div><div class="section-title">${esc(t('perNaam'))}</div><div class="card">${rows.length?rows.map(n=>`<div class="row" style="padding:8px 0;border-bottom:1px solid var(--border)"><span>${esc(displayNaam(n))}</span><strong>${fmt(countFor(n.id))}</strong></div>`).join(''):`<div class="empty">${esc(t('noHistory'))}</div>`}</div><div class="section-title">${esc(t('history'))}</div><div class="card"><div class="tabs">${[['today','today'],['yesterday','yesterday'],['7','sevenDays'],['30','thirtyDays'],['all','all']].map(([v,k])=>`<button class="tab ${historyFilter===v?'active':''}" data-history="${v}">${esc(t(k))}</button>`).join('')}</div>${renderHistory()}</div><div class="section-title">${esc(t('certificates'))}</div><div class="list">${renderCertificatesCards()}</div>`; }
+  function renderHistory(){ const keys=Object.keys(state.daily).sort().reverse().filter(k=>{ if(historyFilter==='all')return true; const d=(Date.now()-new Date(k+'T00:00:00').getTime())/86400000; return historyFilter==='today'?k===todayKey():historyFilter==='yesterday'?k===new Date(Date.now()-86400000).toISOString().slice(0,10):d<(Number(historyFilter)+1); }); if(!keys.length)return `<div class="empty">${esc(t('noHistory'))}</div>`; return `<div class="table-list">${keys.slice(0,60).map(k=>{const entries=Object.entries(state.daily[k]||{}).filter(([,v])=>clampInt(v)>0);return `<div class="history-item"><div><strong>${esc(dateLabel(k))}</strong><div class="list-meta">${entries.map(([id,v])=>`${esc(naamNameById(id))} — ${fmt(v)}`).join('<br>')}</div></div><strong>${fmt(dailyTotal(k))}</strong></div>`}).join('')}</div>`; }
+  function renderCertificatesCards(){ if(!state.certificates.length)return `<div class="empty">${esc(t('noCertificates'))}</div>`; return state.certificates.slice().reverse().map(c=>`<div class="list-item"><div class="list-main"><div class="list-name">${esc(milestoneLabel(c.milestone))}</div><div class="list-meta">${esc(naamNameById(c.naamId))} · ${esc(dateLabel(c.date))}</div></div><button class="secondary-btn" data-certificate="${esc(c.id)}">${esc(t('certificate'))}</button></div>`).join(''); }
+  function renderSankalp(){ const active=state.sankalps.filter(s=>s.status==='active'); document.getElementById('view-sankalp').innerHTML=`<div class="card hero-card"><div class="row"><div><div class="eyebrow">${esc(t('sankalpTitle'))}</div><h2 style="margin:5px 0">${esc(t('sankalpTitle'))}</h2></div><button class="primary-btn" data-action="new-sankalp">+ ${esc(t('createSankalp'))}</button></div></div>${active.length?active.map(s=>`<div class="section-title">${esc(naamNameById(s.naamId))}</div><div class="card"><div class="row"><strong>${fmt(s.progress)} / ${fmt(s.target)}</strong><span>${progressPct(s.progress,s.target).toFixed(1)}%</span></div><div class="progress-track" style="margin-top:12px"><div class="progress-fill" style="width:${progressPct(s.progress,s.target)}%"></div></div><div class="progress-meta"><span>${fmt(Math.max(0,s.target-s.progress))} ${esc(t('remaining'))}</span><span>${s.deadline?esc(dateLabel(s.deadline)):''}</span></div></div>`).join(''):`<div class="empty">${esc(t('noSankalp'))}</div>`}<div class="section-title">${esc(t('certificates'))}</div><div class="list">${renderCertificatesCards()}</div>`; }
+  function renderSettings(){ const s=state.settings; document.getElementById('view-settings').innerHTML=`<div class="section-title">${esc(t('profile'))}</div><div class="card form-grid"><label>${esc(t('profileName'))}<input id="profile-name" maxlength="80" value="${esc(state.profile.name)}"></label><button class="primary-btn" data-action="save-profile">${esc(t('save'))}</button></div><div class="section-title">${esc(t('languageSetting'))}</div><div class="card choice-grid two"><button class="choice-btn ${state.lang==='hi'?'active':''}" data-setting-lang="hi">हिन्दी</button><button class="choice-btn ${state.lang==='en'?'active':''}" data-setting-lang="en">English</button></div><div class="section-title">${esc(t('soundSetting'))}</div><div class="card">${toggleRow('masterSound',t('masterSound'),s.masterSound)}${toggleRow('tapSound',t('tapSound'),s.tapSound)}${toggleRow('malaSound',t('malaSound'),s.malaSound)}${toggleRow('vibration',t('vibration'),s.vibration)}<div class="toggle-row"><span>${esc(t('volume'))}</span><div class="range-row"><input id="volume-range" type="range" min="0" max="100" value="${s.volume}"><strong id="volume-value">${s.volume}</strong></div></div></div><div class="section-title">${esc(t('tapProtection'))}</div><div class="card choice-grid"><button class="choice-btn ${s.tapProtection==='strict'?'active':''}" data-protection="strict">${esc(t('strict'))}</button><button class="choice-btn ${s.tapProtection==='normal'?'active':''}" data-protection="normal">${esc(t('normal'))}</button><button class="choice-btn ${s.tapProtection==='off'?'active':''}" data-protection="off">${esc(t('off'))}</button></div><div class="section-title">${esc(t('display'))}</div><div class="card">${toggleRow('darkMode',t('darkMode'),s.darkMode)}${toggleRow('keepAwake',t('keepAwake'),s.keepAwake)}</div><div class="section-title">${esc(t('data'))}</div><div class="card stack"><button class="secondary-btn" data-action="export">${esc(t('exportBackup'))}</button><button class="secondary-btn" data-action="import">${esc(t('importBackup'))}</button><div class="notice">${esc(t('resetWarning'))}</div><button class="secondary-btn danger-btn" data-action="reset">${esc(t('reset'))}</button></div>`; }
+  function toggleRow(key,label,value){ return `<div class="toggle-row"><span>${esc(label)}</span><label class="toggle"><input type="checkbox" data-setting="${key}" ${value?'checked':''}><span class="slider"></span></label></div>`; }
+  function naamNameById(id){ const n=allNaams().find(x=>x.id===id); return n?displayNaam(n):id; }
+  function calcStreak(){ let d=new Date(); let streak=0; while(true){const k=d.toISOString().slice(0,10);if(dailyTotal(k)<=0)break;streak++;d.setDate(d.getDate()-1);}return streak; }
+  function updateSankalpsAndCertificates(naamId){ state.sankalps.forEach(s=>{ if(s.status==='active'){ s.progress=countFor(s.naamId); if(s.progress>=s.target)s.status='completed'; }}); MILESTONES.forEach(m=>{ if(countFor(naamId)>=m && !state.certificates.some(c=>c.naamId===naamId&&c.milestone===m)){ const cert={id:uid(),naamId,milestone:m,date:todayKey(),issuedAt:nowISO(),name:state.profile.name||'Naam Jap Sadhak'}; state.certificates.push(cert); setTimeout(()=>toast(`${milestoneLabel(m)} — ${t('unlocked')}`),0); }}); }
+  function playTone(kind='tap'){ const s=state.settings;if(!s.masterSound || (kind==='tap'&&!s.tapSound)||(kind==='mala'&&!s.malaSound))return; try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const c=new C(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=kind==='mala'?660:420;g.gain.value=(s.volume/100)*0.035;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+(kind==='mala'?.22:.055));}catch(e){}}
+  function vibrate(ms=20){if(state.settings.vibration&&navigator.vibrate)navigator.vibrate(ms);}
+  function maybeWake(){ if(!state.settings.keepAwake||!('wakeLock' in navigator))return; navigator.wakeLock.request('screen').then(w=>wakeLock=w).catch(()=>{}); }
+  function releaseWake(){ if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;} }
+  function startSession(){ activeSession={id:uid(),naamId:state.selectedNaamId,count:0,startedAt:nowISO()};isPaused=false;maybeWake();setView('jap'); }
+  function registerJap(){ if(!activeSession||isPaused)return; const now=performance.now(); const guard=state.settings.tapProtection==='strict'?180:state.settings.tapProtection==='normal'?70:0; if(now-lastTapAt<guard)return; lastTapAt=now; const id=activeSession.naamId; activeSession.count++; state.counts[id]=countFor(id)+1; const day=todayKey(); state.daily[day]??={}; state.daily[day][id]=countForDailyNaam(state.daily[day],id)+1; const newTotal=state.counts[id]; updateSankalpsAndCertificates(id); persist(); playTone('tap'); vibrate(10); const btn=document.getElementById('jap-tap'); if(btn){btn.classList.remove('tap');void btn.offsetWidth;btn.classList.add('tap');} if(newTotal%MALA===0){playTone('mala');vibrate(70);toast(t('malaComplete'));} updateJapLive(); }
+  function updateJapLive(){const n=selectedNaam(), c=document.getElementById('session-count');if(c)c.textContent=fmt(activeSession?.count||0);const pf=document.querySelector('#view-jap .progress-fill');if(pf)pf.style.width=`${((countFor(n.id)%MALA)/MALA)*100}%`;const metas=document.querySelectorAll('#view-jap .progress-meta');if(metas[0])metas[0].innerHTML=`<span>${fmt(countFor(n.id)%MALA)} / ${MALA}</span><span>${fmt(MALA-(countFor(n.id)%MALA))} ${esc(t('remaining'))}</span>`;}
+  function undo(){ if(!activeSession||activeSession.count<=0)return; const id=activeSession.naamId; activeSession.count--; state.counts[id]=Math.max(0,countFor(id)-1); const day=todayKey(); if(state.daily[day]?.[id]){state.daily[day][id]=Math.max(0,state.daily[day][id]-1);if(state.daily[day][id]===0)delete state.daily[day][id];} state.sankalps.forEach(s=>{if(s.status==='completed'&&s.progress-1<s.target)s.status='active';s.progress=countFor(s.naamId);}); persist(); updateJapLive(); }
+  function finishSession(){ if(!activeSession)return; if(activeSession.count>0)state.sessions.push({...activeSession,finishedAt:nowISO()}); activeSession=null;isPaused=false;releaseWake();persist(true);setView('home'); }
+  function exitSession(){activeSession=null;isPaused=false;releaseWake();setView('home');}
+  function addCustom(){ const name=prompt(t('addNaamPrompt')); if(!name)return; const clean=name.trim().slice(0,80);if(!clean)return;const id='custom-'+uid();state.customNaams.push({id,name:clean,hi:clean,group:'Custom'});state.counts[id]=0;state.selectedNaamId=id;state.favourites.push(id);persist(true);renderView();toast(t('saved')); }
+  function createSankalp(){ const n=selectedNaam(); showModal(`<h2>${esc(t('createSankalp'))}</h2><div class="form-grid"><label>${esc(t('chooseNaam'))}<select id="s-naam">${allNaams().map(x=>`<option value="${esc(x.id)}" ${x.id===n.id?'selected':''}>${esc(displayNaam(x))}</option>`).join('')}</select></label><label>${esc(t('target'))}<input id="s-target" type="number" min="1" step="1" value="1008" placeholder="${esc(t('targetPlaceholder'))}"></label><label>${esc(t('deadline'))}<input id="s-deadline" type="date" min="${todayKey()}"></label></div><div class="modal-actions"><button class="secondary-btn" data-modal-close>${esc(t('cancel'))}</button><button class="primary-btn" data-action="save-sankalp">${esc(t('save'))}</button></div>`); }
+  function saveSankalp(){const id=document.getElementById('s-naam').value,target=clampInt(document.getElementById('s-target').value,1);if(!target)return;const deadline=document.getElementById('s-deadline').value||null;state.sankalps.push({id:uid(),naamId:id,target,progress:countFor(id),deadline,status:countFor(id)>=target?'completed':'active',createdAt:nowISO()});persist(true);closeModal();renderSankalp();toast(t('saved'));}
+  function showModal(html){document.getElementById('modal-root').innerHTML=`<div class="modal-backdrop"><div class="modal">${html}</div></div>`;}
+  function closeModal(){document.getElementById('modal-root').innerHTML='';}
+  function certificateModal(c){showModal(`<div class="certificate"><div class="cert-title">${esc(t('appName'))}</div><div class="cert-sub">${esc(t('certificate'))}</div><div>${esc(t('certFor'))}</div><div class="cert-name">${esc(c.name)}</div><div class="cert-meta"><strong>${esc(naamNameById(c.naamId))}</strong><br>${esc(milestoneLabel(c.milestone))}<br>${fmt(c.milestone)} ${esc(t('naamCount'))}<br>${esc(t('date'))}: ${esc(dateLabel(c.date))}</div><div class="cert-id">${esc(t('certificateId'))}: ${esc(c.id)}</div></div><div class="notice" style="margin-top:12px">${esc(t('certificateNote'))}</div><div class="modal-actions"><button class="secondary-btn" data-modal-close>${esc(t('close'))}</button><button class="primary-btn" data-action="print-certificate">${esc(t('downloadPrint'))}</button></div>`); }
+  function printCertificate(){const cert=document.querySelector('.certificate');if(!cert)return;const w=window.open('','_blank');if(!w){toast('Allow pop-ups to print.');return;}w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Naam Jap Certificate</title><style>body{margin:0;padding:40px;font-family:system-ui;color:#16332f}.certificate{max-width:700px;margin:auto;background:linear-gradient(145deg,#fff,#f0f9f5 60%,#fbf3df);border:8px double #c9a75e;border-radius:10px;padding:60px 35px;text-align:center}.cert-title{font-size:36px;font-weight:900;color:#176c61}.cert-sub{color:#80672d;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin:8px 0 30px}.cert-name{font-size:30px;font-weight:900;margin:20px 0}.cert-meta{line-height:1.9;color:#4c605c}.cert-id{margin-top:25px;font-size:11px;overflow-wrap:anywhere;color:#6c7975}@media print{body{padding:0}}</style></head><body>${cert.outerHTML}</body></html>`);w.document.close();w.focus();setTimeout(()=>w.print(),250);}
+  function exportBackup(){const payload={format:'Naam Jap Backup',version:APP_VERSION,schemaVersion:state.schemaVersion,exportedAt:nowISO(),data:state};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`naam-jap-backup-${todayKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast(t('backupSuccess'));}
+  function importBackup(){const input=document.createElement('input');input.type='file';input.accept='application/json,.json';input.onchange=()=>{const file=input.files?.[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const p=JSON.parse(r.result);if(!p||p.format!=='Naam Jap Backup'||!p.data||typeof p.data!=='object')throw new Error('bad');if(!confirm(t('confirmRestore')))return;state=normalize(p.data);persist(true).then(()=>{applyTheme();setView(currentView);toast(t('restoreSuccess'));});}catch(e){toast(t('invalidBackup'));}};r.readAsText(file);};input.click();}
+  function resetData(){if(!confirm(t('resetWarning')))return;state=freshState();activeSession=null;releaseWake();persist(true).then(()=>{applyTheme();showOnboarding();toast(t('resetDone'));});}
+  function applyTheme(){document.documentElement.dataset.theme=state.settings.darkMode?'dark':'light'; if(state.settings.darkMode){document.documentElement.style.setProperty('--bg','#0e1e1b');document.documentElement.style.setProperty('--surface','#142824');document.documentElement.style.setProperty('--surface-2','#1a3731');document.documentElement.style.setProperty('--text','#eaf7f3');document.documentElement.style.setProperty('--muted','#a5b9b4');document.documentElement.style.setProperty('--border','#28443e');}else{document.documentElement.style.cssText='';}}
+  function updateI18nOnboarding(){document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));document.documentElement.lang=state.lang;}
+  function showOnboarding(){document.getElementById('main').classList.add('hidden');document.getElementById('onboarding').classList.remove('hidden');const sel=document.getElementById('onboarding-naam');sel.innerHTML=allNaams().map(n=>`<option value="${esc(n.id)}">${esc(displayNaam(n))}</option>`).join('');sel.value=state.selectedNaamId;updateI18nOnboarding();document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===state.lang));}
+  function enterApp(){document.getElementById('onboarding').classList.add('hidden');document.getElementById('main').classList.remove('hidden');applyTheme();setView('home');}
+  async function init(){ try{db=await openDB();const saved=await dbGet();if(saved)state=normalize(saved);}catch(e){state=normalize(state);} applyTheme();setTimeout(()=>{document.getElementById('splash')?.remove(); if(!state.onboarded)showOnboarding();else enterApp();},1250); }
 
-const CERT_MILESTONES=[{id:"m108",target:108,titleEn:"First Mala",titleHi:"पहली माला",descEn:"108 Naam Jap",descHi:"108 नाम जाप"},{id:"m1008",target:1008,titleEn:"Sadhana Step",titleHi:"साधना चरण",descEn:"1,008 Naam Jap",descHi:"1,008 नाम जाप"},{id:"m10008",target:10008,titleEn:"Deep Sadhana",titleHi:"गहरी साधना",descEn:"10,008 Naam Jap",descHi:"10,008 नाम जाप"},{id:"m108000",target:108000,titleEn:"Naam Sankalp",titleHi:"नाम संकल्प",descEn:"1,08,000 Naam Jap",descHi:"1,08,000 नाम जाप"}];
-const thoughts={
- en:["Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.","Man bhatak jaaye to nirash na hon. Prem se phir Naam ki or laut aayein.","Jahan sambhav ho, Jap ke liye saaf aur shaant sthaan chunen.","Apne Ishta Naam mein shraddha rakhein aur doosre bhakton ke Naam ka bhi samman karein.","Jap ko dikhawa ya competition na banayein. Niyamita aur bhav par dhyan dein.","Naam ke saath daya, satya, vinamrata aur seva ko jeevan mein lane ka prayas karein."],
- hi:["Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.","Man bhatak jaaye to nirash na hon. Prem se phir Naam ki ओर laut aayein.","Jahan sambhav ho, Jap ke liye saaf aur shaant sthaan chunen.","Apne Ishta Naam mein shraddha rakhein aur doosre bhakton ke Naam ka bhi samman karein.","Jap ko dikhawa ya competition na banayein. Niyamita aur bhav par dhyan dein.","Naam ke saath daya, satya, vinamrata aur seva ko jeevan mein lane ka prayas karein."]
-};
-
-let state;
-let session={active:false,count:0,undone:0,lastTap:0,paused:false,start:0,history:[],lastMala:0};
-
-function defaultState(){return {version:7,onboarded:false,lang:"hi",selected:"radhe",customNaams:[],favourites:[],counts:{},daily:{},sessions:[],goals:[],certificates:[],profile:{name:"",joined:todayKey()},settings:{tapGuard:"strict",sound:true,tapSound:true,malaSound:true,soundVolume:55},milestoneCertificates:{}}}
-function load(){try{state=JSON.parse(localStorage.getItem(KEY))||defaultState()}catch(e){state=defaultState()} normalize()}
-function normalize(){const d=defaultState();state={...d,...state,profile:{...d.profile,...(state.profile||{})},settings:{...d.settings,...(state.settings||{})},counts:state.counts||{},daily:state.daily||{},customNaams:state.customNaams||[],favourites:state.favourites||[],sessions:state.sessions||[],goals:state.goals||[],certificates:state.certificates||[],milestoneCertificates:state.milestoneCertificates||{}};if(!state.profile.name)state.profile.name=""}
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
-function allNaams(){return NAAMS.concat(state.customNaams)}
-function naamObj(id){return allNaams().find(n=>n.id===id)||NAAMS[1]}
-function displayNaam(n){return state.lang==="hi"?n.hi:n.en}
-function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
-function todayData(){const k=todayKey();if(!state.daily[k])state.daily[k]={};return state.daily[k]}
-function totalFor(id){return Number(state.counts[id]||0)}
-function totalAllJap(){return Object.values(state.counts).reduce((a,b)=>a+Number(b||0),0)}
-function addCount(id,n){state.counts[id]=Math.max(0,totalFor(id)+n);const td=todayData();td[id]=Math.max(0,Number(td[id]||0)+n)}
-function getToday(id){return Number((state.daily[todayKey()]||{})[id]||0)}
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),2400)}
-function t(k){return (I[state.lang]||I.hi)[k]||k}
-function applyLang(){document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));document.documentElement.lang=state.lang;render()}
-function fillNaamSelect(sel,selected){if(!sel)return;sel.innerHTML="";const groups={};allNaams().forEach(n=>{if(!groups[n.group])groups[n.group]=[];groups[n.group].push(n)});Object.keys(groups).forEach(g=>{const og=document.createElement("optgroup");og.label=g;groups[g].forEach(n=>{const o=document.createElement("option");o.value=n.id;o.textContent=displayNaam(n);og.appendChild(o)});sel.appendChild(og)});const custom=document.createElement("option");custom.value="__custom";custom.textContent=state.lang==="hi"?"＋ अपना Naam जोड़ें":"＋ Add custom Naam";sel.appendChild(custom);const wanted=selected||state.selected||"radhe";sel.value=Array.from(sel.options).some(o=>o.value===wanted)?wanted:"radhe"}
-function renderOnboard(){const sel=document.getElementById("onboardNaam");if(!sel)return;fillNaamSelect(sel,state.selected);const custom=document.getElementById("onboardCustom");if(custom)custom.classList.toggle("hidden",sel.value!=="__custom")}
-function renderSoundControls(){const on=state.settings.sound!==false;const tap=state.settings.tapSound!==false;const mala=state.settings.malaSound!==false;const vol=Math.max(0,Math.min(100,Number(state.settings.soundVolume??55)));const all=document.getElementById("soundToggle"),tapBtn=document.getElementById("tapSoundToggle"),malaBtn=document.getElementById("malaSoundToggle"),r=document.getElementById("soundVolume"),lab=document.getElementById("soundVolumeLabel");if(all){all.textContent=on?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");all.classList.toggle("off",!on)}if(tapBtn){tapBtn.textContent=(on&&tap)?"ON":"OFF";tapBtn.classList.toggle("off",!(on&&tap))}if(malaBtn){malaBtn.textContent=(on&&mala)?"ON":"OFF";malaBtn.classList.toggle("off",!(on&&mala))}if(r)r.value=vol;if(lab)lab.textContent=vol+"%"}
-function render(){renderSoundControls();renderOnboard();const n=naamObj(state.selected);document.getElementById("homeNaam").textContent=displayNaam(n);document.getElementById("japNaam").textContent=displayNaam(n);document.getElementById("todayCount").textContent=getToday(n.id).toLocaleString();document.getElementById("todayMala").textContent=Math.floor(getToday(n.id)/108);document.getElementById("todayRemain").textContent=getToday(n.id)%108;document.getElementById("malaProgress").style.width=`${(getToday(n.id)%108)/108*100}%`;document.getElementById("totalCount").textContent=totalFor(n.id).toLocaleString();document.getElementById("totalMala").textContent=Math.floor(totalFor(n.id)/108).toLocaleString();const g=state.goals.find(x=>x.active);document.getElementById("goalText").textContent=g?`${Math.min(totalFor(g.naamId),g.target).toLocaleString()}/${g.target.toLocaleString()}`:"—";document.getElementById("dailyThought").textContent=thoughts[state.lang][new Date().getDate()%thoughts[state.lang].length];document.getElementById("guidanceList").innerHTML=(state.lang==="hi"?["Jahan sambhav ho, saaf aur shaant sthaan chunen.","Mobile ko Jap ke dauran anuchit ya gandi jagah par na rakhein.","Notifications aur doosre distractions ko kam karein.","Ek chune hue Naam par man lagane ka abhyas karein.","Naam Jap ko competition ya dikhawa na banayein."]:["Where possible, choose a clean and quiet place.","Keep the phone in a clean and appropriate place during Jap.","Reduce notifications and other distractions.","Practice bringing the mind back to your chosen Naam.","Do not turn Naam Jap into competition or display."]).map(x=>`<li>${x}</li>`).join("");fillNaamSelect(document.getElementById("goalNaam"),state.selected);fillNaamSelect(document.getElementById("defaultNaamSelect"),state.selected);document.getElementById("languageSelect").value=state.lang;document.getElementById("tapGuardSelect").value=state.settings.tapGuard;renderNaamList();renderGoals();renderMilestones();renderHistory();renderCertificates();renderProfile();renderSession();}
-
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo(0,0)}
-function openModal(html){document.getElementById("modalContent").innerHTML=html;document.getElementById("modal").classList.remove("hidden")}
-function closeModal(){document.getElementById("modal").classList.add("hidden")}
-function addCustomNaam(){const inp=document.getElementById("newNaamInput");const text=inp.value.trim();if(!text){toast(state.lang==="hi"?"Naam likhiye":"Enter a Naam");return}const id="custom-"+Date.now();state.customNaams.push({id,hi:text,en:text,group:"Custom"});state.selected=id;save();closeModal();render();toast(state.lang==="hi"?"Naam add ho gaya":"Naam added")}
-function renderNaamList(){const el=document.getElementById("naamList");el.innerHTML=allNaams().map(n=>{const fav=state.favourites.includes(n.id);return `<div class="list-item"><div class="list-main"><b>${escapeHtml(displayNaam(n))}</b><div class="tiny muted">${totalFor(n.id).toLocaleString()} Jap · ${Math.floor(totalFor(n.id)/108)} Mala</div></div><div class="list-actions"><button class="secondary small selectNaam" data-id="${n.id}">${n.id===state.selected?(state.lang==="hi"?"Chuna":"Selected"):(state.lang==="hi"?"Chunein":"Select")}</button><button class="secondary small favNaam" data-id="${n.id}">${fav?"♥":"♡"}</button></div></div>`}).join("");el.querySelectorAll(".selectNaam").forEach(b=>b.onclick=()=>{state.selected=b.dataset.id;save();render();showPage("home");});el.querySelectorAll(".favNaam").forEach(b=>b.onclick=()=>{const i=state.favourites.indexOf(b.dataset.id);if(i>=0)state.favourites.splice(i,1);else state.favourites.push(b.dataset.id);save();render();})}
-function renderMilestones(){const total=totalAllJap(),el=document.getElementById("milestoneList");if(!el)return;el.innerHTML=CERT_MILESTONES.map(m=>{const done=total>=m.target,r=Math.max(0,m.target-total);return `<div class="milestone-row"><div class="milestone-icon">${done?"✓":"🏅"}</div><div class="milestone-main"><b>${state.lang==="hi"?m.titleHi:m.titleEn}</b><small>${state.lang==="hi"?m.descHi:m.descEn}</small></div><span class="milestone-status ${done?"done":""}">${done?t("unlocked"):`${r.toLocaleString()} ${t("remaining")}`}</span></div>`}).join("")}
-function renderGoals(){const el=document.getElementById("goalList");if(!state.goals.length){el.innerHTML=`<div class="card muted">${state.lang==="hi"?"Abhi koi Sankalp nahi hai.":"No Sankalp yet."}</div>`;return}el.innerHTML=state.goals.map((g,i)=>{const c=Math.min(totalFor(g.naamId),g.target),pct=Math.min(100,c/g.target*100);return `<div class="goal-item"><div class="goal-top"><b>${escapeHtml(displayNaam(naamObj(g.naamId)))}</b><span>${c.toLocaleString()}/${g.target.toLocaleString()}</span></div><div class="goal-bar progress"><span style="width:${pct}%"></span></div><div class="tiny muted">${g.deadline?`Deadline: ${g.deadline}`:"No deadline"} · ${g.active?"Active":"Completed/Paused"}</div><div class="goal-actions"><button class="secondary small completeTest" data-i="${i}">${state.lang==="hi"?"Certificate check":"Certificate check"}</button><button class="danger small deleteGoal" data-i="${i}">${state.lang==="hi"?"Delete":"Delete"}</button></div></div>`}).join("");el.querySelectorAll(".deleteGoal").forEach(b=>b.onclick=()=>{state.goals.splice(Number(b.dataset.i),1);save();render()});el.querySelectorAll(".completeTest").forEach(b=>checkCertificate(state.goals[Number(b.dataset.i)]))}
-function renderHistory(){const el=document.getElementById("historyList");const arr=state.sessions.slice().reverse().slice(0,50);el.innerHTML=arr.length?arr.map(s=>`<div class="history-item"><b>${escapeHtml(displayNaam(naamObj(s.naamId)))}</b><div>${s.count.toLocaleString()} Jap · ${Math.floor(s.count/108)} Mala</div><div class="tiny muted">${new Date(s.at).toLocaleString()}</div></div>`).join(""):`<div class="card muted">${state.lang==="hi"?"Abhi history khali hai.":"No history yet."}</div>`}
-function renderCertificates(){const el=document.getElementById("certificateList");el.innerHTML=state.certificates.length?state.certificates.slice().reverse().map(c=>`<div class="cert-item"><div class="cert"><div>🪷</div><h3>Naam Jap<br>Completion Certificate</h3><p>This acknowledges completion of a self-recorded Naam Jap practice.</p><p class="cert-user-name"><b>${escapeHtml(state.profile.name||"Naam Sadhak")}</b></p><h4>${escapeHtml(c.naamId==="all"?(state.lang==="hi"?(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleHi||"Naam Jap"):(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleEn||"Naam Jap")):displayNaam(naamObj(c.naamId)))}</h4><b>${c.target.toLocaleString()} Jap</b><p class="tiny">Completed: ${c.date}</p><p class="cert-num">Certificate ID: ${c.id}</p><button class="secondary small printCert" data-id="${c.id}">${state.lang==="hi"?"Print / Save PDF":"Print / Save PDF"}</button></div></div>`).join(""):`<div class="card muted">${state.lang==="hi"?"Target poora hone par certificate yahan milega.":"Completed target certificates will appear here."}</div>`;el.querySelectorAll(".printCert").forEach(b=>b.onclick=()=>printCertificate(b.dataset.id))}
-
-function renderProfile(){
- const name=state.profile.name||(state.lang==="hi"?"Naam Sadhak":"Naam Sadhak");
- const initial=(name.trim()[0]||"A").toUpperCase();
- document.getElementById("profileName").textContent=name;document.getElementById("profileMiniName").textContent=name;document.getElementById("profileAvatar").textContent=initial;document.getElementById("profileMiniAvatar").textContent=initial;document.getElementById("profileJoined").textContent="Naam Jap Sadhana · "+state.profile.joined;
- const total=Object.values(state.counts).reduce((a,b)=>a+Number(b||0),0);document.getElementById("profileTotalJap").textContent=total.toLocaleString();document.getElementById("profileTotalMala").textContent=Math.floor(total/108).toLocaleString();document.getElementById("profileDays").textContent=Object.keys(state.daily).filter(k=>Object.values(state.daily[k]||{}).some(v=>Number(v)>0)).length;
- const ns=allNaams().filter(n=>totalFor(n.id)>0).sort((a,b)=>totalFor(b.id)-totalFor(a.id));document.getElementById("profileNaamSummary").innerHTML=ns.length?ns.map(n=>`<div class="summary-row"><div class="summary-name"><b>${escapeHtml(displayNaam(n))}</b><span class="tiny muted">${Math.floor(totalFor(n.id)/108)} ${t("mala")} · ${totalFor(n.id)%108}/108</span></div><span class="badge">${totalFor(n.id).toLocaleString()}</span></div>`).join(""):`<p class="muted">${state.lang==="hi"?"Jap shuru karte hi aapke Naam yahan dikhne lagenge.":"Start Jap to see your Naam summary here."}`;
- const gs=state.goals.slice().reverse();document.getElementById("profileGoalSummary").innerHTML=gs.length?gs.map(g=>{const c=Math.min(totalFor(g.naamId),g.target),p=Math.min(100,c/g.target*100);return `<div class="summary-row"><div class="summary-name"><b>${escapeHtml(displayNaam(naamObj(g.naamId)))}</b><span class="tiny muted">${c.toLocaleString()}/${g.target.toLocaleString()}</span></div><span class="badge">${Math.round(p)}%</span></div>`}).join(""):`<p class="muted">${state.lang==="hi"?"Abhi koi Sankalp nahi hai.":"No Sankalp yet."}`;
- const next=CERT_MILESTONES.find(m=>total<m.target);document.getElementById("profileCertificateProgress").innerHTML=next?`<div class="cert-progress-next"><b>${t("nextCertificate")}: ${state.lang==="hi"?next.titleHi:next.titleEn}</b><div class="tiny muted">${(next.target-total).toLocaleString()} ${t("remaining")} · ${next.target.toLocaleString()} Jap</div></div>`:`<div class="cert-progress-next"><b>🏅 ${t("unlocked")}</b><div class="tiny muted">${state.lang==="hi"?"सभी milestones पूरे हो गए।":"All current milestones are unlocked."}</div></div>`;
-}
-function editProfile(){
- openModal(`<h2>${t("myProfile")}</h2><label>${t("profileName")}</label><input id="profileNameInput" maxlength="40" value="${escapeHtml(state.profile.name||"")}" placeholder="${state.lang==="hi"?"Jaise: Asish":"e.g. Asish"}"><p class="tiny muted">${t("profileHint")}</p><button id="saveProfile" class="primary wide">${t("saveProfile")}</button>`);
- document.getElementById("saveProfile").onclick=()=>{const v=document.getElementById("profileNameInput").value.trim();if(!v){toast(state.lang==="hi"?"Naam likhiye":"Enter your name");return}state.profile.name=v;save();closeModal();render();showPage("profile");toast(state.lang==="hi"?"Profile save ho gaya":"Profile saved")}
-}
-function switchProfileTab(tab){
- document.querySelectorAll(".profile-tab").forEach(b=>b.classList.toggle("active",b.dataset.profileTab===tab));
- document.querySelectorAll(".profile-panel").forEach(p=>p.classList.remove("active"));
- const id=tab==="summary"?"profileSummaryTab":tab==="history"?"profileHistoryTab":"profileCertificatesTab";
- document.getElementById(id).classList.add("active");
-}
-
-function renderSession(){document.getElementById("sessionCount").textContent=session.count.toLocaleString();document.getElementById("sessionMala").textContent=Math.floor(session.count/108);document.getElementById("sessionRemain").textContent=session.count%108;document.getElementById("sessionProgress").style.width=`${session.count%108/108*100}%`;document.getElementById("sessionPill").textContent=session.count.toLocaleString();document.getElementById("pauseBtn").textContent=session.paused?(state.lang==="hi"?"Jari rakhein":"Resume"):t("pause");const ss=document.getElementById("sessionSoundBtn");if(ss){ss.textContent=state.settings.sound?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");ss.classList.toggle("off",!state.settings.sound)}document.getElementById("japButton").disabled=session.paused;document.getElementById("sessionStatus").textContent=session.paused?(state.lang==="hi"?"Jap filhaal roka gaya hai.":"Jap is paused."):session.active?(state.lang==="hi"?"Har sachet tap ko 1 Jap gina jayega.":"Each accepted tap counts as 1 Jap."):""}
-
-let audioCtx=null;
-function ensureAudio(){
- try{
-  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
-  if(audioCtx.state==="suspended")audioCtx.resume();
-  return audioCtx;
- }catch(e){return null}
-}
-function tone(freq,when,duration,volume,type="sine"){
- const ctx=ensureAudio(); if(!ctx)return;
- const osc=ctx.createOscillator(), gain=ctx.createGain();
- const master=Math.max(0,Math.min(1,Number(state.settings.soundVolume??55)/100));
- osc.type=type; osc.frequency.setValueAtTime(freq,when);
- gain.gain.setValueAtTime(0.0001,when);
- gain.gain.exponentialRampToValueAtTime(Math.max(0.0001,volume*master),when+0.015);
- gain.gain.exponentialRampToValueAtTime(0.0001,when+duration);
- osc.connect(gain);gain.connect(ctx.destination);
- osc.start(when);osc.stop(when+duration+0.02);
-}
-function japSound(kind="tap"){
- if(state.settings.sound===false)return;
- if(kind==="mala" && state.settings.malaSound===false)return;
- if(kind!=="mala" && state.settings.tapSound===false)return;
- const ctx=ensureAudio(); if(!ctx)return;
- const now=ctx.currentTime;
- if(kind==="mala"){
-  tone(523.25,now,.22,.055,"sine");tone(659.25,now+.16,.28,.055,"sine");tone(783.99,now+.32,.40,.065,"sine");
- }else tone(520,now,.075,.035,"triangle");
-}
-
-function startJap(){
- session={active:true,paused:false,count:0,undone:0,lastMala:0,lastTap:0,history:[],startedAt:Date.now()};
- showPage("jap");
- renderSession();
-}
-function acceptTap(){
- if(!session.active) startJap();
- if(session.paused)return;
- const now=Date.now();
- if(state.settings.tapGuard==="strict" && session.lastTap && now-session.lastTap<420)return;
- if(state.settings.tapGuard==="normal" && session.lastTap && now-session.lastTap<220)return;
- session.lastTap=now;
- session.count++;
- session.history.push(1);
- addCount(state.selected,1);
- japSound("tap");
- if(typeof checkMilestoneCertificates==="function")checkMilestoneCertificates();
- if(typeof checkGoalsForCertificate==="function")checkGoalsForCertificate();
- const newMala=Math.floor(session.count/108);
- if(newMala>session.lastMala){
-   session.lastMala=newMala;
-   if(newMala>0)japSound("mala");
-   toast(state.lang==="hi"?`🪷 ${newMala} ${t("mala")} complete`:`🪷 Mala ${newMala} complete`);
- }
- save();
- render();
- renderSession();
-}
-function undo(){if(!session.active||session.count<=0)return;if(session.history.length){session.history.pop();session.count--;addCount(state.selected,-1);session.undone++;save();renderSession();render()}}
-function showMalaMessage(m){openModal(`<div style="text-align:center"><div style="font-size:45px">🌸</div><h2>${state.lang==="hi"?"एक माला पूर्ण":"One Mala Complete"}</h2><p>${state.lang==="hi"?`आपने 108 Naam Jap पूरे किए। यह ${m}वीं माला है।`:`You completed 108 Naam Jap. This is Mala ${m}.`}</p><p class="muted">${state.lang==="hi"?"गिनती से अधिक महत्वपूर्ण आपका भाव और नियमितता है।":"Your bhav and regularity matter more than the number."}</p><button id="malaClose" class="primary wide">${state.lang==="hi"?"आगे बढ़ें":"Continue"}</button></div>`);document.getElementById("malaClose").onclick=closeModal}
-function finishSession(){if(!session.active)return;if(session.count>0)state.sessions.push({naamId:state.selected,count:session.count,at:new Date().toISOString()});session.active=false;save();render();showPage("home");toast(state.lang==="hi"?"Jap session save ho gaya":"Jap session saved")}
-function checkMilestoneCertificates(){const total=totalAllJap();let unlocked=[];CERT_MILESTONES.forEach(m=>{if(total>=m.target&&!state.milestoneCertificates[m.id]){const id=`NJ-${m.id.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;const c={id,milestoneId:m.id,naamId:"all",target:m.target,date:todayKey()};state.milestoneCertificates[m.id]=c;state.certificates.push(c);unlocked.push(m)}});if(unlocked.length){save();showMilestoneUnlocked(unlocked[unlocked.length-1])}}
-function showMilestoneUnlocked(m){openModal(`<div style="text-align:center"><div style="font-size:52px">🪷</div><h2>${state.lang==="hi"?"Certificate Unlock हुआ":"Certificate Unlocked"}</h2><p><b>${state.lang==="hi"?m.titleHi:m.titleEn}</b></p><p>${m.target.toLocaleString()} Naam Jap complete</p><p class="muted">${state.lang==="hi"?"यह self-recorded in-app completion acknowledgement है।":"This is a self-recorded in-app completion acknowledgement."}</p><button id="openNewCert" class="primary wide">${state.lang==="hi"?"Certificate देखें":"View Certificate"}</button></div>`);document.getElementById("openNewCert").onclick=()=>{closeModal();showPage("profile");switchProfileTab("certificates")}}
-function checkGoalsForCertificate(){state.goals.forEach(g=>{if(g.active&&totalFor(g.naamId)>=g.target&&!state.certificates.some(c=>c.goalId===g.id)){g.active=false;const id=`NJ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;state.certificates.push({id,goalId:g.id,naamId:g.naamId,target:g.target,date:todayKey()});showCertificateUnlocked(g)}})}
-function checkCertificate(g){if(totalFor(g.naamId)>=g.target){checkGoalsForCertificate();render();toast(state.lang==="hi"?"Sankalp poora — certificate unlock ho gaya":"Sankalp complete — certificate unlocked")}else{toast(state.lang==="hi"?`Abhi ${(g.target-totalFor(g.naamId)).toLocaleString()} Jap baaki hain.`:`${(g.target-totalFor(g.naamId)).toLocaleString()} Jap remaining.`)}}
-function showCertificateUnlocked(g){openModal(`<div style="text-align:center"><div style="font-size:48px">🪷</div><h2>${state.lang==="hi"?"Sankalp poorn":"Sankalp Complete"}</h2><p>${displayNaam(naamObj(g.naamId))} · ${g.target.toLocaleString()} Jap</p><p class="muted">${state.lang==="hi"?"Aapka in-app completion certificate tayyar hai.":"Your in-app completion certificate is ready."}</p><button id="viewCert" class="primary wide">${state.lang==="hi"?"Certificate dekhein":"View Certificate"}</button></div>`);document.getElementById("viewCert").onclick=()=>{closeModal();showPage("certificate")}}
-function printCertificate(id){
- const c=state.certificates.find(x=>x.id===id);if(!c)return;
- const n=c.naamId==="all"?(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleEn||"Naam Jap Milestone"):displayNaam(naamObj(c.naamId));
- const w=window.open("","_blank");if(!w){toast(state.lang==="hi"?"Popup allow karein":"Allow popups");return}
- w.document.write(`<html><head><title>Naam Jap Certificate</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
- @page{size:A4;margin:12mm}
- *{box-sizing:border-box}
- body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef6ff;color:#172033;padding:18px}
- .cert{max-width:760px;margin:10px auto;background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 52%,#f0fdf4 100%);border:3px solid #2563eb;border-radius:24px;padding:42px 38px;text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 36px rgba(15,23,42,.14)}
- .cert:before{content:"";position:absolute;inset:10px;border:2px solid #16a34a;border-radius:18px;pointer-events:none}
- .top{position:relative;z-index:1;color:#1d4ed8;font:800 13px system-ui;letter-spacing:4px}
- .lotus{position:relative;z-index:1;font-size:64px;margin:8px 0}
- h1{position:relative;z-index:1;margin:4px 0;color:#1d4ed8;font-size:38px}
- h2{position:relative;z-index:1;margin:8px 0;color:#15803d;font-size:22px}
- .intro{position:relative;z-index:1;color:#475569}
- .person{position:relative;z-index:1;font-size:28px;font-weight:800;color:#172033;margin:20px 0 8px}
- .naam-label{position:relative;z-index:1;display:inline-block;padding:8px 18px;border-radius:999px;background:#dcfce7;color:#166534;font:800 16px system-ui;margin:4px 0 14px}
- .count{position:relative;z-index:1;font-size:30px;font-weight:900;color:#b45309;margin:10px}
- .date{position:relative;z-index:1;color:#475569}
- .id{position:relative;z-index:1;font:12px system-ui;color:#64748b;margin-top:22px}
- .footer{position:relative;z-index:1;margin-top:18px;color:#1d4ed8;font:700 12px system-ui;letter-spacing:1px}
- @media print{body{background:#fff;padding:0}.cert{box-shadow:none;margin:0;max-width:none}}
- </style></head><body><div class="cert">
- <div class="top">✦ NAAM JAP • NAAM SMARAN ✦</div>
- <div class="lotus">🪷</div>
- <h1>Naam Jap</h1><h2>Completion Certificate</h2>
- <p class="intro">This acknowledges completion of a self-recorded Naam Jap practice.</p>
- <div class="person">${escapeHtml(state.profile.name||"Naam Sadhak")}</div>
- <div class="naam-label">🙏 Naam Jap: ${escapeHtml(n)}</div>
- <div class="count">${c.target.toLocaleString()} Jap</div>
- <div class="date">Completed: ${c.date}</div>
- <div class="id">Certificate ID: ${c.id}</div>
- <div class="footer">श्रद्धा • नियमितता • नाम स्मरण</div>
- </div><script>window.print()<\/script></body></html>`);
- w.document.close()
-}
-function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`naam-jap-backup-${todayKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-
-function finishSplash(){const s=document.getElementById("splashScreen");if(s)setTimeout(()=>s.remove(),900)}
-function init(){
- load();
- const onboard=document.getElementById("onboarding"), main=document.getElementById("mainApp");
- if(!state.onboarded){onboard.classList.remove("hidden");main.classList.add("hidden");renderOnboard()}
- else{onboard.classList.add("hidden");main.classList.remove("hidden")}
-
- const onboardNaam=document.getElementById("onboardNaam");
- if(onboardNaam) onboardNaam.addEventListener("change",e=>document.getElementById("onboardCustom").classList.toggle("hidden",e.target.value!=="__custom"));
-
- document.querySelectorAll(".choice-btn").forEach(b=>b.onclick=()=>{
-   document.querySelectorAll(".choice-btn").forEach(x=>x.classList.remove("selected"));
-   b.classList.add("selected");state.lang=b.dataset.lang;
-   document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
-   renderOnboard();
- });
-
- document.getElementById("finishOnboard").onclick=()=>{
-   const s=document.getElementById("onboardNaam").value;
-   if(!s){toast(state.lang==="hi"?"Pehle Naam chuniye":"Please choose a Naam");return}
-   if(s==="__custom"){
-     const v=document.getElementById("onboardCustom").value.trim();
-     if(!v){toast(state.lang==="hi"?"Custom Naam likhiye":"Enter custom Naam");return}
-     const id="custom-"+Date.now();state.customNaams.push({id,hi:v,en:v,group:"Custom"});state.selected=id;
-   }else state.selected=s;
-   openModal(`<h2>${t("profileName")}</h2><input id="firstProfileName" maxlength="40" placeholder="${state.lang==="hi"?"Apna naam likhiye":"Enter your name"}"><p class="tiny muted">${t("profileHint")}</p><button id="finishProfile" class="primary wide">${t("continue")}</button>`);
-   document.getElementById("finishProfile").onclick=()=>{
-     const v=document.getElementById("firstProfileName").value.trim();
-     if(!v){toast(state.lang==="hi"?"Naam likhiye":"Enter your name");return}
-     state.profile.name=v;state.onboarded=true;save();closeModal();
-     onboard.classList.add("hidden");main.classList.remove("hidden");applyLang();showPage("home");
-   };
- };
-
- // Core Jap controls
- document.getElementById("startJap").onclick=startJap;
- document.getElementById("backHome").onclick=()=>showPage("home");
- const japBtn=document.getElementById("japButton");
- if(japBtn){japBtn.onclick=acceptTap;japBtn.onpointerup=e=>{if(e.pointerType!=="mouse"){e.preventDefault();acceptTap()}}}
- document.getElementById("undoBtn").onclick=undo;
- document.getElementById("pauseBtn").onclick=()=>{if(session.active){session.paused=!session.paused;renderSession()}};
- document.getElementById("finishSessionBtn").onclick=finishSession;
- document.getElementById("sessionSoundBtn").onclick=()=>{
-   state.settings.sound=!state.settings.sound;save();render();renderSession();
-   if(state.settings.sound)japSound("tap");
- };
-
- // Navigation
- document.querySelectorAll(".bottom-nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
- document.getElementById("profileTopBtn").onclick=()=>{showPage("profile");switchProfileTab("summary")};
- document.getElementById("editProfileBtn").onclick=editProfile;
- document.querySelectorAll(".profile-tab").forEach(b=>b.onclick=()=>switchProfileTab(b.dataset.profileTab));
-
- // Settings
- document.getElementById("soundToggle").onclick=()=>{state.settings.sound=state.settings.sound===false;save();render();if(state.settings.sound)japSound("tap")};
- document.getElementById("tapSoundToggle").onclick=()=>{state.settings.tapSound=state.settings.tapSound===false;save();render();if(state.settings.tapSound&&state.settings.sound)japSound("tap")};
- document.getElementById("malaSoundToggle").onclick=()=>{state.settings.malaSound=state.settings.malaSound===false;save();render();if(state.settings.malaSound&&state.settings.sound)japSound("mala")};
- document.getElementById("soundVolume").oninput=e=>{state.settings.soundVolume=Number(e.target.value);save();renderSoundControls()};
- document.getElementById("soundVolume").onchange=()=>{if(state.settings.sound)japSound("tap")};
- document.getElementById("addNaamBtn").onclick=()=>openModal(`<h2>${state.lang==="hi"?"Apna Naam joden":"Add custom Naam"}</h2><input id="newNaamInput" maxlength="60" placeholder="${state.lang==="hi"?"Naam likhiye":"Enter Naam"}"><button id="saveCustom" class="primary wide">${state.lang==="hi"?"Joden":"Add"}</button>`);
-
- // Modal
- document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
- document.getElementById("modalClose").onclick=closeModal;
- document.getElementById("modalContent").addEventListener("click",e=>{if(e.target.id==="saveCustom")addCustomNaam()});
-
- // Sankalp
- document.getElementById("goalForm").onsubmit=e=>{
-   e.preventDefault();
-   const id=document.getElementById("goalNaam").value,target=Math.floor(Number(document.getElementById("goalTarget").value)),deadline=document.getElementById("goalDeadline").value;
-   if(!id||id==="__custom"||!Number.isFinite(target)||target<108){toast(state.lang==="hi"?"Target kam se kam 108 hona chahiye":"Target must be at least 108");return}
-   state.goals.push({id:"goal-"+Date.now(),naamId:id,target,deadline,active:true});save();render();
-   toast(state.lang==="hi"?"Sankalp save ho gaya":"Sankalp saved")
- };
- document.querySelectorAll(".goal-chip").forEach(b=>b.onclick=()=>document.getElementById("goalTarget").value=b.dataset.target);
-
- // Settings selectors
- document.getElementById("languageSelect").onchange=e=>{state.lang=e.target.value;save();applyLang();render()};
- document.getElementById("defaultNaamSelect").onchange=e=>{if(e.target.value!=="__custom"){state.selected=e.target.value;save();render()}};
- document.getElementById("tapGuardSelect").onchange=e=>{state.settings.tapGuard=e.target.value;save();render()};
- document.getElementById("exportBtn").onclick=exportData;
- document.getElementById("resetDataBtn").onclick=()=>{
-   if(confirm(state.lang==="hi"?"Kya aap sab local data reset karna chahte hain?":"Reset all local data?")){
-     localStorage.removeItem(KEY);location.reload()
-   }
- };
-
- // Keyboard shortcut
- document.addEventListener("keydown",e=>{
-   if(e.code==="Space"&&document.getElementById("jap").classList.contains("active")&&
-      document.activeElement.tagName!=="INPUT"&&document.activeElement.tagName!=="SELECT"&&document.activeElement.tagName!=="TEXTAREA"){
-     e.preventDefault();acceptTap()
-   }
- });
-
- applyLang();
- try{render();}catch(e){console.error("Naam Jap render error:",e)}
- setTimeout(finishSplash,100);
-}init();
-/* v18: certificate Naam label helper. Existing certificate records remain untouched. */
-window.formatCertificateNaam = function(record){
-  if (!record) return "";
-  const naam = record.naam || record.name || record.japNaam || record.japName || record.selectedNaam || "";
-  return naam ? `Naam Jap: ${naam}` : "";
-};
+  document.addEventListener('click', e=>{
+    const nav=e.target.closest('[data-nav]');if(nav){setView(nav.dataset.nav);return;}
+    const lang=e.target.closest('[data-lang]');if(lang){state.lang=lang.dataset.lang;document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===state.lang));document.getElementById('onboarding-naam').innerHTML=allNaams().map(n=>`<option value="${esc(n.id)}">${esc(displayNaam(n))}</option>`).join('');return;}
+    const setLang=e.target.closest('[data-setting-lang]');if(setLang){state.lang=setLang.dataset.settingLang;document.documentElement.lang=state.lang;persist();renderSettings();renderNav();renderTopbar();return;}
+    const action=e.target.closest('[data-action]')?.dataset.action;
+    if(action==='start-jap'||action==='start-session'){startSession();return;} if(action==='exit-session'){exitSession();return;} if(action==='undo'){undo();return;} if(action==='pause'){isPaused=!isPaused;renderJap();return;} if(action==='finish'){finishSession();return;} if(action==='toggle-sound'){state.settings.masterSound=!state.settings.masterSound;persist();renderJap();return;} if(action==='add-custom'){addCustom();return;} if(action==='new-sankalp'){createSankalp();return;} if(action==='save-sankalp'){saveSankalp();return;} if(action==='save-profile'){state.profile.name=(document.getElementById('profile-name')?.value||'').trim().slice(0,80);persist(true);toast(t('saved'));return;} if(action==='export'){exportBackup();return;} if(action==='import'){importBackup();return;} if(action==='reset'){resetData();return;} if(action==='print-certificate'){printCertificate();return;}
+    const sel=e.target.closest('[data-select-naam]');if(sel){state.selectedNaamId=sel.dataset.selectNaam;persist();renderNaam();toast(t('saved'));return;}
+    const fav=e.target.closest('[data-fav]');if(fav){const id=fav.dataset.fav;state.favourites=state.favourites.includes(id)?state.favourites.filter(x=>x!==id):[...state.favourites,id];persist();renderNaam();return;}
+    const hist=e.target.closest('[data-history]');if(hist){historyFilter=hist.dataset.history;renderProfile();return;}
+    const cert=e.target.closest('[data-certificate]');if(cert){const c=state.certificates.find(x=>x.id===cert.dataset.certificate);if(c)certificateModal(c);return;}
+    if(e.target.closest('[data-modal-close]')){closeModal();return;}
+    const prot=e.target.closest('[data-protection]');if(prot){state.settings.tapProtection=prot.dataset.protection;persist();renderSettings();return;}
+  });
+  document.addEventListener('input', e=>{if(e.target.id==='naam-search'){renderNaam();document.getElementById('naam-search')?.focus();}if(e.target.id==='volume-range'){state.settings.volume=clampInt(e.target.value,0,100);const v=document.getElementById('volume-value');if(v)v.textContent=state.settings.volume;persist();}});
+  document.addEventListener('change', e=>{const key=e.target.dataset.setting;if(key){state.settings[key]=e.target.checked;persist();if(key==='darkMode')applyTheme();}});
+  document.addEventListener('click', e=>{if(e.target.id==='onboarding-continue'){const custom=document.getElementById('onboarding-custom').value.trim().slice(0,80);if(custom){const id='custom-'+uid();state.customNaams.push({id,name:custom,hi:custom,group:'Custom'});state.counts[id]=0;state.selectedNaamId=id;}else state.selectedNaamId=document.getElementById('onboarding-naam').value;state.onboarded=true;state.profile.startedAt=state.profile.startedAt||todayKey();persist(true).then(enterApp);}});
+  document.addEventListener('pointerdown', e=>{if(e.target.id==='jap-tap')registerJap();});
+  document.addEventListener('keydown', e=>{if(e.key===' '&&currentView==='jap'&&activeSession){e.preventDefault();registerJap();}});
+  window.addEventListener('beforeunload',()=>{if(activeSession&&activeSession.count>0){state.sessions.push({...activeSession,finishedAt:nowISO(),interrupted:true});dbSet(state).catch(()=>{});}});
+  navigator.storage?.persist?.().catch?.(()=>{});
+  init();
+})();
