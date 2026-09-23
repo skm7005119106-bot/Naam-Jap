@@ -60,3 +60,13 @@ Retained:
 - Jap screen card and tap button enlarged to use the available phone screen better.
 - Naam and Jap counter increased further for a more immersive counting screen.
 - Reduced unused vertical space while keeping controls accessible.
+
+
+## v22 update
+- Increased the central Jap circle and typography further.
+- Balanced vertical spacing so the Jap card feels fuller without crowding the controls.
+- Reduced the perception of unused empty screen area.
+
+
+## v23 update
+- Enlarged the central Naam Jap circle substantially to use the phone width better.
