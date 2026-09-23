@@ -1,7 +1,7 @@
 /* Naam Jap v3 — clean offline-first application core. */
 (() => {
   'use strict';
-  const APP_VERSION = '3.0.0';
+  const APP_VERSION = '3.1.0';
   const DB_NAME = 'naam-jap-db';
   const DB_VERSION = 1;
   const STORE = 'app';

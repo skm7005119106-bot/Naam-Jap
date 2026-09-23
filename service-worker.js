@@ -1,8 +1,8 @@
 /* Naam Jap service worker — versioned shell cache with network-first navigation. */
-const VERSION = 'naam-jap-v3-0-0';
+const VERSION = 'naam-jap-v3-1-0';
 const SHELL = `${VERSION}-shell`;
 const ASSETS = [
-  './', './index.html', './style.css?v=3.0.0', './app.js?v=3.0.0', './manifest.json',
+  './', './index.html', './style.css?v=3.1.0', './app.js?v=3.1.0', './manifest.json',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-512-maskable.png'
 ];
 self.addEventListener('install', event => {

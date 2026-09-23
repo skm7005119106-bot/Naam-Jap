@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="style.css?v=3.0.0">
+  <link rel="stylesheet" href="style.css?v=3.1.0">
   <title>Naam Jap — Naam Smaran</title>
 </head>
 <body>
@@ -65,30 +65,12 @@
 
   <div id="toast-region" class="toast-region" aria-live="polite"></div>
   <div id="modal-root"></div>
-  <script src="app.js?v=3.0.0" defer></script>
+  <script src="app.js?v=3.1.0" defer></script>
   <script>
     (function () {
       if (!('serviceWorker' in navigator)) return;
-      var reloadedForController = false;
-      navigator.serviceWorker.addEventListener('controllerchange', function () {
-        if (reloadedForController) return;
-        reloadedForController = true;
-        window.location.reload();
-      });
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./service-worker.js?v=3.0.0', { updateViaCache: 'none' })
-          .then(function (registration) {
-            if (registration.waiting) registration.waiting.postMessage('SKIP_WAITING');
-            registration.addEventListener('updatefound', function () {
-              var worker = registration.installing;
-              if (!worker) return;
-              worker.addEventListener('statechange', function () {
-                if (worker.state === 'installed' && navigator.serviceWorker.controller && registration.waiting) {
-                  registration.waiting.postMessage('SKIP_WAITING');
-                }
-              });
-            });
-          })
+        navigator.serviceWorker.register('./service-worker.js?v=3.1.0', { updateViaCache: 'none' })
           .catch(function () {});
       });
     }());
