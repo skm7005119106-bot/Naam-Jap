@@ -106,3 +106,51 @@ Retained:
 - Kept six-tab navigation responsive and non-overlapping.
 - Removed the Jap card's forced tall empty minimum height.
 - Bumped stylesheet and service-worker versions to v28.
+
+## v29 — Real fixes (manifest, service worker, one clean stylesheet)
+**Why it never went full-screen (v14–v28):** the app had no `manifest.json`,
+no `icons/` folder, and `service-worker.js` was never registered from
+`index.html`. Without a manifest + icons, Android/Chrome has nothing to
+install as a standalone app, so "Add to Home screen" always opened it as a
+normal browser tab with the address bar — no amount of CSS could fix that.
+`service-worker.js` also listed `manifest.json` and the icon files in its
+cache list even though they didn't exist, so `caches.addAll()` was failing
+and the worker never activated.
+- Added `manifest.json` (`display: standalone`, `display_override:
+  ["fullscreen","standalone","minimal-ui"]`) plus generated `icons/icon-192.png`,
+  `icons/icon-512.png`, `icons/icon-512-maskable.png`.
+- Linked the manifest, apple/mobile PWA meta tags and icons in `index.html`,
+  and registered `service-worker.js` (it was sitting in the project unused).
+- `service-worker.js` now caches each asset independently so one missing
+  file can't silently break offline install again.
+- Added a small script that requests real Fullscreen API fullscreen once
+  the app is launched from the installed home-screen icon.
+
+**Why size changes kept looking like they "didn't apply":** `style.css` had
+grown to ~1600 lines because v12–v28 each added new overriding rules at the
+bottom instead of editing the original ones — the same element's font-size
+ended up declared 5–8 times across different, inconsistent `@media`
+breakpoints, so on some phone widths an older/smaller value was still the
+one winning the cascade.
+- Rewrote `style.css` as one consolidated file (~280 lines): every element's
+  size is defined once, using `clamp()` for fluid scaling instead of stacked
+  breakpoints, so text and icon sizes no longer depend on hitting an exact
+  screen-width bucket. Sizes were also increased further (Naam heading,
+  today's counter, Jap circle text, bottom-nav icons all bigger than v28).
+
+**Small app.js fixes:**
+- `session.undone` was reset without its field on every new Jap session,
+  so Undo silently produced `NaN` internally (not visible, but wrong).
+- Sankalp (custom goal) certificates only unlocked when the user opened
+  Sankalp and manually pressed "Certificate check". They now auto-unlock
+  on every tap, same as the 108/1,008/10,008/1,08,000 milestone
+  certificates already did.
+
+Bumped stylesheet/service-worker cache to v29.
+
+**Note on true full-screen in a wrapped Android app:** the manifest fixes
+full-screen for this as an installed PWA (open in Chrome → menu → "Add to
+Home screen"/"Install app"). If this HTML is instead being wrapped into an
+APK with a WebView-based builder, that tool's own "fullscreen /
+hide status bar" setting (not this web code) is what controls the native
+status/navigation bar.

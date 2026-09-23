@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#8b5e34">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="manifest" href="manifest.json">
+  <!-- Android / Chrome installable full-screen app -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- iOS full-screen support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Naam Jap">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=28">
+  <link rel="stylesheet" href="style.css?v=29">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -211,5 +220,29 @@
   </div>
 </div>
 <script src="app.js"></script>
+<script>
+  // Register service worker so the app is installable and works offline.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    });
+  }
+  // When launched from the home-screen icon (standalone/fullscreen display),
+  // also ask the browser for real fullscreen (hides the status bar too on
+  // devices/browsers that support the Fullscreen API).
+  (function () {
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+      window.matchMedia('(display-mode: fullscreen)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) {
+      var tryFullscreen = function () {
+        var el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        document.removeEventListener('click', tryFullscreen);
+      };
+      document.addEventListener('click', tryFullscreen, { once: true });
+    }
+  })();
+</script>
 </body>
 </html>

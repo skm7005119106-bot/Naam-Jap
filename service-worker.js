@@ -1,10 +1,15 @@
-const CACHE = 'naam-jap-v28-pwa';
-const ASSETS = ['./','./index.html','./style.css?v=28','./app.js','./manifest.json','./icons/icon-192.png','./icons/icon-512.png'];
+const CACHE = 'naam-jap-v29-pwa';
+const ASSETS = ['./','./index.html','./style.css?v=29','./app.js','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png'];
 
 self.addEventListener('install', e =>
   e.waitUntil(
     caches.open(CACHE)
-      .then(c => c.addAll(ASSETS))
+      .then(c => Promise.all(ASSETS.map(url =>
+        // Cache each file independently: if one request ever fails, it no
+        // longer breaks the entire install (which used to leave the whole
+        // app uncached and non-installable).
+        fetch(url).then(res => res.ok && c.put(url, res)).catch(() => {})
+      )))
       .then(() => self.skipWaiting())
   )
 );

@@ -1,14 +1,35 @@
 {
-  "name": "Naam Jap",
+  "name": "Naam Jap — Naam Smaran",
   "short_name": "Naam Jap",
-  "start_url": "./",
+  "description": "A simple offline companion for Naam Jap and Naam Smaran.",
+  "start_url": "./index.html",
   "scope": "./",
+  "id": "./index.html",
   "display": "standalone",
-  "background_color": "#fffaf3",
-  "theme_color": "#8b5e34",
-  "description": "An offline companion for Naam Jap and Naam Smaran.",
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#f5f8fc",
+  "theme_color": "#2563eb",
+  "lang": "hi",
+  "dir": "ltr",
   "icons": [
-    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

@@ -126,7 +126,7 @@ function japSound(kind="tap"){
 }
 
 function startJap(){
- session={active:true,paused:false,count:0,lastMala:0,lastTap:0,history:[],startedAt:Date.now()};
+ session={active:true,paused:false,count:0,undone:0,lastMala:0,lastTap:0,history:[],startedAt:Date.now()};
  showPage("jap");
  renderSession();
 }
@@ -142,6 +142,7 @@ function acceptTap(){
  addCount(state.selected,1);
  japSound("tap");
  if(typeof checkMilestoneCertificates==="function")checkMilestoneCertificates();
+ if(typeof checkGoalsForCertificate==="function")checkGoalsForCertificate();
  const newMala=Math.floor(session.count/108);
  if(newMala>session.lastMala){
    session.lastMala=newMala;
