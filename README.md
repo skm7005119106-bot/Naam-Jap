@@ -48,3 +48,9 @@ Retained:
 ## v19 update
 - Certificate now prominently names the specific Naam Jap completed.
 - Print/Save PDF certificate redesigned with blue, green and gold accents and a clear Naam Jap badge.
+
+
+## v20 update
+- Larger Naam Jap headings and counter.
+- Larger central tap/jap button and Naam label.
+- Increased usable screen width and reduced empty margins/space.

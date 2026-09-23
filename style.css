@@ -388,3 +388,80 @@ button,.bottom-nav button{touch-action:manipulation;-webkit-user-select:none;use
   margin:8px 0;
 }
 .cert-num{color:#64748b !important}
+
+/* ===== v20 larger headings, counter and better screen usage ===== */
+.main,main{max-width:760px !important;}
+.page{
+  padding:16px 12px 132px !important;
+}
+.hero-card{
+  padding:30px 18px !important;
+}
+.hero-card h1{
+  font-size:38px !important;
+  margin:10px 0 12px !important;
+  color:#1d4ed8 !important;
+}
+.hero-card .big-count{
+  font-size:72px !important;
+}
+.jap-card{
+  padding:26px 12px 24px !important;
+  min-height:calc(100vh - 210px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+}
+.jap-card h2,
+#japNaam{
+  font-size:36px !important;
+  line-height:1.15 !important;
+  margin:8px 0 10px !important;
+  color:#15803d !important;
+  font-weight:900 !important;
+}
+.jap-card .session-count{
+  font-size:78px !important;
+  line-height:1 !important;
+  margin:14px 0 8px !important;
+  color:#1d4ed8 !important;
+}
+.jap-button{
+  width:min(82vw,380px) !important;
+  height:min(82vw,380px) !important;
+  max-width:380px !important;
+  max-height:380px !important;
+  font-size:40px !important;
+  border-width:9px !important;
+  margin:20px auto 18px !important;
+  background:linear-gradient(145deg,#eff6ff,#dcfce7) !important;
+  color:#1d4ed8 !important;
+  box-shadow:0 14px 30px rgba(37,99,235,.16),0 4px 10px rgba(22,163,74,.10) !important;
+}
+.jap-card .tiny{
+  font-size:14px !important;
+}
+.jap-actions{
+  width:100%;
+  margin-top:4px;
+}
+.jap-actions button{
+  min-height:44px;
+}
+.card,.hero-card,.jap-card{
+  width:100%;
+}
+@media(max-width:430px){
+  .page{padding-left:10px !important;padding-right:10px !important;}
+  .hero-card h1{font-size:34px !important;}
+  .hero-card .big-count{font-size:64px !important;}
+  .jap-card{min-height:calc(100vh - 195px);}
+  .jap-card h2,#japNaam{font-size:33px !important;}
+  .jap-card .session-count{font-size:70px !important;}
+  .jap-button{
+    width:min(84vw,350px) !important;
+    height:min(84vw,350px) !important;
+    font-size:38px !important;
+  }
+}
