@@ -21,3 +21,10 @@ Retained:
 - Polished startup animation with lotus pulse and blue/green loading dots.
 - Removed the rotating ring/line-style loader.
 - Preserves existing Naam Jap functionality and v12 UI improvements.
+
+
+## v15 update
+- Stronger Android-style bottom navigation with larger icons and labels.
+- Refined cards, shadows, header polish and blue/green accents.
+- Added service-worker cache version 15 to force the updated UI instead of stale cached CSS.
+- Added CSS cache-busting for style.css.

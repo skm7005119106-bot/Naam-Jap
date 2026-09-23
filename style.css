@@ -195,3 +195,86 @@ html,body{background:var(--ui-bg);color:var(--ui-text)}
   0%,72%{opacity:1;visibility:visible}
   100%{opacity:0;visibility:hidden;pointer-events:none}
 }
+
+/* ===== v15 Android-style polish ===== */
+:root{
+  --android-blue:#2563eb;
+  --android-blue-dark:#1d4ed8;
+  --android-green:#16a34a;
+  --android-green-dark:#15803d;
+}
+body{
+  background:linear-gradient(180deg,#f8fbff 0%,#f3f7f4 100%);
+}
+header,.app-header{
+  box-shadow:0 2px 12px rgba(15,23,42,.10);
+}
+.page{
+  max-width:680px;
+  margin:0 auto;
+}
+.card,.panel,.profile-hero,.summary-card,.milestone-card{
+  border:1px solid rgba(148,163,184,.22);
+  box-shadow:0 6px 22px rgba(15,23,42,.07);
+}
+.bottom-nav{
+  min-height:76px !important;
+  padding:7px 6px calc(7px + env(safe-area-inset-bottom)) !important;
+  gap:4px;
+  background:rgba(255,255,255,.98) !important;
+  border-top:1px solid #dbeafe !important;
+  box-shadow:0 -8px 24px rgba(15,23,42,.10) !important;
+}
+.bottom-nav button{
+  min-height:64px !important;
+  min-width:52px;
+  padding:6px 4px 5px !important;
+  font-size:26px !important;
+  line-height:1 !important;
+  border-radius:16px !important;
+  transform:translateZ(0);
+}
+.bottom-nav button span{
+  display:block;
+  font-size:11px !important;
+  line-height:1.15 !important;
+  margin-top:6px !important;
+  font-weight:800 !important;
+  letter-spacing:.1px;
+}
+.bottom-nav button.active{
+  color:#fff !important;
+  background:linear-gradient(135deg,var(--android-blue),var(--android-blue-dark)) !important;
+  box-shadow:0 5px 14px rgba(37,99,235,.28) !important;
+  transform:translateY(-2px);
+}
+.bottom-nav button:nth-child(2).active,
+.bottom-nav button:nth-child(5).active{
+  background:linear-gradient(135deg,var(--android-green),var(--android-green-dark)) !important;
+}
+.bottom-nav button:nth-child(3).active{
+  background:linear-gradient(135deg,#3b82f6,#1d4ed8) !important;
+}
+.bottom-nav button:nth-child(4).active{
+  background:linear-gradient(135deg,#8b5cf6,#6d28d9) !important;
+}
+.bottom-nav button:nth-child(6).active{
+  background:linear-gradient(135deg,#64748b,#334155) !important;
+}
+.page{
+  padding-bottom:125px !important;
+}
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+@media(max-width:430px){
+  .bottom-nav button{
+    min-height:64px !important;
+    min-width:50px;
+    font-size:25px !important;
+  }
+  .bottom-nav button span{font-size:10px !important}
+}
+
+/* Hide the old line/ring loader if any legacy markup survives. */
+.splash-ring{display:none !important;}
