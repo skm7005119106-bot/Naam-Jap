@@ -23,10 +23,175 @@
 .sound-chip.off{background:#eee8e1;color:#80766e}
 @media(max-width:430px){.bottom-nav{grid-template-columns:repeat(6,minmax(0,1fr))}.bottom-nav button{font-size:9px;padding:8px 1px 7px}.bottom-nav button span{margin-top:2px}}
 
-.splash-screen{position:fixed;inset:0;background:radial-gradient(circle at 50% 42%,#fff8ee 0,#f6e6d3 42%,#d7b184 100%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#704a2b;animation:splashFade 2.2s ease forwards}.splash-lotus{font-size:64px;animation:lotusFloat 1.2s ease-in-out infinite}.splash-title{font-family:Georgia,serif;font-size:38px;font-weight:700;margin-top:12px}.splash-subtitle{font-size:14px;letter-spacing:3px;text-transform:uppercase;margin-top:5px;opacity:.72}.splash-ring{width:34px;height:34px;border:3px solid rgba(112,74,43,.2);border-top-color:#8f5f36;border-radius:50%;margin-top:24px;animation:spin .9s linear infinite}@keyframes lotusFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.04)}}@keyframes splashFade{0%,70%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden;pointer-events:none}}@keyframes spin{to{transform:rotate(360deg)}}.milestone-card{background:linear-gradient(135deg,#fffaf3,#f7e7d4)}.milestone-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #eadfd3}.milestone-row:last-child{border-bottom:0}.milestone-icon{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#ead4ba}.milestone-main{flex:1;min-width:0}.milestone-main b{display:block}.milestone-main small{color:#7d7067}.milestone-status{font-size:11px;border-radius:99px;padding:5px 8px;background:#eee7df;color:#74685e;white-space:nowrap}.milestone-status.done{background:#e7d5bd;color:#704a2b;font-weight:800}.cert-progress-next{padding:12px;background:#f8eee3;border-radius:13px}
+.milestone-card{background:linear-gradient(135deg,#fffaf3,#f7e7d4)}.milestone-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #eadfd3}.milestone-row:last-child{border-bottom:0}.milestone-icon{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#ead4ba}.milestone-main{flex:1;min-width:0}.milestone-main b{display:block}.milestone-main small{color:#7d7067}.milestone-status{font-size:11px;border-radius:99px;padding:5px 8px;background:#eee7df;color:#74685e;white-space:nowrap}.milestone-status.done{background:#e7d5bd;color:#704a2b;font-weight:800}.cert-progress-next{padding:12px;background:#f8eee3;border-radius:13px}
 
 #japButton{touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer}
 
 .sound-setting-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid #eadfd3}.sound-setting-row span{font-weight:600}.sound-setting-row button{min-width:90px}.card input[type="range"]{width:100%;accent-color:#9a6738}
 
 .cert-user-name{font-size:24px;margin:14px 0;color:#704a2b}
+
+
+/* ===== v12 UI IMPROVEMENT: stronger blue + green palette ===== */
+:root{
+  --ui-blue:#2563eb;
+  --ui-blue-dark:#1d4ed8;
+  --ui-blue-soft:#dbeafe;
+  --ui-green:#16a34a;
+  --ui-green-dark:#15803d;
+  --ui-green-soft:#dcfce7;
+  --ui-bg:#f5f8fc;
+  --ui-card:#ffffff;
+  --ui-border:#d9e2ef;
+  --ui-text:#172033;
+}
+
+html,body{background:var(--ui-bg);color:var(--ui-text)}
+.topbar{background:#fff;border-bottom:2px solid var(--ui-blue-soft)}
+.brand{color:var(--ui-blue-dark)}
+.icon-btn{color:var(--ui-blue-dark)}
+.hero-card,.jap-card,.card,.stat,.onboard-card,.list-item,.goal-item,.cert-item,.history-item{
+  background:var(--ui-card);
+  border-color:var(--ui-border);
+  box-shadow:0 4px 16px rgba(30,64,175,.07)
+}
+.hero-card{border-top:5px solid var(--ui-blue)}
+.eyebrow{color:var(--ui-blue-dark)}
+.primary{background:var(--ui-blue);border-color:var(--ui-blue);color:#fff}
+.primary:hover{background:var(--ui-blue-dark)}
+.progress span{background:var(--ui-green)}
+.progress{background:#e5e7eb}
+.stat b{color:var(--ui-blue-dark)}
+.stat:nth-child(2) b{color:var(--ui-green-dark)}
+.pill{background:var(--ui-blue-soft);color:var(--ui-blue-dark)}
+.sound-chip{border-color:#bbf7d0;background:var(--ui-green-soft);color:var(--ui-green-dark)}
+.sound-chip.off{background:#eef2f7;color:#64748b}
+.secondary{background:#fff;color:var(--ui-blue-dark);border-color:#bfdbfe}
+.secondary:hover{background:var(--ui-blue-soft)}
+.choice-btn.selected{outline:3px solid var(--ui-blue);background:var(--ui-blue-soft)}
+.goal-chip{background:var(--ui-green-soft);border-color:#bbf7d0;color:var(--ui-green-dark)}
+.profile-avatar{background:linear-gradient(135deg,var(--ui-blue),var(--ui-blue-dark))}
+.profile-mini>span:first-child{background:linear-gradient(135deg,var(--ui-blue),var(--ui-blue-dark))}
+.profile-hero{background:linear-gradient(135deg,#fff,#eff6ff);border-color:#bfdbfe}
+.profile-tab.active{color:var(--ui-blue-dark);background:#fff}
+.badge{background:var(--ui-green-soft);color:var(--ui-green-dark)}
+.milestone-card{background:linear-gradient(135deg,#fff,#eff6ff)}
+.milestone-icon{background:var(--ui-blue-soft);color:var(--ui-blue-dark)}
+.milestone-status.done{background:var(--ui-green-soft);color:var(--ui-green-dark)}
+.cert{border-color:var(--ui-blue)}
+.jap-button{
+  border-color:#93c5fd;
+  background:linear-gradient(145deg,#dcfce7,#dbeafe);
+  color:var(--ui-blue-dark);
+  box-shadow:0 10px 28px rgba(37,99,235,.16)
+}
+.jap-button:active{transform:scale(.97)}
+.bottom-nav{
+  background:#fff;
+  border-top:2px solid #dbeafe;
+  box-shadow:0 -5px 18px rgba(30,64,175,.08);
+  padding-top:4px;
+  padding-bottom:calc(4px + env(safe-area-inset-bottom))
+}
+.bottom-nav button{
+  min-height:58px;
+  padding:7px 2px 5px;
+  font-size:20px;
+  line-height:1;
+  color:#64748b;
+  border-radius:12px;
+  margin:2px;
+  transition:background .15s, color .15s, transform .15s
+}
+.bottom-nav button span{
+  font-size:11px;
+  line-height:1.2;
+  margin-top:5px;
+  font-weight:700
+}
+.bottom-nav button.active{
+  color:#fff;
+  background:var(--ui-blue);
+  font-weight:800;
+  box-shadow:0 3px 10px rgba(37,99,235,.22)
+}
+.bottom-nav button:nth-child(2).active{background:var(--ui-green-dark)}
+.bottom-nav button:nth-child(3).active{background:var(--ui-blue-dark)}
+.bottom-nav button:nth-child(4).active{background:#7c3aed}
+.bottom-nav button:nth-child(5).active{background:var(--ui-green-dark)}
+.bottom-nav button:nth-child(6).active{background:#475569}
+
+@media(max-width:430px){
+  .bottom-nav button{min-height:60px;font-size:20px;padding:7px 1px 5px}
+  .bottom-nav button span{font-size:10px;margin-top:5px}
+  .page{padding-bottom:112px}
+}
+
+
+/* ===== v14 polished startup animation ===== */
+.splash-screen{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(160deg,#eff6ff 0%,#f8fafc 52%,#ecfdf5 100%);
+  color:#0f172a;
+  animation:splashFadeOut 1.55s ease forwards;
+}
+.splash-glow{
+  position:absolute;width:190px;height:190px;border-radius:50%;
+  background:rgba(37,99,235,.13);
+  filter:blur(2px);
+  animation:glowPulse 1.25s ease-in-out infinite;
+}
+.splash-lotus{
+  position:relative;z-index:1;font-size:62px;line-height:1;
+  filter:drop-shadow(0 8px 18px rgba(37,99,235,.20));
+  animation:lotusIn .75s cubic-bezier(.2,.8,.2,1) both,
+            lotusFloat 1.35s ease-in-out .75s infinite;
+}
+.splash-title{
+  position:relative;z-index:1;margin-top:12px;
+  font-family:Georgia,serif;font-size:34px;font-weight:800;
+  color:#1d4ed8;
+  animation:titleIn .65s ease .18s both;
+}
+.splash-subtitle{
+  position:relative;z-index:1;margin-top:4px;
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:#15803d;font-weight:700;
+  animation:titleIn .65s ease .28s both;
+}
+.splash-dots{
+  position:relative;z-index:1;display:flex;gap:6px;margin-top:20px;
+  animation:titleIn .55s ease .38s both;
+}
+.splash-dots span{
+  width:7px;height:7px;border-radius:50%;background:#2563eb;
+  animation:dotPulse .9s ease-in-out infinite;
+}
+.splash-dots span:nth-child(2){background:#16a34a;animation-delay:.14s}
+.splash-dots span:nth-child(3){background:#2563eb;animation-delay:.28s}
+@keyframes lotusIn{
+  0%{opacity:0;transform:scale(.72) translateY(12px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+@keyframes lotusFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-5px) scale(1.025)}
+}
+@keyframes titleIn{
+  0%{opacity:0;transform:translateY(8px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+@keyframes glowPulse{
+  0%,100%{transform:scale(.86);opacity:.65}
+  50%{transform:scale(1.05);opacity:1}
+}
+@keyframes dotPulse{
+  0%,100%{transform:translateY(0);opacity:.45}
+  50%{transform:translateY(-3px);opacity:1}
+}
+@keyframes splashFadeOut{
+  0%,72%{opacity:1;visibility:visible}
+  100%{opacity:0;visibility:hidden;pointer-events:none}
+}

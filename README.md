@@ -15,3 +15,9 @@ Retained:
 - Settings
 - Custom sound controls
 - Opening animation
+
+
+## v14 update
+- Polished startup animation with lotus pulse and blue/green loading dots.
+- Removed the rotating ring/line-style loader.
+- Preserves existing Naam Jap functionality and v12 UI improvements.
