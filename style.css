@@ -930,3 +930,346 @@ main > *{
     max-height:410px !important;
   }
 }
+
+/* =========================================================
+   v27 FINAL UI — real full-width phone layout
+   Targets the actual app structure in index.html.
+   ========================================================= */
+
+/* App shell: no centered 680px column */
+#mainApp{
+  width:100% !important;
+  min-height:100vh !important;
+}
+#mainApp > main{
+  display:block !important;
+  width:100vw !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+}
+#mainApp .page{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:18px 12px 128px !important;
+}
+#mainApp .page.active{
+  display:block !important;
+}
+
+/* Full-width cards */
+#mainApp .hero-card,
+#mainApp .jap-card,
+#mainApp .card,
+#mainApp .profile-hero,
+#mainApp .profile-stats,
+#mainApp .profile-tabs,
+#mainApp .list,
+#mainApp #goalList,
+#mainApp .milestone-card{
+  width:100% !important;
+  max-width:none !important;
+}
+
+/* Header */
+#mainApp .topbar{
+  width:100% !important;
+  min-height:82px !important;
+  padding:13px 14px !important;
+}
+#mainApp .brand{
+  font-size:25px !important;
+  line-height:1.1 !important;
+  font-weight:900 !important;
+}
+#mainApp #subtitle{
+  font-size:13px !important;
+  margin-top:3px !important;
+}
+#mainApp .profile-mini{
+  min-height:50px !important;
+  font-size:14px !important;
+}
+
+/* HOME */
+#home .hero-card{
+  padding:25px 14px 20px !important;
+  border-radius:22px !important;
+  border-top:5px solid #2563eb !important;
+}
+#home .eyebrow{
+  font-size:13px !important;
+  letter-spacing:1.5px !important;
+}
+#home #homeNaam{
+  font-size:42px !important;
+  line-height:1.08 !important;
+  margin:9px 0 10px !important;
+  color:#1d4ed8 !important;
+  font-weight:900 !important;
+}
+#home #todayCount{
+  font-size:82px !important;
+  line-height:.9 !important;
+  margin:8px 0 9px !important;
+  font-weight:900 !important;
+  color:#172033 !important;
+}
+#home .hero-card > .muted{
+  font-size:15px !important;
+}
+#home .mala-row{
+  font-size:16px !important;
+  margin:18px 3px 8px !important;
+}
+#home .progress{
+  height:9px !important;
+}
+#home #startJap{
+  min-height:58px !important;
+  font-size:18px !important;
+  margin-top:18px !important;
+  border-radius:14px !important;
+}
+#home .stats-grid{
+  width:100% !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:9px !important;
+  margin:12px 0 !important;
+}
+#home .stat{
+  width:100% !important;
+  padding:15px 6px !important;
+  border-radius:18px !important;
+}
+#home .stat span{
+  font-size:13px !important;
+}
+#home .stat b{
+  font-size:25px !important;
+  margin-top:5px !important;
+}
+#home .card{
+  padding:18px 15px !important;
+  margin:12px 0 !important;
+  border-radius:18px !important;
+}
+#home .card-title{
+  font-size:18px !important;
+}
+#home .card p,
+#home .card li{
+  font-size:15px !important;
+  line-height:1.55 !important;
+}
+#home .card li{
+  margin:7px 0 !important;
+}
+
+/* JAP — use the whole card width and a large tap target */
+#jap{
+  padding-top:12px !important;
+}
+#jap .jap-head{
+  margin:0 2px 10px !important;
+  min-height:40px !important;
+}
+#jap .text-btn{
+  font-size:16px !important;
+  padding:7px 3px !important;
+}
+#jap .pill{
+  font-size:14px !important;
+}
+#jap .jap-card{
+  width:100% !important;
+  min-height:calc(100vh - 215px) !important;
+  padding:22px 12px 28px !important;
+  border-radius:22px !important;
+}
+#jap .jap-card > .tiny{
+  font-size:14px !important;
+}
+#jap #japNaam{
+  font-size:42px !important;
+  line-height:1.08 !important;
+  margin:8px 0 8px !important;
+  color:#15803d !important;
+  font-weight:900 !important;
+}
+#jap #sessionCount{
+  font-size:94px !important;
+  line-height:.88 !important;
+  margin:7px 0 8px !important;
+  color:#1d4ed8 !important;
+  font-weight:900 !important;
+}
+#jap .jap-card > .muted{
+  font-size:15px !important;
+}
+#jap .progress{
+  width:100% !important;
+  height:9px !important;
+  margin:12px 0 14px !important;
+}
+#jap #japButton{
+  width:min(86vw,430px) !important;
+  height:min(86vw,430px) !important;
+  max-width:430px !important;
+  max-height:430px !important;
+  min-width:315px !important;
+  min-height:315px !important;
+  margin:20px auto 22px !important;
+  border-width:10px !important;
+  font-size:54px !important;
+}
+#jap .jap-actions{
+  width:100% !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:9px !important;
+  flex-wrap:nowrap !important;
+}
+#jap .jap-actions button{
+  flex:1 1 0 !important;
+  min-width:0 !important;
+  min-height:50px !important;
+  padding:8px 8px !important;
+  font-size:15px !important;
+  white-space:nowrap !important;
+}
+#jap #sessionSoundBtn{
+  min-height:44px !important;
+  font-size:14px !important;
+}
+#jap #sessionStatus{
+  font-size:13px !important;
+}
+#jap > .card{
+  width:100% !important;
+  padding:18px 15px !important;
+}
+
+/* Other pages: same full-width treatment */
+#naam,#sankalp,#profile,#settings{
+  width:100% !important;
+}
+#naam .section-head,
+#sankalp .section-head,
+#settings .section-head{
+  min-height:46px !important;
+}
+#naam .section-head h2,
+#sankalp .section-head h2,
+#settings .section-head h2{
+  font-size:30px !important;
+  line-height:1.1 !important;
+}
+#naam .card,#sankalp .card,#settings .card{
+  padding:20px 15px !important;
+  border-radius:20px !important;
+}
+#naam .list-item,
+#sankalp .goal-item,
+#profile .card,
+#settings .card{
+  font-size:15px !important;
+}
+#profile .profile-name-wrap h2{
+  font-size:27px !important;
+}
+#profile .profile-tab{
+  font-size:13px !important;
+  padding:11px 4px !important;
+}
+
+/* Bottom navigation: full width, readable, no overlap */
+#mainApp .bottom-nav{
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  width:100vw !important;
+  min-height:82px !important;
+  display:grid !important;
+  grid-template-columns:repeat(6,minmax(0,1fr)) !important;
+  gap:2px !important;
+  padding:5px 4px calc(7px + env(safe-area-inset-bottom)) !important;
+  box-sizing:border-box !important;
+}
+#mainApp .bottom-nav button{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:68px !important;
+  margin:0 !important;
+  padding:5px 1px 4px !important;
+  border-radius:14px !important;
+  font-size:29px !important;
+  line-height:1 !important;
+  overflow:hidden !important;
+}
+#mainApp .bottom-nav button span{
+  display:block !important;
+  width:100% !important;
+  margin-top:5px !important;
+  font-size:11px !important;
+  line-height:1.1 !important;
+  font-weight:800 !important;
+  white-space:nowrap !important;
+  overflow:hidden !important;
+  text-overflow:clip !important;
+}
+
+/* Phone-specific sizing */
+@media(max-width:430px){
+  #mainApp .page{
+    padding-left:8px !important;
+    padding-right:8px !important;
+  }
+  #home #homeNaam{font-size:39px !important;}
+  #home #todayCount{font-size:76px !important;}
+  #home .card p,#home .card li{font-size:14.5px !important;}
+  #jap #japNaam{font-size:39px !important;}
+  #jap #sessionCount{font-size:88px !important;}
+  #jap #japButton{
+    width:calc(100vw - 28px) !important;
+    height:calc(100vw - 28px) !important;
+    min-width:305px !important;
+    min-height:305px !important;
+    max-width:405px !important;
+    max-height:405px !important;
+  }
+  #mainApp .bottom-nav{
+    min-height:80px !important;
+    padding-left:3px !important;
+    padding-right:3px !important;
+  }
+  #mainApp .bottom-nav button{
+    min-height:66px !important;
+    font-size:27px !important;
+  }
+  #mainApp .bottom-nav button span{
+    font-size:10.5px !important;
+  }
+}
+
+/* Small phones: keep everything readable without tab overlap */
+@media(max-width:360px){
+  #home #homeNaam{font-size:35px !important;}
+  #home #todayCount{font-size:68px !important;}
+  #home .stat span{font-size:12px !important;}
+  #home .stat b{font-size:22px !important;}
+  #jap #japNaam{font-size:35px !important;}
+  #jap #sessionCount{font-size:78px !important;}
+  #jap #japButton{
+    width:calc(100vw - 24px) !important;
+    height:calc(100vw - 24px) !important;
+    min-width:285px !important;
+    min-height:285px !important;
+  }
+  #mainApp .bottom-nav button{font-size:24px !important;}
+  #mainApp .bottom-nav button span{font-size:9.5px !important;}
+}

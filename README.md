@@ -91,3 +91,10 @@ Retained:
 - Cards, home sections and Jap screen now expand across the available viewport.
 - Bottom navigation remains full-width and fixed.
 - Preserved readable typography and the large Jap circle.
+
+## v27 FINAL UI update
+- Reworked the actual #mainApp > main and page layout instead of relying on generic selectors.
+- Removed the 680px centered-column constraint.
+- Home, Jap, Profile, Sankalp, Naam and Settings now use the full phone width.
+- Increased typography and tap controls while preserving responsive six-tab navigation.
+- Added a fresh stylesheet/cache version to prevent stale CSS from masking the update.
