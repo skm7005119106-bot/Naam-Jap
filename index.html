@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=37">
+  <link rel="stylesheet" href="style.css?v=39">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -73,12 +73,18 @@
 
         <div class="card">
           <div class="card-title">🌸 <span data-i18n="dailySmaran">Aaj ka Smaran</span></div>
-          <p id="dailyThought"></p>
+          <p id="dailyThought">Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.</p>
         </div>
+
+        <section class="inspiration-card" aria-label="Inspirational Naam Smaran">
+          <div class="inspiration-head"><div><div class="eyebrow">✦ Naam Smaran Prerna</div><h2>आज की प्रेरणा</h2></div><button id="nextInspirationBtn" class="inspiration-next" type="button" aria-label="Next inspiration">↻</button></div>
+          <div id="inspirationLine" class="inspiration-line">जहाँ हैं, वहीं से शुरू करें। एक सच्चा नाम-जप भी सुंदर शुरुआत है।</div>
+          <div class="inspiration-footer">हर दिन थोड़ा नाम-स्मरण • प्रेम से • बिना जल्दबाजी</div>
+        </section>
 
         <div class="card">
           <div class="card-title">🕉️ <span data-i18n="beforeJap">Jap se pehle</span></div>
-          <ul id="guidanceList"></ul>
+          <ul id="guidanceList"><li>Saaf aur shaant sthaan chunen.</li><li>Notifications aur distractions kam karein.</li><li>Ek Naam par man ko prem se wapas laayein.</li><li>Naam Jap ko competition na banayein.</li></ul>
         </div>
       </section>
 
@@ -170,14 +176,47 @@
         <div id="profileSummaryTab" class="profile-panel active">
           <div class="card"><div class="card-title">📿 <span data-i18n="naamSummary">Naam Jap Summary</span></div><div id="profileNaamSummary"></div></div>
           <div class="card"><div class="card-title">🎯 <span data-i18n="goalSummary">Sankalp Summary</span></div><div id="profileGoalSummary"></div></div><div class="card"><div class="card-title">🏅 <span data-i18n="certificateProgress">Certificate Progress</span></div><div id="profileCertificateProgress"></div></div>
-          <button id="exportBtn" class="secondary wide" data-i18n="export">Export Backup</button>
+          <div class="profile-quick-actions">
+  <button id="profileSankalpBtn" class="quick-action secondary">🎯 Sankalp <small>Target set karein</small></button>
+  <button id="profileSettingsBtn" class="quick-action secondary">⚙ Settings <small>Sound, language & theme</small></button>
+</div>
+<button id="exportBtn" class="secondary wide" data-i18n="export">Export Backup</button>
         </div>
-        <div id="profileHistoryTab" class="profile-panel"><div id="historyList"></div></div>
-        <div id="profileCertificatesTab" class="profile-panel"><div id="certificateList"></div></div>
+        <div id="profileHistoryTab" class="profile-panel">
+  <div class="card info-card"><div class="card-title">📖 <span>History kaise kaam karti hai</span></div><p>Har completed Jap session yahan Naam, session ke Jap aur date ke saath save hota hai. Total Jap aur Mala alag se continuously save rehte hain.</p></div>
+  <div id="historyList"></div>
+</div>
+        <div id="profileCertificatesTab" class="profile-panel">
+  <div class="card info-card"><div class="card-title">🏆 <span>Certificate kaise milega</span></div><p><b>108 Jap = 1 Mala.</b> 108 par sirf Mala complete hoti hai. Certificate milestones bade targets par unlock hote hain: <b>1,008 → 10,008 → 1,08,000 → 10,00,000</b>. Har Naam ka progress alag count hota hai.</p></div>
+  <div id="certificateList"></div>
+</div>
       </section>
 
       <section id="settings" class="page">
         <div class="section-head"><h2 data-i18n="settings">Settings</h2><button id="settingsBackBtn" class="secondary small">← Profile</button></div>
+        <div class="card settings-appearance">
+          <div class="card-title">🎨 <span>Theme & Appearance</span></div>
+          <p class="muted settings-help">App ka mood, dark/light mode aur selected Naam ke hisaab se Jap screen ka look badlein.</p>
+          <label for="appearanceSelect">App Theme</label>
+          <select id="appearanceSelect">
+            <option value="divine">🪷 Divine</option>
+            <option value="light">☀️ Light</option>
+            <option value="dark">🌙 Dark</option>
+            <option value="system">📱 System</option>
+          </select>
+          <label for="naamThemeSelect">Jap Naam Theme</label>
+          <select id="naamThemeSelect">
+            <option value="auto">✨ Auto — Naam ke hisaab se</option>
+            <option value="radha">🌸 Radha — Lotus Pink</option>
+            <option value="krishna">🦚 Krishna — Peacock Blue</option>
+            <option value="ram">🪔 Ram — Saffron</option>
+            <option value="shiva">🔱 Shiv — Indigo</option>
+            <option value="gold">ॐ Divine Gold</option>
+          </select>
+          <div class="settings-toggle-row"><div><b>📳 Haptic Tap</b><small>Har Jap par halka vibration</small></div><button id="vibrationToggle" class="secondary small" type="button">ON</button></div>
+          <div class="settings-toggle-row"><div><b>🔆 Keep Screen Awake</b><small>Jap ke dauran screen sleep ko rokne ki koshish</small></div><button id="keepAwakeToggle" class="secondary small" type="button">OFF</button></div>
+        </div>
+
         <div class="card">
           <label data-i18n="language">Language</label>
           <select id="languageSelect">
@@ -214,8 +253,8 @@
     </main>
 
     <nav class="bottom-nav" aria-label="Primary navigation">
-      <button data-page="home"><span class="nav-icon">⌂</span><span data-i18n="home">Home</span><small>Today</small></button>
-      <button data-page="jap"><span class="nav-icon">◉</span><span data-i18n="naamJap">Jap</span><small>Start</small></button>
+      <button data-page="home"><span class="nav-icon">⌂</span><span data-i18n="home">Home</span><small>Aaj</small></button>
+      <button data-page="jap"><span class="nav-icon">ॐ</span><span data-i18n="naamJap">Jap</span><small>108 Mala</small></button>
       <button data-page="naam"><span class="nav-icon">✦</span><span data-i18n="naam">Naam</span><small>Choose</small></button>
       <button data-page="profile"><span class="nav-icon">●</span><span data-i18n="profile">Profile</span><small>Progress</small></button>
     </nav>
@@ -234,7 +273,7 @@
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js?v=37').catch(() => {});
+      navigator.serviceWorker.register('service-worker.js?v=39').catch(() => {});
     });
   }
   // Do not call requestFullscreen() from a normal click. Android Chrome shows

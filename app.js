@@ -1,4 +1,4 @@
-const KEY="naam_jap_v7";
+const KEY="naam_jap_v8";
 const NAAMS=[
  {id:"radha",hi:"राधा",en:"Radha",group:"Radha"},
  {id:"radhe",hi:"राधे राधे",en:"Radhe Radhe",group:"Radha"},
@@ -38,13 +38,39 @@ const thoughts={
  en:["Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.","Man bhatak jaaye to nirash na hon. Prem se phir Naam ki or laut aayein.","Jahan sambhav ho, Jap ke liye saaf aur shaant sthaan chunen.","Apne Ishta Naam mein shraddha rakhein aur doosre bhakton ke Naam ka bhi samman karein.","Jap ko dikhawa ya competition na banayein. Niyamita aur bhav par dhyan dein.","Naam ke saath daya, satya, vinamrata aur seva ko jeevan mein lane ka prayas karein."],
  hi:["Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.","Man bhatak jaaye to nirash na hon. Prem se phir Naam ki ओर laut aayein.","Jahan sambhav ho, Jap ke liye saaf aur shaant sthaan chunen.","Apne Ishta Naam mein shraddha rakhein aur doosre bhakton ke Naam ka bhi samman karein.","Jap ko dikhawa ya competition na banayein. Niyamita aur bhav par dhyan dein.","Naam ke saath daya, satya, vinamrata aur seva ko jeevan mein lane ka prayas karein."]
 };
+const inspirations={
+ en:[
+  "Begin where you are. One sincere Naam is already a beautiful beginning.",
+  "When the mind wanders, return gently to the Naam — without anger, without hurry.",
+  "A little daily practice becomes a deep habit when it is done with love.",
+  "Do not compare your Jap with anyone. Let your own journey become peaceful.",
+  "Let the Naam bring patience to your words, kindness to your actions and peace to your mind.",
+  "Today’s goal is not to impress anyone. It is simply to remember with sincerity.",
+  "One Mala at a time. One breath at a time. Keep going with श्रद्धा.",
+  "Regularity is more precious than rushing. Slow, peaceful remembrance is also progress.",
+  "Keep your heart soft. Let Naam Smaran inspire seva, daya and vinamrata.",
+  "Your next Jap is always a fresh opportunity to return to the present moment."
+ ],
+ hi:[
+  "जहाँ हैं, वहीं से शुरू करें। एक सच्चा नाम-जप भी सुंदर शुरुआत है।",
+  "मन भटके तो बिना क्रोध और बिना जल्दबाजी के प्रेम से फिर नाम की ओर लौटें।",
+  "थोड़ा-थोड़ा रोज़ किया गया अभ्यास प्रेम से गहरी साधना बन जाता है।",
+  "अपने जाप की तुलना किसी से न करें। अपनी यात्रा को शांत और सरल रखें।",
+  "नाम को अपने शब्दों में धैर्य, कर्मों में दया और मन में शांति बनने दें।",
+  "आज किसी को प्रभावित करना लक्ष्य नहीं है। श्रद्धा से स्मरण करना ही पर्याप्त है।",
+  "एक माला एक समय में। एक श्वास एक समय में। श्रद्धा के साथ आगे बढ़ें।",
+  "जल्दी से अधिक नियमितता महत्वपूर्ण है। शांत नाम-स्मरण भी साधना है।",
+  "हृदय को कोमल रखें। नाम-स्मरण से सेवा, दया और विनम्रता को जीवन में लाएँ।",
+  "अगला जाप वर्तमान क्षण में लौटने का एक नया अवसर है।"
+ ]
+};
 
 let state;
 let session={active:false,count:0,undone:0,lastTap:0,paused:false,start:0,history:[],lastMala:0};
 
-function defaultState(){return {version:9,onboarded:false,lang:"hi",selected:"radhe",customNaams:[],favourites:[],counts:{},daily:{},sessions:[],goals:[],certificates:[],profile:{name:"",joined:todayKey()},settings:{tapGuard:"off",sound:true,tapSound:true,malaSound:true,soundVolume:85},milestoneCertificates:{}}}
+function defaultState(){return {version:10,onboarded:false,lang:"hi",selected:"radhe",customNaams:[],favourites:[],counts:{},daily:{},sessions:[],goals:[],certificates:[],profile:{name:"",joined:todayKey()},settings:{tapGuard:"off",sound:true,tapSound:true,malaSound:true,soundVolume:85,theme:"divine",naamTheme:"auto",vibration:true,keepAwake:false},milestoneCertificates:{}}}
 function load(){try{state=JSON.parse(localStorage.getItem(KEY))||defaultState()}catch(e){state=defaultState()} normalize()}
-function normalize(){const d=defaultState();const oldVersion=Number(state&&state.version||0);state={...d,...state,profile:{...d.profile,...(state.profile||{})},settings:{...d.settings,...(state.settings||{})},counts:state.counts||{},daily:state.daily||{},customNaams:state.customNaams||[],favourites:state.favourites||[],sessions:state.sessions||[],goals:state.goals||[],certificates:state.certificates||[],milestoneCertificates:state.milestoneCertificates||{}};if(oldVersion<8)state.settings.tapGuard="off";state.version=9;if(!state.profile.name)state.profile.name=""}
+function normalize(){const d=defaultState();const oldVersion=Number(state&&state.version||0);state={...d,...state,profile:{...d.profile,...(state.profile||{})},settings:{...d.settings,...(state.settings||{})},counts:state.counts||{},daily:state.daily||{},customNaams:state.customNaams||[],favourites:state.favourites||[],sessions:state.sessions||[],goals:state.goals||[],certificates:state.certificates||[],milestoneCertificates:state.milestoneCertificates||{}};if(oldVersion<8)state.settings.tapGuard="off";state.version=10;if(!state.profile.name)state.profile.name=""}
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function allNaams(){return NAAMS.concat(state.customNaams)}
 function naamObj(id){return allNaams().find(n=>n.id===id)||NAAMS[1]}
@@ -60,8 +86,36 @@ function t(k){return (I[state.lang]||I.hi)[k]||k}
 function applyLang(){document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));document.documentElement.lang=state.lang;render()}
 function fillNaamSelect(sel,selected){if(!sel)return;sel.innerHTML="";const groups={};allNaams().forEach(n=>{if(!groups[n.group])groups[n.group]=[];groups[n.group].push(n)});Object.keys(groups).forEach(g=>{const og=document.createElement("optgroup");og.label=g;groups[g].forEach(n=>{const o=document.createElement("option");o.value=n.id;o.textContent=displayNaam(n);og.appendChild(o)});sel.appendChild(og)});const custom=document.createElement("option");custom.value="__custom";custom.textContent=state.lang==="hi"?"＋ अपना Naam जोड़ें":"＋ Add custom Naam";sel.appendChild(custom);const wanted=selected||state.selected||"radhe";sel.value=Array.from(sel.options).some(o=>o.value===wanted)?wanted:"radhe"}
 function renderOnboard(){const sel=document.getElementById("onboardNaam");if(!sel)return;fillNaamSelect(sel,state.selected);const custom=document.getElementById("onboardCustom");if(custom)custom.classList.toggle("hidden",sel.value!=="__custom")}
+function autoNaamTheme(id){
+ const n=naamObj(id);
+ const g=(n&&n.group||"").toLowerCase();
+ if(g.includes("radha"))return "radha";
+ if(g.includes("krishna"))return "krishna";
+ if(g.includes("ram"))return "ram";
+ if(g.includes("shiva"))return "shiva";
+ return "gold";
+}
+function applyVisualTheme(){
+ const root=document.documentElement;
+ const theme=state.settings.theme||"divine";
+ const naamTheme=state.settings.naamTheme||"auto";
+ root.dataset.theme=theme;
+ root.dataset.naamTheme=naamTheme==="auto"?autoNaamTheme(state.selected):naamTheme;
+}
+function renderVisualSettings(){
+ const a=document.getElementById("appearanceSelect"), n=document.getElementById("naamThemeSelect"), v=document.getElementById("vibrationToggle"), k=document.getElementById("keepAwakeToggle");
+ if(a)a.value=state.settings.theme||"divine";
+ if(n)n.value=state.settings.naamTheme||"auto";
+ if(v){v.textContent=state.settings.vibration!==false?"ON":"OFF";v.classList.toggle("off",state.settings.vibration===false)}
+ if(k){k.textContent=state.settings.keepAwake===true?"ON":"OFF";k.classList.toggle("off",state.settings.keepAwake!==true)}
+}
+function updateWakeLock(){
+ if(!("wakeLock" in navigator))return;
+ if(state.settings.keepAwake===true && document.visibilityState==="visible") navigator.wakeLock.request("screen").then(w=>{window.__naamWakeLock=w;w.addEventListener("release",()=>{window.__naamWakeLock=null})}).catch(()=>{});
+ else if(window.__naamWakeLock)window.__naamWakeLock.release().catch(()=>{});
+}
 function renderSoundControls(){const on=state.settings.sound!==false;const tap=state.settings.tapSound!==false;const mala=state.settings.malaSound!==false;const vol=Math.max(0,Math.min(100,Number(state.settings.soundVolume??85)));const all=document.getElementById("soundToggle"),tapBtn=document.getElementById("tapSoundToggle"),malaBtn=document.getElementById("malaSoundToggle"),r=document.getElementById("soundVolume"),lab=document.getElementById("soundVolumeLabel");if(all){all.textContent=on?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");all.classList.toggle("off",!on)}if(tapBtn){tapBtn.textContent=(on&&tap)?"ON":"OFF";tapBtn.classList.toggle("off",!(on&&tap))}if(malaBtn){malaBtn.textContent=(on&&mala)?"ON":"OFF";malaBtn.classList.toggle("off",!(on&&mala))}if(r)r.value=vol;if(lab)lab.textContent=vol+"%"}
-function render(){renderSoundControls();renderOnboard();const n=naamObj(state.selected);document.getElementById("homeNaam").textContent=displayNaam(n);document.getElementById("japNaam").textContent=displayNaam(n);const today=getToday(n.id), todayInMala=today===0?0:((today-1)%108)+1;document.getElementById("todayCount").textContent=today.toLocaleString();document.getElementById("todayMala").textContent=Math.floor(today/108);document.getElementById("todayRemain").textContent=todayInMala;document.getElementById("malaProgress").style.width=`${todayInMala/108*100}%`;document.getElementById("totalCount").textContent=totalFor(n.id).toLocaleString();document.getElementById("totalMala").textContent=Math.floor(totalFor(n.id)/108).toLocaleString();const g=state.goals.find(x=>x.active);document.getElementById("goalText").textContent=g?`${Math.min(totalFor(g.naamId),g.target).toLocaleString()}/${g.target.toLocaleString()}`:"—";document.getElementById("dailyThought").textContent=thoughts[state.lang][new Date().getDate()%thoughts[state.lang].length];document.getElementById("guidanceList").innerHTML=(state.lang==="hi"?["Jahan sambhav ho, saaf aur shaant sthaan chunen.","Mobile ko Jap ke dauran anuchit ya gandi jagah par na rakhein.","Notifications aur doosre distractions ko kam karein.","Ek chune hue Naam par man lagane ka abhyas karein.","Naam Jap ko competition ya dikhawa na banayein."]:["Where possible, choose a clean and quiet place.","Keep the phone in a clean and appropriate place during Jap.","Reduce notifications and other distractions.","Practice bringing the mind back to your chosen Naam.","Do not turn Naam Jap into competition or display."]).map(x=>`<li>${x}</li>`).join("");fillNaamSelect(document.getElementById("goalNaam"),state.selected);fillNaamSelect(document.getElementById("defaultNaamSelect"),state.selected);document.getElementById("languageSelect").value=state.lang;document.getElementById("tapGuardSelect").value=state.settings.tapGuard;renderNaamList();renderGoals();renderMilestones();renderHistory();renderCertificates();renderProfile();renderSession();}
+function render(){applyVisualTheme();renderSoundControls();renderVisualSettings();renderOnboard();const n=naamObj(state.selected);document.getElementById("homeNaam").textContent=displayNaam(n);document.getElementById("japNaam").textContent=displayNaam(n);const today=getToday(n.id), todayInMala=today===0?0:((today-1)%108)+1;document.getElementById("todayCount").textContent=today.toLocaleString();document.getElementById("todayMala").textContent=Math.floor(today/108);document.getElementById("todayRemain").textContent=todayInMala;document.getElementById("malaProgress").style.width=`${todayInMala/108*100}%`;document.getElementById("totalCount").textContent=totalFor(n.id).toLocaleString();document.getElementById("totalMala").textContent=Math.floor(totalFor(n.id)/108).toLocaleString();const g=state.goals.find(x=>x.active);document.getElementById("goalText").textContent=g?`${Math.min(totalFor(g.naamId),g.target).toLocaleString()}/${g.target.toLocaleString()}`:"—";document.getElementById("dailyThought").textContent=thoughts[state.lang][new Date().getDate()%thoughts[state.lang].length];const insp=document.getElementById("inspirationLine");if(insp)insp.textContent=inspirations[state.lang][(new Date().getDate()-1)%inspirations[state.lang].length];document.getElementById("guidanceList").innerHTML=(state.lang==="hi"?["Jahan sambhav ho, saaf aur shaant sthaan chunen.","Mobile ko Jap ke dauran anuchit ya gandi jagah par na rakhein.","Notifications aur doosre distractions ko kam karein.","Ek chune hue Naam par man lagane ka abhyas karein.","Naam Jap ko competition ya dikhawa na banayein."]:["Where possible, choose a clean and quiet place.","Keep the phone in a clean and appropriate place during Jap.","Reduce notifications and other distractions.","Practice bringing the mind back to your chosen Naam.","Do not turn Naam Jap into competition or display."]).map(x=>`<li>${x}</li>`).join("");fillNaamSelect(document.getElementById("goalNaam"),state.selected);fillNaamSelect(document.getElementById("defaultNaamSelect"),state.selected);document.getElementById("languageSelect").value=state.lang;document.getElementById("tapGuardSelect").value=state.settings.tapGuard;renderNaamList();renderGoals();renderMilestones();renderHistory();renderCertificates();renderProfile();renderSession();}
 
 function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,left:0,behavior:"instant"});document.documentElement.scrollTop=0;document.body.scrollTop=0}
 function openModal(html){document.getElementById("modalContent").innerHTML=html;document.getElementById("modal").classList.remove("hidden")}
@@ -80,7 +134,7 @@ function renderProfile(){
  const total=Object.values(state.counts).reduce((a,b)=>a+Number(b||0),0);document.getElementById("profileTotalJap").textContent=total.toLocaleString();document.getElementById("profileTotalMala").textContent=Math.floor(total/108).toLocaleString();document.getElementById("profileDays").textContent=Object.keys(state.daily).filter(k=>Object.values(state.daily[k]||{}).some(v=>Number(v)>0)).length;
  const ns=allNaams().filter(n=>totalFor(n.id)>0).sort((a,b)=>totalFor(b.id)-totalFor(a.id));document.getElementById("profileNaamSummary").innerHTML=ns.length?ns.map(n=>`<div class="summary-row"><div class="summary-name"><b>${escapeHtml(displayNaam(n))}</b><span class="tiny muted">${Math.floor(totalFor(n.id)/108)} ${t("mala")} · ${totalFor(n.id)%108}/108</span></div><span class="badge">${totalFor(n.id).toLocaleString()}</span></div>`).join(""):`<p class="muted">${state.lang==="hi"?"Jap shuru karte hi aapke Naam yahan dikhne lagenge.":"Start Jap to see your Naam summary here."}`;
  const gs=state.goals.slice().reverse();document.getElementById("profileGoalSummary").innerHTML=gs.length?gs.map(g=>{const c=Math.min(totalFor(g.naamId),g.target),p=Math.min(100,c/g.target*100);return `<div class="summary-row"><div class="summary-name"><b>${escapeHtml(displayNaam(naamObj(g.naamId)))}</b><span class="tiny muted">${c.toLocaleString()}/${g.target.toLocaleString()}</span></div><span class="badge">${Math.round(p)}%</span></div>`}).join(""):`<p class="muted">${state.lang==="hi"?"Abhi koi Sankalp nahi hai.":"No Sankalp yet."}`;
- const selectedTotal=totalFor(state.selected), next=CERT_MILESTONES.find(m=>selectedTotal<m.target);document.getElementById("profileCertificateProgress").innerHTML=`<div class="cert-rules"><b>Certificate for ${escapeHtml(displayNaam(naamObj(state.selected)))}</b><div class="tiny muted">Each milestone is counted separately for this Naam. 108 Jap = First Mala certificate.</div></div>`+(next?`<div class="cert-progress-next"><b>${t("nextCertificate")}: ${state.lang==="hi"?next.titleHi:next.titleEn}</b><div class="tiny muted">${(next.target-selectedTotal).toLocaleString()} ${t("remaining")} · ${next.target.toLocaleString()} Jap</div></div>`:`<div class="cert-progress-next"><b>${t("unlocked")}</b><div class="tiny muted">All current milestones for this Naam are unlocked.</div></div>`);
+ const selectedTotal=totalFor(state.selected), next=CERT_MILESTONES.find(m=>selectedTotal<m.target);document.getElementById("profileCertificateProgress").innerHTML=`<div class="cert-rules"><b>Certificate for ${escapeHtml(displayNaam(naamObj(state.selected)))}</b><div class="tiny muted">108 Jap = 1 Mala. 108 par certificate nahi milta. Is Naam ke bade milestones: 1,008 → 10,008 → 1,08,000 → 10,00,000 Jap.</div></div>`+(next?`<div class="cert-progress-next"><b>${t("nextCertificate")}: ${state.lang==="hi"?next.titleHi:next.titleEn}</b><div class="tiny muted">${(next.target-selectedTotal).toLocaleString()} ${t("remaining")} · ${next.target.toLocaleString()} Jap</div></div>`:`<div class="cert-progress-next"><b>${t("unlocked")}</b><div class="tiny muted">All current milestones for this Naam are unlocked.</div></div>`);
 }
 function editProfile(){
  openModal(`<h2>${t("myProfile")}</h2><label>${t("profileName")}</label><input id="profileNameInput" maxlength="40" value="${escapeHtml(state.profile.name||"")}" placeholder="${state.lang==="hi"?"Jaise: Asish":"e.g. Asish"}"><p class="tiny muted">${t("profileHint")}</p><button id="saveProfile" class="primary wide">${t("saveProfile")}</button>`);
@@ -93,7 +147,33 @@ function switchProfileTab(tab){
  document.getElementById(id).classList.add("active");
 }
 
-function renderSession(){const inMala=session.count===0?0:((session.count-1)%108)+1;document.getElementById("sessionCount").textContent=session.count.toLocaleString();document.getElementById("sessionMala").textContent=Math.floor(session.count/108);document.getElementById("sessionRemain").textContent=inMala;document.getElementById("sessionProgress").style.width=`${inMala/108*100}%`;document.getElementById("sessionPill").textContent=session.count.toLocaleString();document.getElementById("pauseBtn").textContent=session.paused?(state.lang==="hi"?"Jari rakhein":"Resume"):t("pause");const ss=document.getElementById("sessionSoundBtn");if(ss){ss.textContent=state.settings.sound?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");ss.classList.toggle("off",!state.settings.sound)}const jb=document.getElementById("japButton");if(jb){jb.disabled=session.paused;const n=naamObj(state.selected);jb.innerHTML=`<span>${escapeHtml(displayNaam(n))}</span><small>${state.lang==="hi"?"1 click = 1 Jap":"1 click = 1 Jap"}</small>`;}document.getElementById("sessionStatus").textContent=session.paused?(state.lang==="hi"?"Jap filhaal roka gaya hai.":"Jap is paused."):session.active?(session.count===0?(state.lang==="hi"?"🙏 Abhi pehla Jap karein — har click 1 Jap hoga.":"🙏 Begin now — every click counts as 1 Jap."):(state.lang==="hi"?"✨ Bahut achha — Naam par dhyan rakhein. Agla click ek aur Jap.":"✨ Beautiful — stay with the Naam. The next click is one more Jap.")):""}
+function renderSession(){
+  const current=session.count;
+  const total=totalFor(state.selected);
+  const mala=Math.floor(total/108);
+  document.getElementById("sessionCount").textContent=current.toLocaleString();
+  document.getElementById("sessionMala").textContent=mala.toLocaleString();
+  document.getElementById("sessionRemain").textContent=current;
+  document.getElementById("sessionProgress").style.width=`${current/108*100}%`;
+  document.getElementById("sessionPill").textContent=`${current}/108`;
+  document.getElementById("pauseBtn").textContent=session.paused?(state.lang==="hi"?"Jari rakhein":"Resume"):t("pause");
+  const ss=document.getElementById("sessionSoundBtn");
+  if(ss){ss.textContent=state.settings.sound?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");ss.classList.toggle("off",!state.settings.sound)}
+  const jb=document.getElementById("japButton");
+  if(jb){
+    jb.disabled=session.paused;
+    const n=naamObj(state.selected);
+    jb.innerHTML=`<span>${escapeHtml(displayNaam(n))}</span><small>${state.lang==="hi"?"1 click = 1 Jap":"1 click = 1 Jap"}</small>`;
+  }
+  const status=document.getElementById("sessionStatus");
+  status.textContent=session.paused
+    ? (state.lang==="hi"?"Jap filhaal roka gaya hai.":"Jap is paused.")
+    : session.active
+      ? (current===0
+        ? (state.lang==="hi"?"🙏 Agli Mala shuru karein — 108 taps = 1 Mala.":"🙏 Begin the next Mala — 108 taps = 1 Mala.")
+        : (state.lang==="hi"?`✨ ${current}/108 — agla click ek aur Jap hai.`:`✨ ${current}/108 — the next click is one more Jap.`))
+      : "";
+}
 
 let audioCtx=null;
 function ensureAudio(){
@@ -118,6 +198,7 @@ function japSound(kind="tap"){
  if(state.settings.sound===false)return;
  if(kind==="mala" && state.settings.malaSound===false)return;
  if(kind==="tap" && state.settings.tapSound===false)return;
+ if(state.settings.vibration!==false && navigator.vibrate)navigator.vibrate(kind==="tap"?10:kind==="mala"?35:55);
  const ctx=ensureAudio(); if(!ctx)return;
  const now=ctx.currentTime;
  if(kind==="mala"){
@@ -136,39 +217,61 @@ function japSound(kind="tap"){
 }
 
 function startJap(){
- session={active:true,paused:false,count:0,undone:0,lastMala:0,lastTap:0,history:[],startedAt:Date.now()};
- showPage("jap");
- renderSession();
+  const total=totalFor(state.selected);
+  const currentMala=total%108;
+  session={active:true,paused:false,count:currentMala,accepted:0,undone:0,lastTap:0,history:[],startedAt:Date.now(),lastMala:Math.floor(total/108)};
+  showPage("jap");
+  renderSession();
 }
 function acceptTap(){
   if(!session.active) startJap();
   if(session.paused)return false;
-  // Exactly one accepted physical tap = exactly one Jap.
-  // We intentionally do not use a time-based guard here: every deliberate tap must count.
-  session.count = Number(session.count||0) + 1;
-  session.history.push(1);
+
+  // One deliberate physical activation = exactly one Jap.
+  const before=session.count;
   addCount(state.selected,1);
+  session.accepted++;
+  session.history.push({before});
+
+  // 108 is one complete Mala. After completion the live Mala counter rolls
+  // back to 0/108 while Total Jap keeps the full lifetime subtotal.
+  const completed = before===107;
+  session.count = completed ? 0 : before+1;
+
   const jb=document.getElementById("japButton");
   if(jb){jb.classList.remove("tap-flash");void jb.offsetWidth;jb.classList.add("tap-flash");}
   japSound("tap");
+
+  if(completed){
+    const total=totalFor(state.selected);
+    session.lastMala=Math.floor(total/108);
+    showMalaMessage(session.lastMala);
+    toast(state.lang==="hi"?`🌸 ${session.lastMala}वीं Mala poori hui`:`🌸 Mala ${session.lastMala} complete`);
+  }
+
+  // Large milestones only. 108 never creates a certificate.
   checkMilestoneCertificates();
   checkGoalsForCertificate();
-  const newMala=Math.floor(session.count/108);
-  if(newMala>session.lastMala){
-    session.lastMala=newMala;
-    if(newMala>0)showMalaMessage(newMala);
-    toast(state.lang==="hi"?`Mala ${newMala} poori hui`:`Mala ${newMala} complete`);
-  }
   save();
-  // Update the live Jap screen first, then the rest of the app.
   renderSession();
   render();
   renderSession();
   return true;
 }
-function undo(){if(!session.active||session.count<=0)return;if(session.history.length){session.history.pop();session.count--;addCount(state.selected,-1);session.undone++;save();renderSession();render()}}
+function undo(){
+  if(!session.active||!session.history.length)return;
+  const h=session.history.pop();
+  addCount(state.selected,-1);
+  session.accepted=Math.max(0,session.accepted-1);
+  session.undone++;
+  session.count=h.before;
+  save();
+  renderSession();
+  render();
+  renderSession();
+}
 function showMalaMessage(m){japSound("mala");openModal(`<div class="mala-celebration"><div class="celebration-symbol">ॐ</div><h2>${state.lang==="hi"?"एक माला पूर्ण":"One Mala Complete"}</h2><p>${state.lang==="hi"?`आपने 108 Naam Jap पूरे किए। यह ${m}वीं माला है।`:`You completed 108 Naam Jap. This is Mala ${m}.`}</p><p class="muted">${state.lang==="hi"?"गिनती से अधिक महत्वपूर्ण आपका भाव और नियमितता है।":"Your bhav and regularity matter more than the number."}</p><button id="malaClose" class="primary wide">${state.lang==="hi"?"आगे बढ़ें":"Continue"}</button></div>`);document.getElementById("malaClose").onclick=closeModal}
-function finishSession(){if(!session.active)return;if(session.count>0)state.sessions.push({naamId:state.selected,count:session.count,at:new Date().toISOString()});session.active=false;save();render();showPage("home");toast(state.lang==="hi"?"Jap session save ho gaya":"Jap session saved")}
+function finishSession(){if(!session.active)return;if(session.accepted>0)state.sessions.push({naamId:state.selected,count:session.accepted,at:new Date().toISOString()});session.active=false;save();render();showPage("home");toast(state.lang==="hi"?"Jap session save ho gaya":"Jap session saved")}
 function checkMilestoneCertificates(){
   const naamId=state.selected||"radhe", total=totalFor(naamId), naam=displayNaam(naamObj(naamId));
   let unlocked=[];
@@ -240,8 +343,9 @@ function finishSplash(){const s=document.getElementById("splashScreen");if(s)set
 function init(){
  load();
  const onboard=document.getElementById("onboarding"), main=document.getElementById("mainApp");
- if(!state.onboarded){onboard.classList.remove("hidden");main.classList.add("hidden");renderOnboard()}
- else{onboard.classList.add("hidden");main.classList.remove("hidden")}
+ // Keep the shell hidden until state, themes, Naam lists and counters are rendered.
+ main.classList.add("hidden");
+ onboard.classList.add("hidden");
 
  const onboardNaam=document.getElementById("onboardNaam");
  if(onboardNaam) onboardNaam.addEventListener("change",e=>document.getElementById("onboardCustom").classList.toggle("hidden",e.target.value!=="__custom"));
@@ -291,6 +395,7 @@ function init(){
  document.querySelectorAll(".bottom-nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
  document.getElementById("profileTopBtn").onclick=()=>{showPage("profile");switchProfileTab("summary")};
  document.getElementById("settingsTopBtn").onclick=()=>showPage("settings");
+ document.getElementById("nextInspirationBtn")?.addEventListener("click",()=>{const arr=inspirations[state.lang]||inspirations.hi;const el=document.getElementById("inspirationLine");const idx=Math.floor(Math.random()*arr.length);if(el){el.classList.remove("inspiration-pop");void el.offsetWidth;el.textContent=arr[idx];el.classList.add("inspiration-pop");}});
  document.getElementById("sankalpBackBtn").onclick=()=>showPage("profile");
  document.getElementById("settingsBackBtn").onclick=()=>showPage("profile");
  document.getElementById("editProfileBtn").onclick=editProfile;
@@ -325,6 +430,11 @@ function init(){
  document.getElementById("languageSelect").onchange=e=>{state.lang=e.target.value;save();applyLang();render()};
  document.getElementById("defaultNaamSelect").onchange=e=>{if(e.target.value!=="__custom"){state.selected=e.target.value;save();render()}};
  document.getElementById("tapGuardSelect").onchange=e=>{state.settings.tapGuard=e.target.value;save();render()};
+ document.getElementById("appearanceSelect").onchange=e=>{state.settings.theme=e.target.value;save();render()};
+ document.getElementById("naamThemeSelect").onchange=e=>{state.settings.naamTheme=e.target.value;save();render()};
+ document.getElementById("vibrationToggle").onclick=()=>{state.settings.vibration=state.settings.vibration===false;save();renderVisualSettings();if(state.settings.vibration&&navigator.vibrate)navigator.vibrate(25)};
+ document.getElementById("keepAwakeToggle").onclick=()=>{state.settings.keepAwake=state.settings.keepAwake!==true;save();renderVisualSettings();updateWakeLock()};
+ document.addEventListener("visibilitychange",updateWakeLock);
  document.getElementById("exportBtn").onclick=exportData;
  document.getElementById("resetDataBtn").onclick=()=>{
    if(confirm(state.lang==="hi"?"Kya aap sab local data reset karna chahte hain?":"Reset all local data?")){
@@ -341,8 +451,7 @@ function init(){
  });
 
  applyLang();
- try{render();}catch(e){console.error("Naam Jap render error:",e)}
- setTimeout(finishSplash,100);
+ requestAnimationFrame(()=>{try{render();if(!state.onboarded){onboard.classList.remove("hidden");renderOnboard()}else{main.classList.remove("hidden");showPage("home");updateWakeLock()}}catch(e){console.error(e);main.classList.remove("hidden")} finishSplash();});
 }init();
 /* v18: certificate Naam label helper. Existing certificate records remain untouched. */
 window.formatCertificateNaam = function(record){

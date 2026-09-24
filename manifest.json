@@ -5,14 +5,16 @@
   "start_url": "./",
   "scope": "./",
   "id": "./",
-  "display": "fullscreen",
+  "display": "standalone",
   "display_override": [
-    "fullscreen",
-    "standalone"
+    "standalone",
+    "fullscreen"
   ],
   "orientation": "portrait",
   "background_color": "#f7fbff",
   "theme_color": "#2563eb",
+  "categories": ["lifestyle", "health", "productivity"],
+  "prefer_related_applications": false,
   "lang": "hi",
   "dir": "ltr",
   "icons": [

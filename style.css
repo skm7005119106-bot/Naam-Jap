@@ -824,3 +824,244 @@ select,input{font-size:21px;min-height:66px}
   .bottom-nav button{min-height:86px}
   .bottom-nav button span:not(.nav-icon){font-size:18px}
 }
+
+/* =========================================================
+   Naam Jap v38 — FINAL MOBILE READING / MALA / NAV POLISH
+   - Stable from first paint
+   - 108 taps = exactly 1 Mala, then live counter rolls to 0
+   - Total Jap remains lifetime subtotal
+   ========================================================= */
+html{font-size:20px}
+body{font-size:20px;line-height:1.65;min-height:100dvh}
+.page{padding:24px 12px calc(150px + env(safe-area-inset-bottom));min-height:calc(100dvh - 82px)}
+.topbar{min-height:86px;padding:13px 14px}
+.brand{font-size:31px}
+#subtitle{font-size:17px}
+.icon-action{width:54px;height:54px;font-size:29px;border-radius:17px}
+.profile-mini{min-height:54px;font-size:19px}
+.profile-mini>span:first-child{width:48px;height:48px;font-size:21px}
+
+.card{padding:24px 18px;margin:17px 0;border-radius:24px}
+.card-title{font-size:23px}
+.card p,.card li{font-size:20px;line-height:1.68}
+.card label{font-size:19px}
+select,input{font-size:20px;min-height:62px}
+.hero-card{padding:30px 17px}
+.eyebrow{font-size:18px}
+.hero-card h1{font-size:clamp(44px,12vw,64px)}
+.big-count{font-size:clamp(96px,27vw,138px)}
+.mala-row{font-size:23px}
+.mala-row b{font-size:24px}
+.progress{height:14px}
+.big-btn{min-height:68px;font-size:23px}
+
+.stat{padding:22px 8px}
+.stat .muted{font-size:17px}
+.stat b{font-size:32px}
+
+/* Jap is the primary feature: use the full portrait viewport. */
+#jap.page.active{padding:8px 8px calc(150px + env(safe-area-inset-bottom))}
+#jap .jap-card{
+  width:100%;
+  min-height:calc(100dvh - 130px);
+  padding:16px 8px 28px;
+  border-radius:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+}
+#jap .jap-head{width:100%;padding:0 4px;margin-bottom:2px}
+#jap .jap-card .tiny{font-size:19px}
+#jap .jap-card h2{
+  font-size:clamp(44px,12vw,66px);
+  margin:2px 0 0;
+  line-height:1.05;
+}
+#jap .session-count{
+  font-size:clamp(104px,29vw,158px);
+  line-height:.88;
+  margin:8px 0 8px;
+  font-weight:950;
+  color:#111827;
+}
+#jap .jap-card .muted{font-size:22px}
+#jap .jap-card .muted b{font-size:25px}
+#jap .jap-card>.progress{
+  width:min(94vw,650px);
+  height:16px;
+  margin:16px auto 7px;
+}
+#jap .jap-button{
+  width:min(86vw,520px);
+  height:min(86vw,520px);
+  max-width:520px;
+  max-height:520px;
+  margin:18px auto 20px;
+  border-width:11px;
+  font-size:clamp(44px,12vw,68px);
+  gap:10px;
+  box-shadow:0 24px 65px rgba(37,99,235,.24),0 0 0 10px rgba(37,99,235,.06);
+}
+#jap .jap-button small{font-size:19px}
+#jap .jap-actions{width:min(96vw,620px);gap:12px}
+#jap .jap-actions button{min-height:60px;font-size:20px;border-radius:18px}
+#jap .sound-chip{font-size:19px;min-height:56px;padding:12px 22px}
+#jap #sessionStatus{font-size:18px!important;max-width:94vw}
+#jap .card:last-child{font-size:19px}
+
+/* Explain the app instead of leaving empty-looking panels. */
+.info-card{background:linear-gradient(145deg,#fff,#f5f9ff);border-color:#cfe0f7}
+.info-card p{margin:0}
+
+/* Large premium navigation with visible borders around every tab. */
+.bottom-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px 7px calc(9px + env(safe-area-inset-bottom));
+  border-top:2px solid #cbd5e1;
+}
+.bottom-nav button{
+  min-height:84px;
+  border:2px solid #d8e1ee;
+  border-radius:20px;
+  background:#f9fbff;
+  padding:8px 4px;
+  gap:4px;
+  font-size:18px;
+  box-shadow:0 3px 10px rgba(15,23,42,.05);
+}
+.bottom-nav button .nav-icon{
+  width:46px;height:46px;border-radius:14px;
+  font-size:27px;
+  border:1px solid #dbe4f0;
+}
+.bottom-nav button span:not(.nav-icon){font-size:17px;font-weight:950}
+.bottom-nav button small{font-size:12px}
+.bottom-nav button.active{
+  border:2px solid #7fb0ff;
+  box-shadow:0 7px 18px rgba(37,99,235,.16),inset 0 0 0 1px #c5dcff;
+}
+
+/* Profile tabs are also larger and clearly bordered. */
+.profile-tabs{gap:8px;padding:7px;border-radius:18px}
+.profile-tab{border:2px solid #dbe4f0;font-size:18px;min-height:58px;border-radius:14px}
+.profile-tab.active{border-color:#8db8ff}
+
+/* Certificate progress: 108 is only a Mala, not a certificate. */
+.certificate-steps>div{padding:17px}
+.certificate-steps b{font-size:27px}
+.certificate-steps span{font-size:16px}
+
+/* Stable splash: app is fully rendered before it disappears. */
+.splash-screen{min-height:100dvh;height:100dvh;display:flex;align-items:center;justify-content:center}
+.splash-title{font-size:44px!important}
+.splash-subtitle{font-size:21px!important}
+.splash-mark{width:116px!important;height:116px!important}
+.splash-mark span{font-size:64px!important}
+
+@media(max-width:430px){
+  .brand{font-size:27px}
+  .topbar{min-height:78px}
+  .page{padding-left:9px;padding-right:9px}
+  #jap .jap-button{width:82vw;height:82vw}
+  .bottom-nav button{min-height:80px}
+  .bottom-nav button span:not(.nav-icon){font-size:16px}
+}
+
+/* =========================================================
+   Naam Jap v39 — Theme system + inspiration + Android scrolling
+   ========================================================= */
+:root{
+  --theme-accent:#2563eb;
+  --theme-accent-2:#16a34a;
+  --theme-soft:#dbeafe;
+  --theme-glow:rgba(37,99,235,.16);
+}
+html,body{overflow-x:hidden;overflow-y:auto;min-height:100dvh}
+body{background:var(--bg);color:var(--text);overscroll-behavior-y:auto}
+main{padding-bottom:env(safe-area-inset-bottom)}
+.page{overflow:visible;min-height:calc(100dvh - 82px);padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+
+/* Appearance themes */
+html[data-theme="dark"]{
+  --bg:#07111f;--card:#0f1b2d;--border:#24344d;--text:#f4f7fb;--muted:#a9b7cc;
+  --blue:#60a5fa;--blue-dark:#93c5fd;--blue-soft:#172b47;
+  --green:#4ade80;--green-dark:#86efac;--green-soft:#123523;
+  --danger-bg:#321b1b;--danger-text:#fecaca;--danger-border:#6b3030;
+}
+html[data-theme="dark"] body{background:var(--bg);color:var(--text)}
+html[data-theme="dark"] .topbar,.html[data-theme="dark"] .bottom-nav{background:#0a1627;border-color:#223554}
+html[data-theme="dark"] .secondary{background:#122239;color:#dbeafe;border-color:#35527a}
+html[data-theme="dark"] .secondary:hover{background:#19314f}
+html[data-theme="dark"] .modal-box{background:#0f1b2d;color:var(--text)}
+html[data-theme="dark"] .hero-card,html[data-theme="dark"] .jap-card,html[data-theme="dark"] .card,html[data-theme="dark"] .stat,html[data-theme="dark"] .list-item,html[data-theme="dark"] .goal-item,html[data-theme="dark"] .cert-item,html[data-theme="dark"] .history-item{box-shadow:0 7px 24px rgba(0,0,0,.22)}
+html[data-theme="dark"] .inspiration-card{background:linear-gradient(145deg,#10213a,#102b27);border-color:#31537b}
+html[data-theme="dark"] .inspiration-footer{color:#a9b7cc}
+html[data-theme="dark"] .settings-appearance select,html[data-theme="dark"] select,html[data-theme="dark"] input{background:#0b1728;color:#f4f7fb;border-color:#334967}
+html[data-theme="dark"] .bottom-nav button{color:#b9c6d9}
+html[data-theme="dark"] .bottom-nav button .nav-icon{background:#17263c;color:#cfe0f5}
+html[data-theme="dark"] .bottom-nav button.active{background:#142c4d;color:#93c5fd}
+html[data-theme="dark"] .bottom-nav button.active .nav-icon{background:#2563eb;color:#fff}
+
+html[data-theme="light"]{--bg:#f5f8fc;--card:#fff;--text:#172033;--muted:#5b6b85}
+html[data-theme="divine"]{--bg:#f8f6ef;--card:#fffdf8;--theme-accent:#8b5e20;--theme-accent-2:#15803d;--theme-soft:#f4e8c6;--theme-glow:rgba(190,139,45,.17)}
+html[data-theme="system"]{--bg:#f5f8fc;--card:#fff;--text:#172033;--muted:#5b6b85}
+@media (prefers-color-scheme:dark){
+ html[data-theme="system"]{--bg:#07111f;--card:#0f1b2d;--border:#24344d;--text:#f4f7fb;--muted:#a9b7cc;--blue:#60a5fa;--blue-dark:#93c5fd;--blue-soft:#172b47;--green:#4ade80;--green-dark:#86efac;--green-soft:#123523}
+ html[data-theme="system"] .topbar,html[data-theme="system"] .bottom-nav{background:#0a1627;border-color:#223554}
+ html[data-theme="system"] .secondary{background:#122239;color:#dbeafe;border-color:#35527a}
+ html[data-theme="system"] select,html[data-theme="system"] input{background:#0b1728;color:#f4f7fb;border-color:#334967}
+}
+
+/* Naam-specific visual themes */
+html[data-naam-theme="radha"]{--theme-accent:#db2777;--theme-accent-2:#c026d3;--theme-soft:#fce7f3;--theme-glow:rgba(236,72,153,.18)}
+html[data-naam-theme="krishna"]{--theme-accent:#2563eb;--theme-accent-2:#0891b2;--theme-soft:#dbeafe;--theme-glow:rgba(37,99,235,.18)}
+html[data-naam-theme="ram"]{--theme-accent:#ea580c;--theme-accent-2:#ca8a04;--theme-soft:#ffedd5;--theme-glow:rgba(234,88,12,.18)}
+html[data-naam-theme="shiva"]{--theme-accent:#4f46e5;--theme-accent-2:#0f766e;--theme-soft:#e0e7ff;--theme-glow:rgba(79,70,229,.18)}
+html[data-naam-theme="gold"]{--theme-accent:#a16207;--theme-accent-2:#15803d;--theme-soft:#fef3c7;--theme-glow:rgba(161,98,7,.18)}
+html[data-naam-theme="radha"] .jap-card{border-top-color:#db2777}
+html[data-naam-theme="krishna"] .jap-card{border-top-color:#2563eb}
+html[data-naam-theme="ram"] .jap-card{border-top-color:#ea580c}
+html[data-naam-theme="shiva"] .jap-card{border-top-color:#4f46e5}
+html[data-naam-theme="gold"] .jap-card{border-top-color:#a16207}
+.jap-card{box-shadow:0 12px 34px var(--theme-glow)}
+.jap-button{border-color:color-mix(in srgb,var(--theme-accent) 48%,#fff);background:radial-gradient(circle at 32% 25%,#fff 0,#f7fbff 22%,color-mix(in srgb,var(--theme-soft) 70%,#fff) 100%);box-shadow:0 14px 38px var(--theme-glow),inset 0 0 0 2px rgba(255,255,255,.72)}
+.jap-button span{color:var(--theme-accent)!important}
+.jap-button:before{border-color:color-mix(in srgb,var(--theme-accent) 45%,#fff)!important}
+
+/* Inspiration section */
+.inspiration-card{margin:18px 0;padding:24px 20px;border:2px solid #ead8a8;border-radius:24px;background:linear-gradient(145deg,#fffaf0,#f1fbf5);box-shadow:0 9px 28px rgba(37,99,235,.07);position:relative;overflow:hidden}
+.inspiration-card:before{content:"ॐ";position:absolute;right:-8px;top:-20px;font-family:Georgia,serif;font-size:110px;color:rgba(190,139,45,.08);transform:rotate(8deg)}
+.inspiration-head{display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;z-index:1}
+.inspiration-head h2{font-size:28px;margin:3px 0 0;color:var(--text)}
+.inspiration-next{width:52px;height:52px;border-radius:16px;border:2px solid #e2c477;background:#fff;color:#8b5e20;font-size:28px;font-weight:900;display:grid;place-items:center;box-shadow:0 5px 15px rgba(161,98,7,.12)}
+.inspiration-line{position:relative;z-index:1;font-size:22px;line-height:1.65;font-weight:750;color:var(--text);margin:18px 0 12px}
+.inspiration-footer{position:relative;z-index:1;font-size:16px;color:#64748b;font-weight:700}
+.inspiration-pop{animation:inspirationPop .28s ease}
+@keyframes inspirationPop{0%{opacity:.3;transform:translateY(5px)}100%{opacity:1;transform:translateY(0)}}
+
+/* Settings */
+.settings-appearance .settings-help{font-size:18px!important;line-height:1.55!important;margin-top:-2px}
+.settings-appearance label{font-size:18px!important;margin-top:18px}
+.settings-appearance select{width:100%;min-height:56px;border:2px solid var(--border);border-radius:16px;padding:10px 14px;background:var(--card);color:var(--text);font-size:19px;font-weight:700}
+.settings-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--border);margin-top:12px}
+.settings-toggle-row b{display:block;font-size:19px}.settings-toggle-row small{display:block;font-size:15px;color:var(--muted);margin-top:3px}
+.settings-toggle-row button{min-width:90px!important;min-height:48px!important;font-size:17px!important}
+.settings-toggle-row button.off{opacity:.65}
+
+/* Large, bordered bottom navigation for touch use */
+.bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 7px calc(8px + env(safe-area-inset-bottom));gap:8px}
+.bottom-nav button{min-height:82px;border:2px solid transparent;border-radius:18px;padding:8px 4px;gap:5px}
+.bottom-nav button .nav-icon{width:48px;height:42px;border-radius:14px;font-size:26px}
+.bottom-nav button span:not(.nav-icon){font-size:17px;font-weight:950}
+.bottom-nav button small{font-size:12px;font-weight:800}
+.bottom-nav button.active{border-color:#bfd7ff;box-shadow:0 6px 18px rgba(37,99,235,.12),inset 0 0 0 1px rgba(255,255,255,.8)}
+
+/* Make the whole app naturally scroll, while keeping nav reachable. */
+#mainApp main{min-height:calc(100dvh - 82px);padding-bottom:0}
+@media(max-width:520px){
+ .inspiration-line{font-size:20px}
+ .inspiration-head h2{font-size:26px}
+ .page{padding-left:10px;padding-right:10px}
+}
