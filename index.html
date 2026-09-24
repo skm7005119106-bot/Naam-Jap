@@ -14,9 +14,10 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body><div id="splashScreen" class="splash-screen">
+  <div class="splash-glow" aria-hidden="true"></div>
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
   <div class="splash-title">Naam Jap</div>
   <div class="splash-subtitle">Naam Smaran</div>
@@ -101,10 +102,6 @@
           </div>
           <button id="sessionSoundBtn" class="sound-chip" type="button">🔔 Sound On</button>
           <p id="sessionStatus" class="tiny muted"></p>
-        </div>
-        <div class="card">
-          <div class="card-title">🙏 <span data-i18n="reminder">Smaran</span></div>
-          <p class="muted" data-i18n="countReminder">Ginti se zyada bhav aur niyamit Naam Smaran par dhyan dein.</p>
         </div>
       </section>
 
@@ -221,28 +218,41 @@
 </div>
 <script src="app.js"></script>
 <script>
-  // Register service worker so the app is installable and works offline.
+  // Some WebViews apply the viewport meta a beat late on cold start, which
+  // can briefly render everything at native/unscaled size until something
+  // forces a layout recompute. Re-asserting it right after load is a cheap,
+  // safe nudge that fixes that without waiting for a user tap.
+  window.addEventListener('load', function () {
+    var vp = document.querySelector('meta[name="viewport"]');
+    if (vp) vp.setAttribute('content', vp.getAttribute('content'));
+  });
+
+  // Service worker: install the current one, and clean up any service
+  // worker from an older copy of this app that might still be controlling
+  // this origin (that's what was serving the old small-font UI on first
+  // open — it owns the page until it's explicitly replaced). If we do
+  // find and remove a stale one, do a single reload so the fresh version
+  // takes over immediately instead of on the next open.
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.getRegistrations().then(function (regs) {
+        var stale = regs.filter(function (r) {
+          var url = (r.active && r.active.scriptURL) || (r.waiting && r.waiting.scriptURL) || (r.installing && r.installing.scriptURL) || '';
+          return url && url.indexOf('service-worker.js') === -1;
+        });
+        var hadStale = stale.length > 0;
+        Promise.all(stale.map(function (r) { return r.unregister(); })).then(function () {
+          navigator.serviceWorker.register('service-worker.js').catch(function () {});
+          if (hadStale && !sessionStorage.getItem('nj-sw-reloaded')) {
+            sessionStorage.setItem('nj-sw-reloaded', '1');
+            location.reload();
+          }
+        });
+      }).catch(function () {
+        navigator.serviceWorker.register('service-worker.js').catch(function () {});
+      });
     });
   }
-  // When launched from the home-screen icon (standalone/fullscreen display),
-  // also ask the browser for real fullscreen (hides the status bar too on
-  // devices/browsers that support the Fullscreen API).
-  (function () {
-    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-      window.matchMedia('(display-mode: fullscreen)').matches ||
-      window.navigator.standalone === true;
-    if (isStandalone) {
-      var tryFullscreen = function () {
-        var el = document.documentElement;
-        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
-        document.removeEventListener('click', tryFullscreen);
-      };
-      document.addEventListener('click', tryFullscreen, { once: true });
-    }
-  })();
 </script>
 </body>
 </html>

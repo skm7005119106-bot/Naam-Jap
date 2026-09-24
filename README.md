@@ -154,3 +154,51 @@ Home screen"/"Install app"). If this HTML is instead being wrapped into an
 APK with a WebView-based builder, that tool's own "fullscreen /
 hide status bar" setting (not this web code) is what controls the native
 status/navigation bar.
+
+## v30 — Jap screen fits one view, boot polish, tap feedback, better certificates
+**Jap tab no longer scrolls.** The app shell (`#mainApp`) is now a real flex
+column: topbar (natural height) + `<main>` (gets exactly whatever height is
+left, computed by the browser, not guessed) + bottom-nav (natural height).
+The Jap page fills that middle space exactly and never scrolls; every
+element inside it (heading, counter, mala/progress, the tap circle, Undo/
+Pause/Finish, sound chip) is sized to fit that space, and the tap circle
+itself uses `min()` of screen width, screen height and a max px size so it
+shrinks gracefully on shorter phones instead of pushing the buttons off
+the bottom. Also removed a duplicate "Jap se pehle" reminder card from this
+tab (Home already has the same guidance) since it was the extra content
+forcing the scroll. Other tabs are unchanged — they still scroll normally
+if their content is long.
+
+**"Small UI at start, then big after tapping a tab" + the fullscreen
+instructions line.** Two separate fixes, since the exact cause can't be
+confirmed without testing on-device:
+- The v29 script auto-called the Fullscreen API on first tap when installed
+  as a standalone app. That's very likely the "instructions line" — Chrome/
+  Android shows its own native "swipe down to exit fullscreen" hint
+  automatically whenever a page calls `requestFullscreen()`. That's a
+  system-level hint, not something this app draws, so it can't be styled —
+  removing the auto-fullscreen call removes the trigger for it. The
+  manifest's `standalone`/`fullscreen` display mode still gives an
+  address-bar-free window without needing this.
+- Added a one-time cleanup on load that unregisters any service worker
+  left over from an older copy of this app and does a single reload if it
+  finds one, plus a small script that re-asserts the viewport meta tag
+  right after load. Either a stale old service worker still controlling
+  the page, or a WebView applying the viewport scale a beat late, would
+  match a "looks like the old small-font build until you interact"
+  symptom — this closes off both.
+
+**Splash screen** got a proper animated entrance: a soft breathing glow
+behind the mark, a bouncier scale/rotate-in for the mark itself, and the
+app name/subtitle now fade up from a slight blur instead of a flat fade.
+
+**Jap circle now reacts to every tap:** a quick scale-bounce plus a soft
+ripple ring on each accepted tap, and a bigger gold ring burst specifically
+when a Mala (108) completes, on top of the existing toast + sound.
+
+**Certificates now clearly name the Naam.** The in-app certificate card was
+restructured to match the already-good print/PDF layout: "This certifies
+that → [your name] → has completed → [count] Jap → of → [Naam]" with the
+Naam shown in its own bold green pill, same visual weight as your name —
+previously the Naam line used an unstyled default heading and was easy to
+miss next to the large name.
