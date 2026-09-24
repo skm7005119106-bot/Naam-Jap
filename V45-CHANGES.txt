@@ -1,1 +1,8 @@
-Naam Jap v45: balanced mobile typography, 6-item bottom navigation fixed, fullscreen JS prompt removed, PWA standalone manifest, cache v45, scrolling preserved.
+Naam Jap v46
+- 4 organized bottom tabs: Home, Jap, Naam, Profile
+- Sankalp merged into Profile sub-tab
+- Settings moved to top header
+- Bottom labels 20px, icons ~29-30px
+- Headings around 38-40px
+- Full app intro splash strengthened; no JS requestFullscreen/browser chrome manipulation
+- Scroll preserved

@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=45">
+  <link rel="stylesheet" href="style.css?v=46">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -47,7 +47,10 @@
         <div class="brand">🪷 <span>Naam Jap</span></div>
         <div id="subtitle" class="tiny muted">Naam Smaran</div>
       </div>
-      <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
+      <div class="top-actions">
+        <button id="settingsTopBtn" class="settings-top-btn" aria-label="Settings" title="Settings">⚙️</button>
+        <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
+      </div>
     </header>
 
     <main>
@@ -113,28 +116,6 @@
         <div id="naamList" class="list"></div>
       </section>
 
-      <section id="sankalp" class="page">
-        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2></div>
-        <div class="card">
-          <form id="goalForm">
-            <label data-i18n="goalNaam">Jap Naam</label>
-            <select id="goalNaam"></select>
-            <label data-i18n="target">Target Jap</label>
-            <input id="goalTarget" type="number" min="108" step="1" value="1008">
-            <div class="quick-goals">
-              <button type="button" class="goal-chip" data-target="108">108</button>
-              <button type="button" class="goal-chip" data-target="1008">1,008</button>
-              <button type="button" class="goal-chip" data-target="10008">10,008</button>
-              <button type="button" class="goal-chip" data-target="108000">1,08,000</button>
-            </div>
-            <label data-i18n="deadline">Deadline (optional)</label>
-            <input id="goalDeadline" type="date">
-            <button class="primary wide" type="submit" data-i18n="saveGoal">Save Sankalp</button>
-          </form>
-        </div>
-        <div id="goalList"></div><div class="card milestone-card"><div class="card-title">🏅 <span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
-      </section>
-
       <section id="profile" class="page">
         <div class="profile-hero">
           <div class="profile-avatar" id="profileAvatar">A</div>
@@ -154,6 +135,7 @@
           <button class="profile-tab active" data-profile-tab="summary" data-i18n="summary">Summary</button>
           <button class="profile-tab" data-profile-tab="history" data-i18n="history">History</button>
           <button class="profile-tab" data-profile-tab="certificates" data-i18n="certificate">Certificates</button>
+          <button class="profile-tab" data-profile-tab="sankalp" data-i18n="sankalp">Sankalp</button>
         </div>
         <div id="profileSummaryTab" class="profile-panel active">
           <div class="card"><div class="card-title">📿 <span data-i18n="naamSummary">Naam Jap Summary</span></div><div id="profileNaamSummary"></div></div>
@@ -162,6 +144,27 @@
         </div>
         <div id="profileHistoryTab" class="profile-panel"><div id="historyList"></div></div>
         <div id="profileCertificatesTab" class="profile-panel"><div id="certificateList"></div></div>
+        <div id="profileSankalpTab" class="profile-panel profile-sankalp-panel">
+        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2></div>
+        <div class="card">
+          <form id="goalForm">
+            <label data-i18n="goalNaam">Jap Naam</label>
+            <select id="goalNaam"></select>
+            <label data-i18n="target">Target Jap</label>
+            <input id="goalTarget" type="number" min="108" step="1" value="1008">
+            <div class="quick-goals">
+              <button type="button" class="goal-chip" data-target="108">108</button>
+              <button type="button" class="goal-chip" data-target="1008">1,008</button>
+              <button type="button" class="goal-chip" data-target="10008">10,008</button>
+              <button type="button" class="goal-chip" data-target="108000">1,08,000</button>
+            </div>
+            <label data-i18n="deadline">Deadline (optional)</label>
+            <input id="goalDeadline" type="date">
+            <button class="primary wide" type="submit" data-i18n="saveGoal">Save Sankalp</button>
+          </form>
+        </div>
+        <div id="goalList"></div><div class="card milestone-card"><div class="card-title">🏅 <span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
+      </div>
       </section>
 
       <section id="settings" class="page">
@@ -201,13 +204,11 @@
       </section>
     </main>
 
-    <nav class="bottom-nav">
+    <nav class="bottom-nav" aria-label="Main navigation">
       <button data-page="home">🏠<span data-i18n="home">Home</span></button>
       <button data-page="jap">📿<span data-i18n="naamJap">Jap</span></button>
       <button data-page="naam">🔖<span data-i18n="naam">Naam</span></button>
       <button data-page="profile">👤<span data-i18n="profile">Profile</span></button>
-      <button data-page="sankalp">🎯<span data-i18n="sankalp">Sankalp</span></button>
-      <button data-page="settings">⚙️<span data-i18n="settings">Settings</span></button>
     </nav>
   </div>
 

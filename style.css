@@ -339,3 +339,51 @@ body{touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;}
 .bottom-nav button{width:100%!important;min-width:0!important;min-height:66px!important;padding:4px 0!important;margin:0!important;font-size:25px!important;line-height:1!important;gap:2px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;}
 .bottom-nav button span{display:block!important;width:100%!important;max-width:100%!important;font-size:14px!important;font-weight:800!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;transform:none!important;}
 @media(max-width:430px){.bottom-nav{min-height:72px!important;padding:3px 2px calc(3px + env(safe-area-inset-bottom))!important}.bottom-nav button{min-height:62px!important;font-size:23px!important}.bottom-nav button span{font-size:12.5px!important}.page{padding-bottom:112px!important;}}
+
+
+/* ===== v46: 4-tab navigation + balanced typography + intro ===== */
+html,body{min-height:100%;overflow-x:hidden!important;overflow-y:auto!important}
+body{touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important}
+#app,#mainApp,main{height:auto!important;min-height:100%!important;overflow:visible!important}
+
+/* Full app intro: covers the app viewport while the PWA starts. Browser chrome is outside webpage control. */
+.splash-screen{position:fixed!important;inset:0!important;z-index:99999!important;min-height:100dvh;background:radial-gradient(circle at 50% 35%,#ffffff 0%,#eef7ff 45%,#eafbf2 100%);animation:splashOut 1s ease 1.55s forwards!important}
+.splash-mark{width:108px!important;height:108px!important;border-radius:32px!important;box-shadow:0 18px 42px rgba(37,99,235,.25),0 0 0 8px rgba(255,255,255,.7)!important}
+.splash-mark span{font-size:56px!important}
+.splash-title{font-size:36px!important;margin-top:22px!important}
+.splash-subtitle{font-size:16px!important;letter-spacing:3px!important}
+.splash-dots{margin-top:20px!important}
+
+/* Header: Settings sits beside the Naam/profile area */
+.topbar{padding-top:calc(12px + env(safe-area-inset-top))!important;padding-bottom:12px!important}
+.top-actions{display:flex;align-items:center;gap:6px;min-width:0}
+.settings-top-btn{width:46px;height:46px;display:grid;place-items:center;border:2px solid #60a5fa;border-radius:14px;background:linear-gradient(135deg,#eff6ff,#f5f3ff);font-size:27px;line-height:1;box-shadow:0 4px 12px rgba(37,99,235,.12);flex:0 0 auto}
+.profile-mini{font-size:14px!important;max-width:145px!important}
+
+/* Headings around 40px without making every small heading enormous */
+h1{font-size:36px!important;line-height:1.18!important}
+h2{font-size:38px!important;line-height:1.2!important}
+h3{font-size:30px!important}
+.section-head h2{font-size:40px!important;margin:0!important}
+.profile-hero h2{font-size:34px!important}
+.jap-card h2{font-size:40px!important}
+.hero-card h1{font-size:clamp(38px,10vw,48px)!important}
+.card-title{font-size:22px!important}
+
+/* Only 4 bottom tabs: spacious, organized, no overlap */
+.bottom-nav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:1000!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:7px!important;width:100%!important;min-height:84px!important;height:auto!important;padding:6px 8px calc(6px + env(safe-area-inset-bottom))!important;background:rgba(255,255,255,.98)!important;border-top:2px solid #bfdbfe!important;backdrop-filter:blur(14px)!important;overflow:visible!important}
+.bottom-nav button{width:100%!important;min-width:0!important;min-height:72px!important;padding:5px 3px!important;margin:0!important;border:2px solid transparent!important;border-radius:17px!important;background:transparent!important;color:#475569!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;font-size:30px!important;line-height:1!important}
+.bottom-nav button span{display:block!important;width:100%!important;font-size:20px!important;font-weight:850!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;text-align:center!important}
+.bottom-nav button.active{border-color:#2563eb!important;background:linear-gradient(135deg,#dbeafe,#f0fdf4)!important;box-shadow:0 5px 15px rgba(37,99,235,.16)!important;color:#1d4ed8!important}
+.bottom-nav button.active span{color:#1d4ed8!important}
+
+/* Keep bottom navigation from covering the last content */
+.page{padding-bottom:126px!important}
+.profile-sankalp-panel{padding-bottom:10px}
+@media(max-width:430px){
+ .bottom-nav{min-height:82px!important;gap:5px!important;padding-left:6px!important;padding-right:6px!important}
+ .bottom-nav button{min-height:70px!important;font-size:29px!important;border-radius:15px!important}
+ .bottom-nav button span{font-size:20px!important}
+ .page{padding-left:13px!important;padding-right:13px!important;padding-bottom:122px!important}
+ .section-head h2{font-size:38px!important}
+}

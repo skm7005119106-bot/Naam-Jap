@@ -89,7 +89,7 @@ function editProfile(){
 function switchProfileTab(tab){
  document.querySelectorAll(".profile-tab").forEach(b=>b.classList.toggle("active",b.dataset.profileTab===tab));
  document.querySelectorAll(".profile-panel").forEach(p=>p.classList.remove("active"));
- const id=tab==="summary"?"profileSummaryTab":tab==="history"?"profileHistoryTab":"profileCertificatesTab";
+ const id=tab==="summary"?"profileSummaryTab":tab==="history"?"profileHistoryTab":tab==="certificates"?"profileCertificatesTab":"profileSankalpTab";
  document.getElementById(id).classList.add("active");
 }
 
@@ -250,6 +250,7 @@ function init(){
  // Navigation
  document.querySelectorAll(".bottom-nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
  document.getElementById("profileTopBtn").onclick=()=>{showPage("profile");switchProfileTab("summary")};
+ document.getElementById("settingsTopBtn").onclick=()=>showPage("settings");
  document.getElementById("editProfileBtn").onclick=editProfile;
  document.querySelectorAll(".profile-tab").forEach(b=>b.onclick=()=>switchProfileTab(b.dataset.profileTab));
 
