@@ -1245,3 +1245,192 @@ select,input{font-size:18px;padding:16px 14px;min-height:54px}
   .bottom-nav button span,.bottom-nav button small{font-size:18px!important}
   .jap-button{width:82vw;height:82vw}
 }
+
+/* =========================================================
+   V40 FINAL POLISH — LARGE READABLE UI + IMMERSIVE INTRO
+   Final base: NaamJap_v40_READABLE_HOME_SCROLL
+   ========================================================= */
+:root{
+  --cert-gold:#c7962f;
+  --cert-gold-light:#f8e7a8;
+  --cert-blue:#2457d6;
+  --cert-blue-light:#e7efff;
+  --cert-green:#16834a;
+  --cert-green-light:#e6f8ee;
+  --cert-rose:#d85c78;
+  --cert-rose-light:#fff0f4;
+}
+
+/* Header — larger, but still compact enough for 320–480px phones */
+.topbar{
+  min-height:88px!important;
+  padding:14px 16px!important;
+  gap:12px!important;
+}
+.brand{font-size:clamp(28px,7.2vw,34px)!important;line-height:1.05!important}
+#subtitle{font-size:18px!important;line-height:1.25!important}
+.icon-action{width:52px!important;height:52px!important;font-size:29px!important}
+.profile-mini{min-height:54px!important;font-size:18px!important;gap:9px!important}
+.profile-mini>span:first-child{width:48px!important;height:48px!important;font-size:21px!important}
+
+/* Readability scale */
+.page{padding-left:16px!important;padding-right:16px!important;padding-bottom:calc(132px + env(safe-area-inset-bottom))!important}
+.section-head h2,.jap-head h2{font-size:clamp(34px,9vw,42px)!important;line-height:1.08!important}
+.hero-card h1{font-size:clamp(42px,12vw,58px)!important}
+.card-title{font-size:22px!important}
+.card p,.card li{font-size:20px!important;line-height:1.6!important}
+.tiny,.eyebrow{font-size:18px!important}
+.muted{font-size:18px}
+.primary,.secondary,.danger,.choice-btn,.goal-chip{min-height:54px!important;font-size:20px!important;padding:14px 18px!important;border-radius:15px!important}
+.big-btn{min-height:62px!important;font-size:23px!important}
+select,input{min-height:58px!important;font-size:20px!important}
+
+/* Home */
+.hero-card{padding:30px 18px!important}
+.big-count{font-size:clamp(86px,25vw,120px)!important}
+.mala-row{font-size:21px!important}
+.mala-row b{font-size:24px!important}
+.stat{min-height:92px!important;padding:16px 8px!important}
+.stat .muted{font-size:16px!important}
+.stat b{font-size:30px!important}
+
+/* Jap */
+.jap-card{padding:30px 16px 34px!important}
+.jap-card .tiny{font-size:19px!important}
+.jap-card h2{font-size:clamp(38px,10vw,54px)!important}
+.session-count{font-size:clamp(82px,23vw,112px)!important}
+.jap-card .muted{font-size:20px!important}
+.jap-card .muted b{font-size:23px!important}
+.jap-button{
+  width:min(82vw,360px)!important;height:min(82vw,360px)!important;
+  max-width:360px!important;max-height:360px!important;
+  border-width:9px!important;
+  font-size:clamp(34px,9vw,48px)!important;
+  margin:20px auto 22px!important;
+}
+.jap-button small{font-size:17px!important}
+.jap-actions{gap:10px!important}
+.jap-actions button{min-height:56px!important;font-size:19px!important}
+.sound-chip{font-size:18px!important;min-height:48px!important}
+
+/* Naam list — large enough to read without creating horizontal overflow */
+.list-item{padding:17px!important;gap:12px!important}
+.list-main b{font-size:21px!important}
+.list-main .tiny{font-size:16px!important}
+.list-actions{gap:8px!important;flex:0 0 auto}
+.list-actions .small{min-height:52px!important;font-size:19px!important;padding:11px 14px!important}
+
+/* Profile */
+.profile-name-wrap h2{font-size:30px!important}
+.profile-avatar{width:80px!important;height:80px!important;font-size:31px!important}
+.profile-tab{min-height:52px!important;font-size:18px!important;padding:13px 6px!important}
+.summary-row{font-size:19px!important}
+
+/* Exactly 4 bottom navigation items — big, equal, organised */
+.bottom-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  min-height:88px!important;
+  padding:7px 8px calc(8px + env(safe-area-inset-bottom))!important;
+  gap:8px!important;
+}
+.bottom-nav button{
+  min-height:76px!important;
+  border-radius:18px!important;
+  padding:6px 2px!important;
+  gap:4px!important;
+  font-size:20px!important;
+}
+.bottom-nav button .nav-icon{
+  width:38px!important;height:38px!important;
+  border-radius:12px!important;
+  font-size:27px!important;
+}
+.bottom-nav button span:not(.nav-icon){
+  font-size:20px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.bottom-nav button small{font-size:13px!important}
+
+/* Immersive startup animation: covers the entire web viewport.
+   No Fullscreen API call is used, so Android's exit-fullscreen popup cannot appear. */
+.splash-screen{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  min-height:100dvh!important;
+  height:100dvh!important;
+  z-index:99999!important;
+  padding:env(safe-area-inset-top) 20px env(safe-area-inset-bottom)!important;
+  background:
+    radial-gradient(circle at 50% 35%,rgba(255,255,255,.96) 0,rgba(255,255,255,.72) 18%,transparent 42%),
+    radial-gradient(circle at 20% 80%,rgba(37,99,235,.18),transparent 35%),
+    radial-gradient(circle at 80% 20%,rgba(22,163,74,.14),transparent 32%),
+    linear-gradient(145deg,#eaf2ff 0%,#ffffff 48%,#ecfff4 100%)!important;
+}
+.splash-mark{
+  width:122px!important;height:122px!important;border-radius:36px!important;
+  box-shadow:0 20px 55px rgba(37,99,235,.30),0 0 0 12px rgba(255,255,255,.55)!important;
+  animation:finalMarkIn .9s cubic-bezier(.2,.8,.2,1) both,finalGlow 1.8s ease-in-out .4s infinite alternate!important;
+}
+.splash-mark span{font-size:64px!important}
+.splash-title{font-size:clamp(38px,10vw,52px)!important;margin-top:25px!important;animation:finalTitleIn .7s ease .2s both!important}
+.splash-subtitle{font-size:18px!important;letter-spacing:4px!important;margin-top:8px!important;animation:finalTitleIn .7s ease .3s both!important}
+.splash-dots{gap:9px!important;margin-top:24px!important}
+.splash-dots i{width:10px!important;height:10px!important}
+@keyframes finalMarkIn{0%{opacity:0;transform:scale(.5) rotate(-12deg)}65%{opacity:1;transform:scale(1.08) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes finalTitleIn{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes finalGlow{from{filter:brightness(1);box-shadow:0 20px 55px rgba(37,99,235,.25),0 0 0 10px rgba(255,255,255,.45)}to{filter:brightness(1.08);box-shadow:0 24px 70px rgba(37,99,235,.36),0 0 0 18px rgba(255,255,255,.18)}}
+
+/* Premium certificate — richer colour hierarchy + complete details */
+.premium-cert{
+  padding:42px 24px 30px!important;
+  border:5px solid var(--cert-gold)!important;
+  border-radius:26px!important;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(216,92,120,.16),transparent 20%),
+    radial-gradient(circle at 88% 10%,rgba(37,99,235,.16),transparent 22%),
+    radial-gradient(circle at 50% 100%,rgba(22,163,74,.13),transparent 30%),
+    linear-gradient(145deg,#fffaf0 0%,#ffffff 43%,#eef7ff 72%,#effcf4 100%)!important;
+  box-shadow:0 20px 55px rgba(30,64,175,.16),inset 0 0 0 2px rgba(255,255,255,.9)!important;
+}
+.premium-cert:before{inset:10px!important;border:2px solid rgba(199,150,47,.55)!important;border-radius:19px!important}
+.premium-cert .cert-crown{font-size:44px!important;color:var(--cert-gold)!important;letter-spacing:7px!important}
+.premium-cert .cert-brand{font-size:16px!important;letter-spacing:3px!important;color:var(--cert-blue)!important}
+.premium-cert h3{font-size:clamp(34px,9vw,44px)!important;color:#18365a!important}
+.premium-cert .cert-subtitle{font-size:23px!important;color:var(--cert-green)!important}
+.premium-cert .cert-intro{font-size:18px!important;line-height:1.6!important;color:#4b5f78!important}
+.premium-cert .cert-name{font-size:clamp(34px,9vw,44px)!important;color:#172033!important}
+.premium-cert .cert-naam-label{
+  padding:13px 22px!important;border-radius:18px!important;
+  background:linear-gradient(135deg,#fff0b8,#ffe2ec 48%,#dff7e9)!important;
+  border:2px solid #d2a33a!important;color:#704500!important;font-size:24px!important;
+}
+.premium-cert .cert-count{font-size:clamp(38px,10vw,48px)!important;color:#b45309!important}
+.premium-cert .cert-milestone{font-size:22px!important;color:#166534!important}
+.premium-cert .cert-meta{gap:10px!important;margin:20px 0!important}
+.premium-cert .cert-meta div{padding:14px 10px!important;border:2px solid #d9e2ef!important;background:rgba(255,255,255,.82)!important}
+.premium-cert .cert-meta small{font-size:14px!important;color:#64748b!important}
+.premium-cert .cert-meta b{font-size:17px!important;color:#20324a!important}
+.premium-cert .cert-number{font-size:15px!important;color:#53657d!important}
+.premium-cert .cert-footer{font-size:16px!important;color:var(--cert-blue)!important}
+.premium-cert .printCert{min-height:58px!important;font-size:20px!important;border-width:2px!important;border-color:#24a8b9!important;color:#1654bd!important;background:linear-gradient(135deg,#fff,#eefcff)!important}
+
+/* Certificate information blocks */
+.certificate-steps>div{border:2px solid #d5dfef!important;background:linear-gradient(145deg,#fff8e6,#eef7ff,#effcf4)!important}
+.certificate-steps b{font-size:26px!important;color:var(--cert-blue)!important}
+.certificate-steps span{font-size:16px!important}
+.cert-rules{font-size:18px!important;background:linear-gradient(135deg,#fff9e8,#edf7ff,#effcf4)!important;border:2px solid #d7c06d!important}
+.cert-rules b{font-size:20px!important}
+.cert-progress-next{font-size:18px!important;border:2px solid #cfe0ff!important;background:#f4f8ff!important}
+
+@media(max-width:390px){
+  .bottom-nav{gap:4px!important;padding-left:4px!important;padding-right:4px!important}
+  .bottom-nav button span:not(.nav-icon){font-size:18px!important}
+  .bottom-nav button .nav-icon{width:34px!important;height:34px!important;font-size:24px!important}
+  .bottom-nav button{min-height:72px!important}
+  .premium-cert{padding:34px 15px 25px!important}
+  .premium-cert .cert-intro{font-size:17px!important}
+  .premium-cert .cert-naam-label{font-size:21px!important}
+}
