@@ -1698,3 +1698,30 @@ body{font-size:40px!important;line-height:1.35!important}
 
 /* No accidental browser zoom on interactive controls. */
 button,select,input,textarea,a{touch-action:manipulation!important}
+
+/* V40 FINAL — Jap circle only: immersive 9:16 Android portrait tap area.
+   No other UI sizing/layout is changed. */
+#jap .jap-button{
+  width:min(96vw,620px)!important;
+  height:min(96vw,620px)!important;
+  max-width:620px!important;
+  max-height:620px!important;
+  aspect-ratio:1/1!important;
+  flex:0 0 auto!important;
+  margin:14px auto 20px!important;
+  border-radius:50%!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-direction:column!important;
+}
+
+@media (max-width:430px){
+  #jap .jap-button{
+    width:96vw!important;
+    height:96vw!important;
+    max-width:none!important;
+    max-height:none!important;
+  }
+}
