@@ -380,7 +380,7 @@ function showLaunchBlessing(){
   el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
   setTimeout(()=>el.classList.remove("show"),3800);
 }
-function finishSplash(){const s=document.getElementById("splashScreen");if(s)setTimeout(()=>s.remove(),900)}
+function finishSplash(){const s=document.getElementById("splashScreen");if(s)setTimeout(()=>s.remove(),5000)}
 function init(){
  load();
  const onboard=document.getElementById("onboarding"), main=document.getElementById("mainApp");

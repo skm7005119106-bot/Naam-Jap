@@ -33,3 +33,13 @@ Mobile-first offline PWA for Naam Jap / Naam Smaran.
 - Launch blessing/inspiration appears briefly after app startup.
 - Home is fully vertical-scrollable; educational content uses tap-to-expand cards.
 - Existing Divine/Light/Dark/System themes and Naam themes are retained.
+
+
+## Final XXL Readable Polish
+- V40 remains the base build; existing features are preserved.
+- Visible UI text is enlarged to 20px or more.
+- Bottom navigation remains exactly Home / Jap / Naam / Profile, with larger icons, labels, borders and spacing.
+- Jap circle enlarged responsively up to 390px while staying perfectly circular and preventing horizontal overflow.
+- Startup splash is extended to about 5 seconds with a richer full-viewport animation.
+- PWA remains fullscreen when launched as an installed PWA; browser address/URL chrome cannot be hidden by webpage code when opened as a normal Chrome tab.
+- Certificate styling uses gold, blue, green and rose accents with full completion details.
