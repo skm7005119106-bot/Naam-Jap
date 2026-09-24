@@ -727,3 +727,100 @@ main,.page{overflow:visible}
   .bottom-nav button span:not(.nav-icon){font-size:16px}
   .bottom-nav button{min-height:80px}
 }
+
+
+/* =========================================================
+   Naam Jap v37 — Immersive 9:16 Jap Counter
+   Final override: the Jap screen is the hero experience.
+   ========================================================= */
+html{font-size:21px}
+body{font-size:21px;line-height:1.6}
+.page{padding:24px 12px calc(142px + env(safe-area-inset-bottom));}
+.brand{font-size:31px}
+#subtitle{font-size:17px}
+.icon-action{width:56px;height:56px;font-size:29px}
+.profile-mini{font-size:19px;min-height:56px}
+.profile-mini>span:first-child{width:48px;height:48px;font-size:21px}
+.card-title{font-size:27px}
+.card p,.card li{font-size:21px}
+.primary,.secondary,.danger,.choice-btn,.goal-chip{font-size:20px;min-height:62px}
+select,input{font-size:21px;min-height:66px}
+
+/* Dedicated immersive Jap viewport */
+#jap.page.active{
+  min-height:calc(100dvh - 82px);
+  padding:8px 8px calc(126px + env(safe-area-inset-bottom));
+  display:block;
+}
+#jap .jap-head{margin:0 4px 8px;min-height:48px}
+#jap .jap-head .text-btn{font-size:20px;min-height:48px}
+#jap .pill{font-size:18px;padding:8px 16px}
+#jap .jap-card{
+  min-height:calc(100dvh - 165px);
+  padding:24px 8px 34px;
+  border-radius:28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:visible;
+}
+#jap .jap-card .tiny{font-size:20px}
+#jap .jap-card h2{
+  font-size:clamp(44px,12vw,68px);
+  line-height:1.04;
+  margin:4px 0 2px;
+}
+#jap .session-count{
+  font-size:clamp(100px,27vw,150px);
+  line-height:.88;
+  margin:12px 0 8px;
+  font-weight:950;
+}
+#jap .jap-card>.muted{font-size:25px}
+#jap .jap-card>.muted b{font-size:29px}
+#jap .jap-card>.progress{
+  width:min(94vw,650px);
+  height:18px;
+  margin:15px auto 6px;
+}
+#jap .jap-button{
+  width:min(88vw,620px)!important;
+  height:min(88vw,620px)!important;
+  max-width:620px!important;
+  max-height:620px!important;
+  margin:18px auto 24px!important;
+  border-width:12px!important;
+  font-size:clamp(48px,13vw,78px)!important;
+  border-radius:50%;
+  box-shadow:0 24px 70px rgba(37,99,235,.25),inset 0 0 70px rgba(255,255,255,.42);
+}
+#jap .jap-button small{font-size:21px!important}
+#jap .jap-actions{width:min(94vw,650px);gap:14px;margin-top:0}
+#jap .jap-actions button{flex:1;min-height:66px;font-size:21px}
+#jap .sound-chip{font-size:20px;min-height:58px;padding:13px 24px;margin-top:18px}
+#jap #sessionStatus{font-size:20px!important;max-width:620px;text-align:center}
+#jap .card{width:100%;margin-top:18px}
+
+/* Larger premium navigation */
+.bottom-nav{min-height:108px;padding:10px 8px calc(11px + env(safe-area-inset-bottom));gap:9px}
+.bottom-nav button{min-height:90px;border-radius:23px;font-size:27px}
+.bottom-nav button .nav-icon{width:50px;height:50px;border-radius:16px;font-size:31px}
+.bottom-nav button span:not(.nav-icon){font-size:19px}
+.bottom-nav button small{font-size:13px}
+
+/* Divine full-screen splash: long enough to feel intentional, never blocks the app */
+.splash-screen{animation:splashOut 0.75s ease 1.35s forwards}
+.splash-mark{width:112px;height:112px;border-radius:34px;box-shadow:0 20px 60px rgba(37,99,235,.30)}
+.splash-mark span{font-size:58px}
+.splash-title{font-size:40px;margin-top:20px}
+.splash-subtitle{font-size:16px;letter-spacing:3px}
+.splash-dots{margin-top:22px}
+
+@media(max-width:430px){
+  body{font-size:20px}
+  .brand{font-size:29px}
+  #jap .jap-button{width:88vw!important;height:88vw!important}
+  .bottom-nav button{min-height:86px}
+  .bottom-nav button span:not(.nav-icon){font-size:18px}
+}
