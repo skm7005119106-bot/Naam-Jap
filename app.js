@@ -339,6 +339,16 @@ function printCertificate(id){
 function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`naam-jap-backup-${todayKey()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 
+function showLaunchBlessing(){
+  const el=document.getElementById("launchBlessing");
+  if(!el)return;
+  const lines=state.lang==="hi"
+    ? ["🌸 आपका जीवन मंगलमय हो।","🪷 आज का दिन शांति, श्रद्धा और प्रेम से भरा हो।","🙏 धीरे-धीरे Naam की ओर लौटें, बिना जल्दबाजी के।","✨ आज का एक छोटा Jap भी एक सुंदर शुरुआत है।","🌿 आपका Naam Smaran आपके मन को शांति का समय दे।"]
+    : ["🌸 May your life be peaceful and auspicious.","🪷 May today be filled with peace, devotion and love.","🙏 Return gently to the Naam, without hurry.","✨ One small Jap today is a beautiful beginning.","🌿 May your Naam Smaran give you a peaceful moment."];
+  el.textContent=lines[Math.floor(Math.random()*lines.length)];
+  el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"),3800);
+}
 function finishSplash(){const s=document.getElementById("splashScreen");if(s)setTimeout(()=>s.remove(),900)}
 function init(){
  load();
@@ -370,7 +380,7 @@ function init(){
      const v=document.getElementById("firstProfileName").value.trim();
      if(!v){toast(state.lang==="hi"?"Naam likhiye":"Enter your name");return}
      state.profile.name=v;state.onboarded=true;save();closeModal();
-     onboard.classList.add("hidden");main.classList.remove("hidden");applyLang();showPage("home");
+     onboard.classList.add("hidden");main.classList.remove("hidden");applyLang();showPage("home");setTimeout(showLaunchBlessing,650);
    };
  };
 
@@ -451,7 +461,7 @@ function init(){
  });
 
  applyLang();
- requestAnimationFrame(()=>{try{render();if(!state.onboarded){onboard.classList.remove("hidden");renderOnboard()}else{main.classList.remove("hidden");showPage("home");updateWakeLock()}}catch(e){console.error(e);main.classList.remove("hidden")} finishSplash();});
+ requestAnimationFrame(()=>{try{render();if(!state.onboarded){onboard.classList.remove("hidden");renderOnboard()}else{main.classList.remove("hidden");showPage("home");updateWakeLock();setTimeout(showLaunchBlessing,650)}}catch(e){console.error(e);main.classList.remove("hidden");setTimeout(showLaunchBlessing,650)} finishSplash();});
 }init();
 /* v18: certificate Naam label helper. Existing certificate records remain untouched. */
 window.formatCertificateNaam = function(record){

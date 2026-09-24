@@ -25,3 +25,11 @@ Mobile-first offline PWA for Naam Jap / Naam Smaran.
 3. Open the Pages URL in Chrome.
 4. Chrome menu → **Add to Home screen / Install app**.
 5. Launch Naam Jap from the Android Home Screen for the standalone app shell.
+
+
+## v40 updates
+- Minimum readable UI text is 18px or larger.
+- Home now includes expandable Naam Jap education sections.
+- Launch blessing/inspiration appears briefly after app startup.
+- Home is fully vertical-scrollable; educational content uses tap-to-expand cards.
+- Existing Divine/Light/Dark/System themes and Naam themes are retained.

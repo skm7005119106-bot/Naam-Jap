@@ -1065,3 +1065,183 @@ html[data-naam-theme="gold"] .jap-card{border-top-color:#a16207}
  .inspiration-head h2{font-size:26px}
  .page{padding-left:10px;padding-right:10px}
 }
+
+
+/* =========================================================
+   v40 — Readable typography + Home learning + launch blessing
+   Rule: no user-facing readable text below 18px.
+   ========================================================= */
+html,body{font-size:18px}
+.tiny,.muted,.card p,.card li,.summary-row,.history-item,.history-item b,
+.settings-help,.settings-toggle-row,.settings-toggle-row small,
+.sound-setting-row,.certificate-explainer,.cert-progress-next,
+.profile-tab,.goal-chip,.milestone-main,.milestone-main small,
+.milestone-status,.badge,.profile-quick-actions small{font-size:18px!important;line-height:1.55}
+#subtitle{font-size:18px!important}
+.brand{font-size:28px}
+.topbar{padding-top:calc(16px + env(safe-area-inset-top));padding-bottom:16px}
+.icon-action{font-size:25px!important;min-width:52px!important;min-height:52px!important}
+.profile-mini{font-size:18px;min-height:52px}
+.profile-mini>span:first-child{width:44px;height:44px;font-size:20px}
+
+.page{padding:20px 16px calc(126px + env(safe-area-inset-bottom))}
+.hero-card{padding:30px 20px}
+.eyebrow{font-size:18px!important;letter-spacing:1.4px}
+.hero-card h1{font-size:clamp(38px,10vw,54px)}
+.big-count{font-size:clamp(76px,23vw,118px);margin:14px 0 8px}
+.mala-row{font-size:19px}
+.mala-row b{font-size:22px}
+.progress{height:14px}
+.big-btn{font-size:21px;min-height:58px}
+
+.stat{padding:20px 8px}
+.stat .muted{font-size:18px!important}
+.stat b{font-size:30px}
+
+.card{padding:22px;margin:16px 0}
+.card-title{font-size:22px}
+.card p{font-size:18px!important}
+.card li{font-size:18px!important}
+.section-head h2{font-size:29px}
+.primary,.secondary,.danger,.choice-btn,.goal-chip{font-size:19px;min-height:54px}
+select,input{font-size:18px;padding:16px 14px;min-height:54px}
+.text-btn{font-size:19px}
+.pill{font-size:18px;padding:9px 17px}
+
+.jap-card{padding:30px 18px 36px;min-height:calc(100svh - 210px)}
+.jap-card .tiny{font-size:18px!important}
+.jap-card h2{font-size:clamp(36px,10vw,52px)}
+.session-count{font-size:clamp(88px,27vw,138px);margin:16px 0 8px}
+.jap-card .muted{font-size:20px!important}
+.jap-card .muted b{font-size:22px}
+.jap-button{
+  width:min(86vw,520px);height:min(86vw,520px);
+  max-width:520px;max-height:520px;
+  border-width:10px;
+  font-size:clamp(36px,10vw,58px);
+  margin:26px auto;
+}
+.jap-button small{display:block;font-size:18px!important;margin-top:8px}
+.jap-actions{gap:12px}
+.jap-actions button{min-width:120px;min-height:56px}
+.sound-chip{font-size:18px;padding:13px 20px}
+
+.list-item{padding:19px}
+.list-main b{font-size:21px}
+.list-main small{font-size:18px!important}
+.goal-item .goal-top{font-size:19px}
+.milestone-main{font-size:18px}
+.milestone-main small{font-size:18px!important}
+.milestone-status{font-size:18px!important}
+
+.profile-hero{padding:24px}
+.profile-name-wrap h2{font-size:30px}
+.profile-name-wrap .tiny{font-size:18px!important}
+.profile-avatar{width:88px;height:88px;font-size:34px}
+.profile-tabs{padding:6px;gap:8px}
+.profile-tab{font-size:18px!important;min-height:58px}
+.summary-row{font-size:18px!important}
+.summary-name b{font-size:20px}
+.badge{font-size:18px!important}
+.cert h3{font-size:29px}
+.cert p{font-size:18px}
+.cert-user-name{font-size:30px}
+.cert .cert-num{font-size:18px}
+
+.settings-appearance .card-title{font-size:24px}
+.card label{font-size:18px!important}
+.sound-toggle .tiny{font-size:18px!important}
+.sound-setting-row{font-size:18px!important}
+.sound-setting-row button{min-width:105px}
+#soundVolumeLabel{font-size:18px!important}
+
+.bottom-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav button{
+  min-height:82px;
+  border:2px solid #dbe5f2;
+  border-radius:18px;
+  margin:2px 3px;
+  padding:8px 4px;
+  gap:5px;
+  font-size:32px;
+}
+.bottom-nav button span{font-size:18px!important;line-height:1.1}
+.bottom-nav button small{font-size:18px!important;line-height:1.1}
+.bottom-nav button.active{border-color:#93c5fd;box-shadow:0 5px 16px rgba(37,99,235,.15)}
+
+.home-learning{margin:16px 0}
+.learn-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  margin:12px 0;
+  box-shadow:0 4px 16px rgba(30,64,175,.06);
+  overflow:hidden;
+}
+.learn-card summary{
+  list-style:none;
+  cursor:pointer;
+  min-height:70px;
+  padding:18px 20px;
+  display:grid;
+  grid-template-columns:42px 1fr 32px;
+  align-items:center;
+  gap:10px;
+  font-size:21px;
+  font-weight:850;
+}
+.learn-card summary::-webkit-details-marker{display:none}
+.learn-icon{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--blue-soft);color:var(--blue-dark);
+  font-size:20px;font-weight:900;
+}
+.summary-arrow{font-size:28px;text-align:center;color:var(--blue-dark);transition:transform .2s}
+.learn-card[open] .summary-arrow{transform:rotate(180deg)}
+.learn-body{
+  border-top:1px solid var(--border);
+  padding:18px 20px 22px;
+  font-size:18px;
+  line-height:1.65;
+}
+.learn-body p{margin:0 0 13px;font-size:18px!important}
+.learn-body p:last-child{margin-bottom:0}
+.learn-body ol,.learn-body ul{margin:0;padding-left:26px}
+.learn-body li{font-size:18px!important;margin:9px 0}
+.learn-body b{font-weight:850}
+
+.launch-blessing{
+  position:fixed;
+  left:50%;
+  top:calc(76px + env(safe-area-inset-top));
+  transform:translate(-50%,-12px) scale(.96);
+  width:min(92vw,560px);
+  z-index:55;
+  opacity:0;
+  pointer-events:none;
+  padding:16px 20px;
+  border:2px solid #d6b65a;
+  border-radius:18px;
+  background:linear-gradient(135deg,#fffdf2,#f1fff7);
+  box-shadow:0 12px 35px rgba(15,23,42,.16);
+  color:var(--text);
+  text-align:center;
+  font-size:19px;
+  font-weight:800;
+  line-height:1.45;
+}
+.launch-blessing.show{animation:blessingInOut 3.7s ease both}
+@keyframes blessingInOut{
+  0%{opacity:0;transform:translate(-50%,-12px) scale(.96)}
+  12%,78%{opacity:1;transform:translate(-50%,0) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-8px) scale(.98)}
+}
+@media(max-width:380px){
+  .bottom-nav button{min-height:78px}
+  .bottom-nav button span,.bottom-nav button small{font-size:18px!important}
+  .jap-button{width:82vw;height:82vw}
+}

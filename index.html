@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=39">
+  <link rel="stylesheet" href="style.css?v=40">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -80,6 +80,54 @@
           <div class="inspiration-head"><div><div class="eyebrow">✦ Naam Smaran Prerna</div><h2>आज की प्रेरणा</h2></div><button id="nextInspirationBtn" class="inspiration-next" type="button" aria-label="Next inspiration">↻</button></div>
           <div id="inspirationLine" class="inspiration-line">जहाँ हैं, वहीं से शुरू करें। एक सच्चा नाम-जप भी सुंदर शुरुआत है।</div>
           <div class="inspiration-footer">हर दिन थोड़ा नाम-स्मरण • प्रेम से • बिना जल्दबाजी</div>
+        </section>
+
+        <section class="home-learning" aria-label="Naam Jap learning">
+          <details class="learn-card" open>
+            <summary><span class="learn-icon">ॐ</span><span>Naam Jap kya hai?</span><span class="summary-arrow">⌄</span></summary>
+            <div class="learn-body">
+              <p><b>Naam Jap / Naam Smaran</b> kisi chune hue Ishwar Naam ko shraddha, dhyan aur niyamit roop se smaran karne ka abhyas hai.</p>
+              <p>Is app ka uddeshya sirf ginti poori karna nahi, balki aapko shanti se apne chune hue Naam par dhyan dene mein madad karna hai.</p>
+            </div>
+          </details>
+
+          <details class="learn-card">
+            <summary><span class="learn-icon">♥</span><span>Naam Jap kyon karein?</span><span class="summary-arrow">⌄</span></summary>
+            <div class="learn-body">
+              <p>Niyamit Naam Smaran ko kai log man ko ekagr karne, apni spiritual routine banane aur shant samay dene ke roop mein apnate hain.</p>
+              <p>Iska anubhav har vyakti ke liye alag ho sakta hai. Isliye Jap ko competition nahi, apni personal sadhana samjhein.</p>
+            </div>
+          </details>
+
+          <details class="learn-card">
+            <summary><span class="learn-icon">108</span><span>Naam Jap kaise karein?</span><span class="summary-arrow">⌄</span></summary>
+            <div class="learn-body">
+              <ol>
+                <li>Shaant aur saaf jagah chunen.</li>
+                <li>Apna Jap Naam select karein.</li>
+                <li>Aaram se baithkar Naam ka smaran karein.</li>
+                <li>Har accepted tap ko <b>1 Jap</b> maana jayega.</li>
+                <li><b>108 Jap = 1 Mala.</b> 108 ke baad current Mala 0/108 se agla round shuru hota hai.</li>
+                <li>Apni gati se karein; jaldi se zyada niyamitata aur bhav par dhyan dein.</li>
+              </ol>
+            </div>
+          </details>
+
+          <details class="learn-card">
+            <summary><span class="learn-icon">★</span><span>Naam Jap se kya phal mil sakta hai?</span><span class="summary-arrow">⌄</span></summary>
+            <div class="learn-body">
+              <p>Dharmik paramparaon mein Naam Smaran ko bhakti aur Ishwar-smaran ka mahatvapurn abhyas maana jata hai. Log isse apni shraddha, ekagrata aur inner routine se jodte hain.</p>
+              <p>App kisi nishchit chamatkari ya medical result ki guarantee nahi karta. Aapka anubhav aapki parampara, bhavna aur niyamit abhyas ke anusar alag ho sakta hai.</p>
+            </div>
+          </details>
+
+          <details class="learn-card">
+            <summary><span class="learn-icon">✦</span><span>108 Mala, Sankalp aur Milestone</span><span class="summary-arrow">⌄</span></summary>
+            <div class="learn-body">
+              <p><b>108 Jap = 1 Mala.</b> Total Jap lifetime subtotal hota hai, jabki current Mala 0 se 108 tak progress karti hai.</p>
+              <p>Aap bade target ke liye <b>Sankalp</b> bana sakte hain. Bade milestones par digital certificate unlock hota hai. Certificate ke milestones profile mein clearly diye gaye hain.</p>
+            </div>
+          </details>
         </section>
 
         <div class="card">
@@ -260,6 +308,7 @@
     </nav>
   </div>
 
+  <div id="launchBlessing" class="launch-blessing" role="status" aria-live="polite"></div>
   <div id="toast" class="toast"></div>
   <div id="modal" class="modal hidden">
     <div class="modal-box">
@@ -273,7 +322,7 @@
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js?v=39').catch(() => {});
+      navigator.serviceWorker.register('service-worker.js?v=40').catch(() => {});
     });
   }
   // Do not call requestFullscreen() from a normal click. Android Chrome shows
