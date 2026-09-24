@@ -609,3 +609,166 @@ h3{font-size:1.25rem!important;line-height:1.2!important;}
   .profile-mini>span:last-child{display:none;}
   .jap-button{width:min(82vw,17.5rem)!important;height:min(82vw,17.5rem)!important;}
 }
+
+/* =========================================================
+   v49 — BIG READABLE MOBILE UI
+   Final override layer. Uses rem/vw/clamp instead of fixed px.
+   Priority: readability, touch comfort, no overlap, no horizontal overflow.
+   ========================================================= */
+:root{
+  --screen-pad:clamp(1rem,4.5vw,1.25rem);
+  --bottom-h:5.25rem;
+}
+
+html,body{
+  font-size:16px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+}
+body{touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;}
+
+#app,#mainApp,main,.page{overflow:visible!important;height:auto!important;min-height:0!important;}
+.page{
+  padding:1.125rem var(--screen-pad) calc(var(--bottom-h) + 2rem + env(safe-area-inset-bottom))!important;
+}
+
+/* ---------- BIG, readable typography ---------- */
+.brand{font-size:clamp(1.35rem,5vw,1.5rem)!important;}
+#subtitle{font-size:1rem!important;}
+
+.section-head h2,
+.profile-hero h2,
+.onboard-card h1{
+  font-size:clamp(2rem,8vw,2.5rem)!important;
+  line-height:1.15!important;
+}
+.hero-card h1{font-size:clamp(2rem,9vw,2.5rem)!important;line-height:1.15!important;}
+.jap-card h2{font-size:clamp(2rem,9vw,2.5rem)!important;line-height:1.15!important;}
+h3{font-size:1.5rem!important;}
+
+.card-title{font-size:1.3rem!important;}
+.card p,.card li,.list-main,.summary-row,.history-item,.milestone-main,
+.sound-setting-row,.goal-item{font-size:1.125rem!important;line-height:1.6!important;}
+.muted{font-size:1rem!important;}
+.tiny{font-size:.9375rem!important;}
+.eyebrow{font-size:.9375rem!important;}
+
+/* ---------- Buttons / controls ---------- */
+.primary,.secondary,.danger,.choice-btn,.goal-chip{
+  min-height:3.25rem!important;
+  font-size:1.125rem!important;
+  font-weight:800!important;
+  padding:.75rem 1rem!important;
+  border-radius:1rem!important;
+}
+.big-btn{min-height:3.5rem!important;font-size:1.25rem!important;}
+.small{min-height:3rem!important;font-size:1.0625rem!important;}
+.text-btn{min-height:3rem!important;font-size:1.125rem!important;}
+
+/* ---------- Header / settings ---------- */
+.topbar{min-height:4.5rem!important;padding-top:calc(.75rem + env(safe-area-inset-top))!important;padding-bottom:.75rem!important;}
+.settings-top-btn{width:3rem!important;height:3rem!important;min-width:3rem!important;min-height:3rem!important;font-size:1.5rem!important;}
+.profile-mini{min-height:3rem!important;font-size:1rem!important;}
+.profile-mini>span:first-child{width:2.5rem!important;height:2.5rem!important;font-size:1.125rem!important;}
+
+/* ---------- Home ---------- */
+.hero-card{padding:1.5rem 1.125rem!important;}
+.big-count{font-size:clamp(3.75rem,18vw,5rem)!important;}
+.mala-row{font-size:1.125rem!important;}
+.mala-row b{font-size:1.25rem!important;}
+.progress{height:.625rem!important;}
+.stat{min-height:5rem!important;padding:1rem .5rem!important;}
+.stat .muted{font-size:.9375rem!important;}
+.stat b{font-size:1.625rem!important;}
+
+/* ---------- Jap screen ---------- */
+.jap-card{padding:1.5rem 1rem 1.75rem!important;}
+.jap-card .tiny{font-size:1rem!important;}
+.session-count{font-size:clamp(3.75rem,18vw,5rem)!important;margin:.75rem 0!important;}
+.jap-card .muted{font-size:1.0625rem!important;}
+
+/* Large responsive Jap circle: about 295–330px on common phones */
+.jap-button{
+  width:min(82vw,20.625rem)!important;
+  height:min(82vw,20.625rem)!important;
+  max-width:20.625rem!important;
+  max-height:20.625rem!important;
+  aspect-ratio:1/1!important;
+  border-radius:50%!important;
+  border-width:.5rem!important;
+  margin:1.5rem auto!important;
+  font-size:clamp(2rem,8vw,2.5rem)!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:1rem!important;
+}
+.jap-actions{gap:.625rem!important;}
+.jap-actions button{min-height:3.25rem!important;font-size:1.0625rem!important;}
+.sound-chip{min-height:2.75rem!important;font-size:.9375rem!important;}
+
+/* ---------- Naam cards ---------- */
+.list-item{padding:1rem!important;min-height:4.5rem!important;}
+.list-main b{font-size:1.2rem!important;}
+.list-main{font-size:1rem!important;}
+.list-actions{gap:.625rem!important;}
+
+/* ---------- Profile ---------- */
+.profile-avatar{width:4rem!important;height:4rem!important;font-size:1.625rem!important;}
+.profile-stats{gap:.75rem!important;}
+.profile-tabs{gap:.5rem!important;padding:.375rem!important;}
+.profile-tab{min-height:3.25rem!important;font-size:1.05rem!important;padding:.75rem .375rem!important;}
+
+/* ---------- Bottom navigation: exactly 4, readable, equal and separated ---------- */
+.bottom-nav{
+  position:fixed!important;
+  left:0!important;right:0!important;bottom:0!important;
+  z-index:1000!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:.375rem!important;
+  min-height:5.25rem!important;
+  height:auto!important;
+  padding:.375rem .5rem calc(.375rem + env(safe-area-inset-bottom))!important;
+  background:rgba(255,255,255,.98)!important;
+  border-top:.125rem solid #bfdbfe!important;
+  backdrop-filter:blur(.75rem)!important;
+  overflow:visible!important;
+}
+.bottom-nav button{
+  width:100%!important;min-width:0!important;min-height:4.25rem!important;
+  padding:.3rem .15rem!important;margin:0!important;
+  border:.1rem solid transparent!important;border-radius:.875rem!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  gap:.25rem!important;
+  font-size:2rem!important;line-height:1!important;
+}
+.bottom-nav button span{
+  display:block!important;width:100%!important;max-width:100%!important;
+  font-size:1.125rem!important;font-weight:800!important;line-height:1.1!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+  text-align:center!important;transform:none!important;
+}
+.bottom-nav button.active{border-color:#2563eb!important;background:linear-gradient(135deg,#dbeafe,#f0fdf4)!important;box-shadow:0 .25rem .875rem rgba(37,99,235,.16)!important;color:#1d4ed8!important;}
+.bottom-nav button.active span{color:#1d4ed8!important;}
+
+/* ---------- Full app opening animation ---------- */
+.splash-screen{
+  position:fixed!important;inset:0!important;z-index:99999!important;
+  min-height:100dvh!important;height:100dvh!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  background:radial-gradient(circle at 50% 38%,#ffffff 0%,#eef7ff 42%,#eafbf2 78%,#f8fafc 100%)!important;
+  animation:splashOut 1s ease 2.6s forwards!important;
+}
+.splash-mark{
+  width:7.5rem!important;height:7.5rem!important;border-radius:2.25rem!important;
+  animation:markIn .9s cubic-bezier(.2,.8,.2,1) both!important;
+}
+.splash-mark span{font-size:4rem!important;animation:omGlow 1.4s ease-in-out infinite!important;}
+.splash-title{font-size:2.5rem!important;margin-top:1.5rem!important;animation:titleIn .7s ease .25s both!important;}
+.splash-subtitle{font-size:1.05rem!important;letter-spacing:.2rem!important;animation:titleIn .7s ease .4s both!important;}
+.splash-dots{margin-top:1.4rem!important;animation:titleIn .6s ease .55s both!important;}
+.splash-dots i{width:.55rem!important;height:.55rem!important;}
+@keyframes omGlow{0%,100%{transform:scale(1);filter:drop-shadow(0 0 .25rem rgba(255,255,255,.25))}50%{transform:scale(1.08);filter:drop-shadow(0 0 1rem rgba(37,99,235,.55))}}
+
+/* Never invoke browser Fullscreen API; standalone PWA is the supported app mode. */
