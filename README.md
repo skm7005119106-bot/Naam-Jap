@@ -1,4 +1,4 @@
-# Naam Jap — Naam Smaran v39
+# Naam Jap — Naam Smaran v41
 
 Mobile-first offline PWA for Naam Jap / Naam Smaran.
 
@@ -33,3 +33,10 @@ Mobile-first offline PWA for Naam Jap / Naam Smaran.
 - Launch blessing/inspiration appears briefly after app startup.
 - Home is fully vertical-scrollable; educational content uses tap-to-expand cards.
 - Existing Divine/Light/Dark/System themes and Naam themes are retained.
+
+## v41 updates
+- Base text size increased app-wide (body, cards, lists, history, settings, buttons) for easier reading.
+- Progress bars and the top bar are taller and more visible.
+- Bottom navigation tabs are bigger and each tab now has its own colour (Home blue, Jap saffron, Naam purple, Profile green), visible even when not selected.
+- App-open welcome popup: a centred "🙏 Welcome / स्वागत है" card with a rotating blessing line (e.g. "आपका दिन शुभ हो, ईश्वर आपका कल्याण करें") appears over a dimmed backdrop; tap it, tap outside it, or wait ~4 seconds to dismiss.
+- Fixed a service-worker cache bug: the offline cache list didn't exactly match the files the app actually requests (mismatched version query strings), so app.js and manifest.json could fail to load from cache when offline. Cache keys are now consistent and bumped to v41.

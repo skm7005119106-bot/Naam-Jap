@@ -341,13 +341,23 @@ function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":
 
 function showLaunchBlessing(){
   const el=document.getElementById("launchBlessing");
+  const bg=document.getElementById("launchBlessingBackdrop");
   if(!el)return;
+  const titleEl=document.getElementById("launchBlessingTitle");
+  const lineEl=document.getElementById("launchBlessingLine");
   const lines=state.lang==="hi"
-    ? ["🌸 आपका जीवन मंगलमय हो।","🪷 आज का दिन शांति, श्रद्धा और प्रेम से भरा हो।","🙏 धीरे-धीरे Naam की ओर लौटें, बिना जल्दबाजी के।","✨ आज का एक छोटा Jap भी एक सुंदर शुरुआत है।","🌿 आपका Naam Smaran आपके मन को शांति का समय दे।"]
-    : ["🌸 May your life be peaceful and auspicious.","🪷 May today be filled with peace, devotion and love.","🙏 Return gently to the Naam, without hurry.","✨ One small Jap today is a beautiful beginning.","🌿 May your Naam Smaran give you a peaceful moment."];
-  el.textContent=lines[Math.floor(Math.random()*lines.length)];
-  el.classList.remove("show"); void el.offsetWidth; el.classList.add("show");
-  setTimeout(()=>el.classList.remove("show"),3800);
+    ? ["आपका दिन शुभ हो, ईश्वर आपका कल्याण करें। 🌸","आज का दिन शांति, श्रद्धा और प्रेम से भरा हो। 🪷","धीरे-धीरे Naam की ओर लौटें, बिना जल्दबाजी के। 🙏","आज का एक छोटा Jap भी एक सुंदर शुरुआत है। ✨","आपका Naam Smaran आपके मन को शांति का समय दे। 🌿"]
+    : ["May your day be blessed, may God bless you. 🌸","May today be filled with peace, devotion and love. 🪷","Return gently to the Naam, without hurry. 🙏","One small Jap today is a beautiful beginning. ✨","May your Naam Smaran give you a peaceful moment. 🌿"];
+  if(titleEl)titleEl.textContent=state.lang==="hi"?"🙏 स्वागत है":"🙏 Welcome";
+  if(lineEl)lineEl.textContent=lines[Math.floor(Math.random()*lines.length)];
+  const hide=()=>{el.classList.remove("show");if(bg)bg.classList.remove("show")};
+  el.classList.remove("show");if(bg)bg.classList.remove("show");
+  void el.offsetWidth;
+  el.classList.add("show");if(bg)bg.classList.add("show");
+  clearTimeout(showLaunchBlessing.timer);
+  showLaunchBlessing.timer=setTimeout(hide,4200);
+  el.onclick=hide;
+  if(bg)bg.onclick=hide;
 }
 function finishSplash(){const s=document.getElementById("splashScreen");if(s)setTimeout(()=>s.remove(),900)}
 function init(){
