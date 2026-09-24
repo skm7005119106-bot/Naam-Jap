@@ -1606,3 +1606,95 @@ select,input,textarea{font-size:20px!important;min-height:58px!important;border-
   .bottom-nav button span:not(.nav-icon){font-size:20px!important}
   .jap-button{width:min(90vw,360px)!important;height:min(90vw,360px)!important}
 }
+
+/* =========================================================
+   V40 FINAL — 40PX+ TYPOGRAPHY + MOBILE GESTURE LOCK
+   Requested: every visible UI text is at least 40px.
+   Normal vertical scrolling remains enabled.
+   ========================================================= */
+html,body{
+  overscroll-behavior:none!important;
+  overscroll-behavior-y:none!important;
+  overscroll-behavior-x:none!important;
+  touch-action:pan-y!important;
+  -webkit-text-size-adjust:100%!important;
+}
+body{font-size:40px!important;line-height:1.35!important}
+
+/* Hard minimum for all visible text. Larger counters/headings remain larger. */
+#app *{font-size:40px!important}
+#app .jap-button{font-size:56px!important}
+#app .jap-button span{font-size:56px!important}
+#app .jap-button small{font-size:40px!important}
+#app .session-count,
+#app .big-count{font-size:clamp(90px,27vw,150px)!important}
+#app .hero-card h1,
+#app .jap-card h2,
+#app .profile-name-wrap h2,
+#app .premium-cert h3{font-size:clamp(44px,12vw,66px)!important}
+#app .premium-cert .cert-name{font-size:clamp(44px,12vw,66px)!important}
+#app .premium-cert .cert-count{font-size:clamp(48px,13vw,78px)!important}
+#app .milestone-celebration .celebration-symbol,
+#app .mala-celebration .celebration-symbol{font-size:70px!important}
+#app .milestone-celebration .big-achievement{font-size:52px!important}
+
+/* Controls stay comfortably tappable with the enlarged text. */
+#app button,#app select,#app input,#app textarea{
+  font-size:40px!important;
+  min-height:76px!important;
+  line-height:1.15!important;
+}
+#app input[type="range"]{min-height:40px!important}
+#app .small{font-size:40px!important;min-height:76px!important;padding:12px 18px!important}
+#app .text-btn{font-size:40px!important;min-height:76px!important}
+#app .primary,#app .secondary,#app .danger,#app .choice-btn,#app .goal-chip{
+  font-size:40px!important;min-height:78px!important;padding:14px 20px!important
+}
+
+/* Four-tab Android-style navigation: large icons + 40px labels. */
+#app .bottom-nav{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  min-height:154px!important;
+  padding:10px 6px calc(12px + env(safe-area-inset-bottom))!important;
+  gap:5px!important;
+}
+#app .bottom-nav button{
+  min-height:126px!important;
+  padding:8px 2px!important;
+  gap:5px!important;
+  font-size:44px!important;
+  touch-action:manipulation!important;
+}
+#app .bottom-nav button .nav-icon{font-size:44px!important;width:48px!important;height:48px!important}
+#app .bottom-nav button span:not(.nav-icon){
+  font-size:40px!important;
+  line-height:.95!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  text-align:center!important;
+  overflow-wrap:anywhere!important;
+}
+#app .page{padding-bottom:calc(184px + env(safe-area-inset-bottom))!important}
+
+/* Keep the Jap circle large and prevent gesture/browser interference. */
+#app .jap-button{
+  width:min(88vw,430px)!important;
+  height:min(88vw,430px)!important;
+  max-width:430px!important;
+  max-height:430px!important;
+  touch-action:manipulation!important;
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+
+/* Splash text also follows the 40px minimum. */
+#splashScreen *{font-size:40px!important}
+#splashScreen .splash-mark{width:140px!important;height:140px!important}
+#splashScreen .splash-mark span{font-size:76px!important}
+#splashScreen .splash-title{font-size:clamp(48px,13vw,68px)!important}
+#splashScreen .splash-dots i{width:14px!important;height:14px!important}
+
+/* No accidental browser zoom on interactive controls. */
+button,select,input,textarea,a{touch-action:manipulation!important}

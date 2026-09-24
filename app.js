@@ -351,6 +351,7 @@ function printCertificate(id){
  .meta b{font-size:15px;word-break:break-all}
  .id{position:relative;z-index:1;padding-top:15px;border-top:1px solid #e5dfca;color:#475569;font:13px system-ui}
  .footer{position:relative;z-index:1;margin-top:25px;color:#2563eb;font:800 13px system-ui;letter-spacing:1.5px}
+ body *{font-size:40px!important}
  @media print{body{background:#fff;padding:0}.cert{box-shadow:none;max-width:none;min-height:0;margin:0}}
  </style></head><body><div class="cert">
  <div class="brand">NAAM JAP • NAAM SMARAN</div>

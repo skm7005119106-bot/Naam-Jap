@@ -43,3 +43,12 @@ Mobile-first offline PWA for Naam Jap / Naam Smaran.
 - Startup splash is extended to about 5 seconds with a richer full-viewport animation.
 - PWA remains fullscreen when launched as an installed PWA; browser address/URL chrome cannot be hidden by webpage code when opened as a normal Chrome tab.
 - Certificate styling uses gold, blue, green and rose accents with full completion details.
+
+
+## V40 FINAL — 40PX INTERACTION FIX
+- All visible app UI text is enforced at 40px minimum, with major counters/headings larger.
+- Four bottom navigation buttons remain, with large 40px labels and larger tap areas.
+- Pull-to-refresh/overscroll is disabled while normal vertical page scrolling remains enabled.
+- Browser double-tap/pinch zoom is suppressed through viewport/touch-action rules without disabling vertical scrolling.
+- Jap counter uses one pointer interaction per physical tap; no JavaScript Fullscreen API is used.
+- Service-worker cache version was bumped so GitHub Pages does not keep the old CSS/JS.
