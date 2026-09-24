@@ -1,12 +1,14 @@
-# Naam Jap — v41 Android/PWA Polish
+# Naam Jap v43 — Big UI + Premium Certificates
 
-- Large four-button bottom navigation: Home, Jap, Naam, Profile
-- 18px minimum readable user-facing typography
-- Enlarged Jap counter and controls
-- Vertical scrolling retained
-- Pull-to-refresh overscroll disabled via CSS overscroll behavior
-- Double-tap zoom prevented inside the app
-- Service worker cache bumped to v41
-- No JavaScript requestFullscreen() call; installed PWA uses manifest display mode
+Mobile-first offline Naam Jap PWA.
 
-For GitHub Pages, upload all files/folders to the repository root and commit the changes. After deployment, remove the old installed PWA once and install the new version again so Android refreshes the manifest/service worker.
+v43 updates:
+- Larger readable typography throughout the app.
+- Larger four-button bottom navigation with strong borders and larger labels/icons.
+- More of the available phone screen is used on the Home and Jap views.
+- Jap counter and circle are larger.
+- Premium colorful certificate design with Sadhak name, exact Jap Naam, completed Jap, Mala count, milestone, date, certificate number and digital-record note.
+- Printable certificate updated with the same detailed premium design.
+- Keeps the v42 scrolling and PWA behavior.
+
+Deploy by replacing the repository files and committing the changes. If an older installed PWA still shows the old UI, remove/reinstall it once so the service-worker cache is refreshed.
