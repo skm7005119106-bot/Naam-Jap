@@ -154,13 +154,13 @@ function acceptTap(){
  renderSession();
 }
 function undo(){if(!session.active||session.count<=0)return;if(session.history.length){session.history.pop();session.count--;addCount(state.selected,-1);session.undone++;save();renderSession();render()}}
-function showMalaMessage(m){openModal(`<div style="text-align:center"><div style="font-size:45px">🌸</div><h2>${state.lang==="hi"?"एक माला पूर्ण":"One Mala Complete"}</h2><p>${state.lang==="hi"?`आपने 108 Naam Jap पूरे किए। यह ${m}वीं माला है।`:`You completed 108 Naam Jap. This is Mala ${m}.`}</p><p class="muted">${state.lang==="hi"?"गिनती से अधिक महत्वपूर्ण आपका भाव और नियमितता है।":"Your bhav and regularity matter more than the number."}</p><button id="malaClose" class="primary wide">${state.lang==="hi"?"आगे बढ़ें":"Continue"}</button></div>`);document.getElementById("malaClose").onclick=closeModal}
+function showMalaMessage(m){openModal(`<div style="text-align:center"><div style="font-size:2.8125rem">🌸</div><h2>${state.lang==="hi"?"एक माला पूर्ण":"One Mala Complete"}</h2><p>${state.lang==="hi"?`आपने 108 Naam Jap पूरे किए। यह ${m}वीं माला है।`:`You completed 108 Naam Jap. This is Mala ${m}.`}</p><p class="muted">${state.lang==="hi"?"गिनती से अधिक महत्वपूर्ण आपका भाव और नियमितता है।":"Your bhav and regularity matter more than the number."}</p><button id="malaClose" class="primary wide">${state.lang==="hi"?"आगे बढ़ें":"Continue"}</button></div>`);document.getElementById("malaClose").onclick=closeModal}
 function finishSession(){if(!session.active)return;if(session.count>0)state.sessions.push({naamId:state.selected,count:session.count,at:new Date().toISOString()});session.active=false;save();render();showPage("home");toast(state.lang==="hi"?"Jap session save ho gaya":"Jap session saved")}
 function checkMilestoneCertificates(){const total=totalAllJap();let unlocked=[];CERT_MILESTONES.forEach(m=>{if(total>=m.target&&!state.milestoneCertificates[m.id]){const id=`NJ-${m.id.toUpperCase()}-${Date.now().toString(36).toUpperCase()}`;const c={id,milestoneId:m.id,naamId:"all",target:m.target,date:todayKey()};state.milestoneCertificates[m.id]=c;state.certificates.push(c);unlocked.push(m)}});if(unlocked.length){save();showMilestoneUnlocked(unlocked[unlocked.length-1])}}
-function showMilestoneUnlocked(m){openModal(`<div style="text-align:center"><div style="font-size:52px">🪷</div><h2>${state.lang==="hi"?"Certificate Unlock हुआ":"Certificate Unlocked"}</h2><p><b>${state.lang==="hi"?m.titleHi:m.titleEn}</b></p><p>${m.target.toLocaleString()} Naam Jap complete</p><p class="muted">${state.lang==="hi"?"यह self-recorded in-app completion acknowledgement है।":"This is a self-recorded in-app completion acknowledgement."}</p><button id="openNewCert" class="primary wide">${state.lang==="hi"?"Certificate देखें":"View Certificate"}</button></div>`);document.getElementById("openNewCert").onclick=()=>{closeModal();showPage("profile");switchProfileTab("certificates")}}
+function showMilestoneUnlocked(m){openModal(`<div style="text-align:center"><div style="font-size:3.25rem">🪷</div><h2>${state.lang==="hi"?"Certificate Unlock हुआ":"Certificate Unlocked"}</h2><p><b>${state.lang==="hi"?m.titleHi:m.titleEn}</b></p><p>${m.target.toLocaleString()} Naam Jap complete</p><p class="muted">${state.lang==="hi"?"यह self-recorded in-app completion acknowledgement है।":"This is a self-recorded in-app completion acknowledgement."}</p><button id="openNewCert" class="primary wide">${state.lang==="hi"?"Certificate देखें":"View Certificate"}</button></div>`);document.getElementById("openNewCert").onclick=()=>{closeModal();showPage("profile");switchProfileTab("certificates")}}
 function checkGoalsForCertificate(){state.goals.forEach(g=>{if(g.active&&totalFor(g.naamId)>=g.target&&!state.certificates.some(c=>c.goalId===g.id)){g.active=false;const id=`NJ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;state.certificates.push({id,goalId:g.id,naamId:g.naamId,target:g.target,date:todayKey()});showCertificateUnlocked(g)}})}
 function checkCertificate(g){if(totalFor(g.naamId)>=g.target){checkGoalsForCertificate();render();toast(state.lang==="hi"?"Sankalp poora — certificate unlock ho gaya":"Sankalp complete — certificate unlocked")}else{toast(state.lang==="hi"?`Abhi ${(g.target-totalFor(g.naamId)).toLocaleString()} Jap baaki hain.`:`${(g.target-totalFor(g.naamId)).toLocaleString()} Jap remaining.`)}}
-function showCertificateUnlocked(g){openModal(`<div style="text-align:center"><div style="font-size:48px">🪷</div><h2>${state.lang==="hi"?"Sankalp poorn":"Sankalp Complete"}</h2><p>${displayNaam(naamObj(g.naamId))} · ${g.target.toLocaleString()} Jap</p><p class="muted">${state.lang==="hi"?"Aapka in-app completion certificate tayyar hai.":"Your in-app completion certificate is ready."}</p><button id="viewCert" class="primary wide">${state.lang==="hi"?"Certificate dekhein":"View Certificate"}</button></div>`);document.getElementById("viewCert").onclick=()=>{closeModal();showPage("certificate")}}
+function showCertificateUnlocked(g){openModal(`<div style="text-align:center"><div style="font-size:3rem">🪷</div><h2>${state.lang==="hi"?"Sankalp poorn":"Sankalp Complete"}</h2><p>${displayNaam(naamObj(g.naamId))} · ${g.target.toLocaleString()} Jap</p><p class="muted">${state.lang==="hi"?"Aapka in-app completion certificate tayyar hai.":"Your in-app completion certificate is ready."}</p><button id="viewCert" class="primary wide">${state.lang==="hi"?"Certificate dekhein":"View Certificate"}</button></div>`);document.getElementById("viewCert").onclick=()=>{closeModal();showPage("certificate")}}
 function printCertificate(id){
  const c=state.certificates.find(x=>x.id===id);if(!c)return;
  const n=c.naamId==="all"?(CERT_MILESTONES.find(m=>m.id===c.milestoneId)?.titleEn||"Naam Jap Milestone"):displayNaam(naamObj(c.naamId));
@@ -168,20 +168,20 @@ function printCertificate(id){
  w.document.write(`<html><head><title>Naam Jap Certificate</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>
  @page{size:A4;margin:12mm}
  *{box-sizing:border-box}
- body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef6ff;color:#172033;padding:18px}
- .cert{max-width:760px;margin:10px auto;background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 52%,#f0fdf4 100%);border:3px solid #2563eb;border-radius:24px;padding:42px 38px;text-align:center;position:relative;overflow:hidden;box-shadow:0 14px 36px rgba(15,23,42,.14)}
- .cert:before{content:"";position:absolute;inset:10px;border:2px solid #16a34a;border-radius:18px;pointer-events:none}
- .top{position:relative;z-index:1;color:#1d4ed8;font:800 13px system-ui;letter-spacing:4px}
- .lotus{position:relative;z-index:1;font-size:64px;margin:8px 0}
- h1{position:relative;z-index:1;margin:4px 0;color:#1d4ed8;font-size:38px}
- h2{position:relative;z-index:1;margin:8px 0;color:#15803d;font-size:22px}
+ body{margin:0;font-family:Georgia,"Times New Roman",serif;background:#eef6ff;color:#172033;padding:1.125rem}
+ .cert{max-width:47.5rem;margin:0.625rem auto;background:linear-gradient(145deg,#ffffff 0%,#f0f7ff 52%,#f0fdf4 100%);border:0.1875rem solid #2563eb;border-radius:1.5rem;padding:2.625rem 2.375rem;text-align:center;position:relative;overflow:hidden;box-shadow:0 0.875rem 2.25rem rgba(15,23,42,.14)}
+ .cert:before{content:"";position:absolute;inset:0.625rem;border:0.125rem solid #16a34a;border-radius:1.125rem;pointer-events:none}
+ .top{position:relative;z-index:1;color:#1d4ed8;font:800 0.8125rem system-ui;letter-spacing:0.25rem}
+ .lotus{position:relative;z-index:1;font-size:4rem;margin:0.5rem 0}
+ h1{position:relative;z-index:1;margin:0.25rem 0;color:#1d4ed8;font-size:2.375rem}
+ h2{position:relative;z-index:1;margin:0.5rem 0;color:#15803d;font-size:1.375rem}
  .intro{position:relative;z-index:1;color:#475569}
- .person{position:relative;z-index:1;font-size:28px;font-weight:800;color:#172033;margin:20px 0 8px}
- .naam-label{position:relative;z-index:1;display:inline-block;padding:8px 18px;border-radius:999px;background:#dcfce7;color:#166534;font:800 16px system-ui;margin:4px 0 14px}
- .count{position:relative;z-index:1;font-size:30px;font-weight:900;color:#b45309;margin:10px}
+ .person{position:relative;z-index:1;font-size:1.75rem;font-weight:800;color:#172033;margin:1.25rem 0 0.5rem}
+ .naam-label{position:relative;z-index:1;display:inline-block;padding:0.5rem 1.125rem;border-radius:62.4375rem;background:#dcfce7;color:#166534;font:800 1rem system-ui;margin:0.25rem 0 0.875rem}
+ .count{position:relative;z-index:1;font-size:1.875rem;font-weight:900;color:#b45309;margin:0.625rem}
  .date{position:relative;z-index:1;color:#475569}
- .id{position:relative;z-index:1;font:12px system-ui;color:#64748b;margin-top:22px}
- .footer{position:relative;z-index:1;margin-top:18px;color:#1d4ed8;font:700 12px system-ui;letter-spacing:1px}
+ .id{position:relative;z-index:1;font:0.75rem system-ui;color:#64748b;margin-top:1.375rem}
+ .footer{position:relative;z-index:1;margin-top:1.125rem;color:#1d4ed8;font:700 0.75rem system-ui;letter-spacing:0.0625rem}
  @media print{body{background:#fff;padding:0}.cert{box-shadow:none;margin:0;max-width:none}}
  </style></head><body><div class="cert">
  <div class="top">✦ NAAM JAP • NAAM SMARAN ✦</div>
