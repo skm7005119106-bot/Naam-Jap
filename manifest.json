@@ -2,19 +2,14 @@
   "name": "Naam Jap — Naam Smaran",
   "short_name": "Naam Jap",
   "description": "A simple offline companion for Naam Jap and Naam Smaran.",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
-  "id": "./",
+  "id": "./index.html",
   "display": "standalone",
-  "display_override": [
-    "standalone",
-    "fullscreen"
-  ],
+  "display_override": ["fullscreen", "standalone", "minimal-ui"],
   "orientation": "portrait",
-  "background_color": "#f7fbff",
+  "background_color": "#f5f8fc",
   "theme_color": "#2563eb",
-  "categories": ["lifestyle", "health", "productivity"],
-  "prefer_related_applications": false,
   "lang": "hi",
   "dir": "ltr",
   "icons": [

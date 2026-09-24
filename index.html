@@ -14,10 +14,10 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=42">
+  <link rel="stylesheet" href="style.css?v=44">
 </head>
 <body><div id="splashScreen" class="splash-screen">
-  <div class="splash-mark" aria-hidden="true"><span>ॐ</span><i class="splash-orbit orbit-a"></i><i class="splash-orbit orbit-b"></i></div>
+  <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
   <div class="splash-title">Naam Jap</div>
   <div class="splash-subtitle">Naam Smaran</div>
   <div class="splash-dots"><i></i><i></i><i></i></div>
@@ -44,10 +44,10 @@
   <div id="mainApp" class="hidden">
     <header class="topbar">
       <div>
-        <div class="brand"><span class="brand-mark">ॐ</span><span>Naam Jap</span></div>
+        <div class="brand">🪷 <span>Naam Jap</span></div>
         <div id="subtitle" class="tiny muted">Naam Smaran</div>
       </div>
-      <div class="top-actions"><button id="settingsTopBtn" class="icon-action" aria-label="Settings">⚙</button><button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button></div>
+      <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
     </header>
 
     <main>
@@ -73,66 +73,12 @@
 
         <div class="card">
           <div class="card-title">🌸 <span data-i18n="dailySmaran">Aaj ka Smaran</span></div>
-          <p id="dailyThought">Naam Jap sirf ginti poori karna nahi; prem, shraddha aur smaran ka abhyas hai.</p>
+          <p id="dailyThought"></p>
         </div>
-
-        <section class="inspiration-card" aria-label="Inspirational Naam Smaran">
-          <div class="inspiration-head"><div><div class="eyebrow">✦ Naam Smaran Prerna</div><h2>आज की प्रेरणा</h2></div><button id="nextInspirationBtn" class="inspiration-next" type="button" aria-label="Next inspiration">↻</button></div>
-          <div id="inspirationLine" class="inspiration-line">जहाँ हैं, वहीं से शुरू करें। एक सच्चा नाम-जप भी सुंदर शुरुआत है।</div>
-          <div class="inspiration-footer">हर दिन थोड़ा नाम-स्मरण • प्रेम से • बिना जल्दबाजी</div>
-        </section>
-
-        <section class="home-learning" aria-label="Naam Jap learning">
-          <details class="learn-card" open>
-            <summary><span class="learn-icon">ॐ</span><span>Naam Jap kya hai?</span><span class="summary-arrow">⌄</span></summary>
-            <div class="learn-body">
-              <p><b>Naam Jap / Naam Smaran</b> kisi chune hue Ishwar Naam ko shraddha, dhyan aur niyamit roop se smaran karne ka abhyas hai.</p>
-              <p>Is app ka uddeshya sirf ginti poori karna nahi, balki aapko shanti se apne chune hue Naam par dhyan dene mein madad karna hai.</p>
-            </div>
-          </details>
-
-          <details class="learn-card">
-            <summary><span class="learn-icon">♥</span><span>Naam Jap kyon karein?</span><span class="summary-arrow">⌄</span></summary>
-            <div class="learn-body">
-              <p>Niyamit Naam Smaran ko kai log man ko ekagr karne, apni spiritual routine banane aur shant samay dene ke roop mein apnate hain.</p>
-              <p>Iska anubhav har vyakti ke liye alag ho sakta hai. Isliye Jap ko competition nahi, apni personal sadhana samjhein.</p>
-            </div>
-          </details>
-
-          <details class="learn-card">
-            <summary><span class="learn-icon">108</span><span>Naam Jap kaise karein?</span><span class="summary-arrow">⌄</span></summary>
-            <div class="learn-body">
-              <ol>
-                <li>Shaant aur saaf jagah chunen.</li>
-                <li>Apna Jap Naam select karein.</li>
-                <li>Aaram se baithkar Naam ka smaran karein.</li>
-                <li>Har accepted tap ko <b>1 Jap</b> maana jayega.</li>
-                <li><b>108 Jap = 1 Mala.</b> 108 ke baad current Mala 0/108 se agla round shuru hota hai.</li>
-                <li>Apni gati se karein; jaldi se zyada niyamitata aur bhav par dhyan dein.</li>
-              </ol>
-            </div>
-          </details>
-
-          <details class="learn-card">
-            <summary><span class="learn-icon">★</span><span>Naam Jap se kya phal mil sakta hai?</span><span class="summary-arrow">⌄</span></summary>
-            <div class="learn-body">
-              <p>Dharmik paramparaon mein Naam Smaran ko bhakti aur Ishwar-smaran ka mahatvapurn abhyas maana jata hai. Log isse apni shraddha, ekagrata aur inner routine se jodte hain.</p>
-              <p>App kisi nishchit chamatkari ya medical result ki guarantee nahi karta. Aapka anubhav aapki parampara, bhavna aur niyamit abhyas ke anusar alag ho sakta hai.</p>
-            </div>
-          </details>
-
-          <details class="learn-card">
-            <summary><span class="learn-icon">✦</span><span>108 Mala, Sankalp aur Milestone</span><span class="summary-arrow">⌄</span></summary>
-            <div class="learn-body">
-              <p><b>108 Jap = 1 Mala.</b> Total Jap lifetime subtotal hota hai, jabki current Mala 0 se 108 tak progress karti hai.</p>
-              <p>Aap bade target ke liye <b>Sankalp</b> bana sakte hain. Bade milestones par digital certificate unlock hota hai. Certificate ke milestones profile mein clearly diye gaye hain.</p>
-            </div>
-          </details>
-        </section>
 
         <div class="card">
           <div class="card-title">🕉️ <span data-i18n="beforeJap">Jap se pehle</span></div>
-          <ul id="guidanceList"><li>Saaf aur shaant sthaan chunen.</li><li>Notifications aur distractions kam karein.</li><li>Ek Naam par man ko prem se wapas laayein.</li><li>Naam Jap ko competition na banayein.</li></ul>
+          <ul id="guidanceList"></ul>
         </div>
       </section>
 
@@ -147,7 +93,7 @@
           <div class="session-count" id="sessionCount">0</div>
           <div class="muted"><span data-i18n="mala">Mala</span> <b id="sessionMala">0</b> · <span id="sessionRemain">0</span>/108</div>
           <div class="progress"><span id="sessionProgress"></span></div>
-          <button id="japButton" class="jap-button" aria-label="Count one Naam"><span>राधे</span><small>1 click = 1 Jap</small></button>
+          <button id="japButton" class="jap-button" aria-label="Count one Naam">राधे</button>
           <div class="jap-actions">
             <button id="undoBtn" class="secondary" data-i18n="undo">Undo</button>
             <button id="pauseBtn" class="secondary" data-i18n="pause">Pause</button>
@@ -168,7 +114,7 @@
       </section>
 
       <section id="sankalp" class="page">
-        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2><button id="sankalpBackBtn" class="secondary small">← Profile</button></div>
+        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2></div>
         <div class="card">
           <form id="goalForm">
             <label data-i18n="goalNaam">Jap Naam</label>
@@ -186,19 +132,7 @@
             <button class="primary wide" type="submit" data-i18n="saveGoal">Save Sankalp</button>
           </form>
         </div>
-        <div id="goalList"></div><div class="card milestone-card">
-  <div class="card-title"><span class="section-symbol">CERT</span> <span data-i18n="certificateSystem">Certificate Milestones</span></div>
-  <p class="muted certificate-explainer">Your certificates are earned separately for each Naam. The counter for the selected Naam is what unlocks that Naam's certificate.</p>
-  <div class="certificate-steps">
-    <div><b>108</b><span>1 Mala Complete</span></div>
-    <div><b>1,008</b><span>Certificate Milestone</span></div>
-    <div><b>10,008</b><span>Deep Sadhana</span></div>
-    <div><b>1,08,000</b><span>Major Milestone</span></div>
-    <div><b>10,00,000</b><span>Mahasadhana</span></div>
-  </div>
-  <p class="tiny muted">When a milestone is reached, the app creates a unique certificate number and records your name, the exact Jap Naam, completed count and date. You can then Print / Save PDF from Profile → Certificates.</p>
-  <div id="milestoneList"></div>
-</div>
+        <div id="goalList"></div><div class="card milestone-card"><div class="card-title">🏅 <span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
       </section>
 
       <section id="profile" class="page">
@@ -224,47 +158,14 @@
         <div id="profileSummaryTab" class="profile-panel active">
           <div class="card"><div class="card-title">📿 <span data-i18n="naamSummary">Naam Jap Summary</span></div><div id="profileNaamSummary"></div></div>
           <div class="card"><div class="card-title">🎯 <span data-i18n="goalSummary">Sankalp Summary</span></div><div id="profileGoalSummary"></div></div><div class="card"><div class="card-title">🏅 <span data-i18n="certificateProgress">Certificate Progress</span></div><div id="profileCertificateProgress"></div></div>
-          <div class="profile-quick-actions">
-  <button id="profileSankalpBtn" class="quick-action secondary">🎯 Sankalp <small>Target set karein</small></button>
-  <button id="profileSettingsBtn" class="quick-action secondary">⚙ Settings <small>Sound, language & theme</small></button>
-</div>
-<button id="exportBtn" class="secondary wide" data-i18n="export">Export Backup</button>
+          <button id="exportBtn" class="secondary wide" data-i18n="export">Export Backup</button>
         </div>
-        <div id="profileHistoryTab" class="profile-panel">
-  <div class="card info-card"><div class="card-title">📖 <span>History kaise kaam karti hai</span></div><p>Har completed Jap session yahan Naam, session ke Jap aur date ke saath save hota hai. Total Jap aur Mala alag se continuously save rehte hain.</p></div>
-  <div id="historyList"></div>
-</div>
-        <div id="profileCertificatesTab" class="profile-panel">
-  <div class="card info-card"><div class="card-title">🏆 <span>Certificate kaise milega</span></div><p><b>108 Jap = 1 Mala.</b> 108 par sirf Mala complete hoti hai. Certificate milestones bade targets par unlock hote hain: <b>1,008 → 10,008 → 1,08,000 → 10,00,000</b>. Har Naam ka progress alag count hota hai.</p></div>
-  <div id="certificateList"></div>
-</div>
+        <div id="profileHistoryTab" class="profile-panel"><div id="historyList"></div></div>
+        <div id="profileCertificatesTab" class="profile-panel"><div id="certificateList"></div></div>
       </section>
 
       <section id="settings" class="page">
-        <div class="section-head"><h2 data-i18n="settings">Settings</h2><button id="settingsBackBtn" class="secondary small">← Profile</button></div>
-        <div class="card settings-appearance">
-          <div class="card-title">🎨 <span>Theme & Appearance</span></div>
-          <p class="muted settings-help">App ka mood, dark/light mode aur selected Naam ke hisaab se Jap screen ka look badlein.</p>
-          <label for="appearanceSelect">App Theme</label>
-          <select id="appearanceSelect">
-            <option value="divine">🪷 Divine</option>
-            <option value="light">☀️ Light</option>
-            <option value="dark">🌙 Dark</option>
-            <option value="system">📱 System</option>
-          </select>
-          <label for="naamThemeSelect">Jap Naam Theme</label>
-          <select id="naamThemeSelect">
-            <option value="auto">✨ Auto — Naam ke hisaab se</option>
-            <option value="radha">🌸 Radha — Lotus Pink</option>
-            <option value="krishna">🦚 Krishna — Peacock Blue</option>
-            <option value="ram">🪔 Ram — Saffron</option>
-            <option value="shiva">🔱 Shiv — Indigo</option>
-            <option value="gold">ॐ Divine Gold</option>
-          </select>
-          <div class="settings-toggle-row"><div><b>📳 Haptic Tap</b><small>Har Jap par halka vibration</small></div><button id="vibrationToggle" class="secondary small" type="button">ON</button></div>
-          <div class="settings-toggle-row"><div><b>🔆 Keep Screen Awake</b><small>Jap ke dauran screen sleep ko rokne ki koshish</small></div><button id="keepAwakeToggle" class="secondary small" type="button">OFF</button></div>
-        </div>
-
+        <div class="section-head"><h2 data-i18n="settings">Settings</h2></div>
         <div class="card">
           <label data-i18n="language">Language</label>
           <select id="languageSelect">
@@ -300,15 +201,16 @@
       </section>
     </main>
 
-    <nav class="bottom-nav" aria-label="Primary navigation">
-      <button data-page="home"><span class="nav-icon">⌂</span><span data-i18n="home">Home</span><small>Aaj</small></button>
-      <button data-page="jap"><span class="nav-icon">ॐ</span><span data-i18n="naamJap">Jap</span><small>108 Mala</small></button>
-      <button data-page="naam"><span class="nav-icon">✦</span><span data-i18n="naam">Naam</span><small>Choose</small></button>
-      <button data-page="profile"><span class="nav-icon">●</span><span data-i18n="profile">Profile</span><small>Progress</small></button>
+    <nav class="bottom-nav">
+      <button data-page="home">🏠<span data-i18n="home">Home</span></button>
+      <button data-page="jap">📿<span data-i18n="naamJap">Jap</span></button>
+      <button data-page="naam">🔖<span data-i18n="naam">Naam</span></button>
+      <button data-page="profile">👤<span data-i18n="profile">Profile</span></button>
+      <button data-page="sankalp">🎯<span data-i18n="sankalp">Sankalp</span></button>
+      <button data-page="settings">⚙️<span data-i18n="settings">Settings</span></button>
     </nav>
   </div>
 
-  <div id="launchBlessing" class="launch-blessing" role="status" aria-live="polite"></div>
   <div id="toast" class="toast"></div>
   <div id="modal" class="modal hidden">
     <div class="modal-box">
@@ -322,66 +224,25 @@
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js?v=43').catch(() => {});
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
     });
   }
-  // Do not call requestFullscreen() from a normal click. Android Chrome shows
-  // a system "To exit full screen..." message when that API is used.
-  // Installed PWA fullscreen is controlled by manifest.json instead.
-
-</script>
-<script>
-  // Android/PWA gesture guard: keep vertical scrolling enabled while preventing
-  // accidental double-tap zoom. Pull-to-refresh is handled by CSS overscroll-behavior.
-  let lastTapAt = 0;
-  document.addEventListener("dblclick", function(e){ e.preventDefault(); }, {passive:false});
-  document.addEventListener("touchend", function(e){
-    const now = Date.now();
-    if (now - lastTapAt < 280 && !e.target.closest("input,select,textarea,button,a,summary")) {
-      e.preventDefault();
+  // When launched from the home-screen icon (standalone/fullscreen display),
+  // also ask the browser for real fullscreen (hides the status bar too on
+  // devices/browsers that support the Fullscreen API).
+  (function () {
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+      window.matchMedia('(display-mode: fullscreen)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) {
+      var tryFullscreen = function () {
+        var el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        document.removeEventListener('click', tryFullscreen);
+      };
+      document.addEventListener('click', tryFullscreen, { once: true });
     }
-    lastTapAt = now;
-  }, {passive:false});
-</script>
-<script>
-  // Stop Android Chrome's pull-to-refresh only when the page is already at the top.
-  // Normal vertical scrolling remains completely enabled.
-  let touchStartY = 0;
-  document.addEventListener("touchstart", e => {
-    if (e.touches && e.touches.length === 1) touchStartY = e.touches[0].clientY;
-  }, {passive:true});
-  document.addEventListener("touchmove", e => {
-    if (!e.touches || e.touches.length !== 1) return;
-    const dy = e.touches[0].clientY - touchStartY;
-    const atTop = (window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0) <= 0;
-    if (atTop && dy > 8 && !e.target.closest("input,select,textarea,[contenteditable=true]")) e.preventDefault();
-  }, {passive:false});
-  document.addEventListener("gesturestart", e => e.preventDefault(), {passive:false});
-
-  // Divine intro chime. Browsers may block autoplay; in that case the first
-  // user interaction unlocks it. The app never forces sound when settings are OFF.
-  window.__introPlayed = false;
-  window.playNaamIntro = function(){
-    if (window.__introPlayed || !window.state || window.state.settings.sound === false) return;
-    try {
-      const ctx = typeof audioCtx !== "undefined" ? audioCtx : null;
-      if(!ctx) return;
-      const now = ctx.currentTime;
-      [[392,0],[523.25,.14],[659.25,.29]].forEach(([f,t],i)=>{
-        const o=ctx.createOscillator(),g=ctx.createGain();
-        o.type="sine"; o.frequency.setValueAtTime(f,now+t);
-        g.gain.setValueAtTime(.0001,now+t);
-        g.gain.exponentialRampToValueAtTime(.045,now+t+.03);
-        g.gain.exponentialRampToValueAtTime(.0001,now+t+.42);
-        o.connect(g);g.connect(ctx.destination);o.start(now+t);o.stop(now+t+.46);
-      });
-      window.__introPlayed=true;
-    } catch(e) {}
-  };
-  window.addEventListener("pointerdown", () => {
-    try { if (typeof ensureAudio === "function") { ensureAudio(); window.playNaamIntro(); } } catch(e) {}
-  }, {once:true, passive:true});
-  setTimeout(() => { try { if (typeof ensureAudio === "function") { ensureAudio(); window.playNaamIntro(); } } catch(e) {} }, 650);
+  })();
 </script>
 </body>
 </html>
