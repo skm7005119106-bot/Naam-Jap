@@ -14,10 +14,9 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=32">
 </head>
 <body><div id="splashScreen" class="splash-screen">
-  <div class="splash-glow" aria-hidden="true"></div>
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
   <div class="splash-title">Naam Jap</div>
   <div class="splash-subtitle">Naam Smaran</div>
@@ -26,13 +25,12 @@
 <div id="app">
   <div id="onboarding" class="screen hidden">
     <div class="onboard-card">
-      <div class="lotus">ॐ</div>
+      <div class="lotus">🪷</div>
       <h1>Naam Jap</h1>
       <p class="muted" data-i18n="welcome">A simple offline companion for Naam Jap.</p>
       <h2 data-i18n="chooseLanguage">Choose your language</h2>
       <div class="choice-grid">
         <button class="choice-btn" data-lang="hi">हिन्दी</button>
-        <button class="choice-btn" data-lang="bn">বাংলা</button>
         <button class="choice-btn" data-lang="en">English</button>
       </div>
       <h2 data-i18n="chooseNaam">Choose your Jap Naam</h2>
@@ -46,13 +44,10 @@
   <div id="mainApp" class="hidden">
     <header class="topbar">
       <div>
-        <div class="brand"><span class="brand-mark">ॐ</span><span>Naam Jap</span></div>
+        <div class="brand">🪷 <span>Naam Jap</span></div>
         <div id="subtitle" class="tiny muted">Naam Smaran</div>
       </div>
-      <div class="top-actions">
-        <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
-        <button id="settingsTopBtn" class="settings-top" aria-label="Settings">⚙</button>
-      </div>
+      <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
     </header>
 
     <main>
@@ -63,7 +58,7 @@
           <div class="big-count" id="todayCount">0</div>
           <div class="muted" data-i18n="todayJap">Today's Jap</div>
           <div class="mala-row">
-            <span><b id="todayMala">0</b> <span data-i18n="mala">Mala</span></span>
+            <span>📿 <b id="todayMala">0</b> <span data-i18n="mala">Mala</span></span>
             <span><b id="todayRemain">0</b>/108</span>
           </div>
           <div class="progress"><span id="malaProgress"></span></div>
@@ -77,12 +72,12 @@
         </div>
 
         <div class="card">
-          <div class="card-title"><span class="section-symbol">✦</span><span data-i18n="dailySmaran">Aaj ka Smaran</span></div>
+          <div class="card-title">🌸 <span data-i18n="dailySmaran">Aaj ka Smaran</span></div>
           <p id="dailyThought"></p>
         </div>
 
         <div class="card">
-          <div class="card-title"><span class="section-symbol">ॐ</span><span data-i18n="beforeJap">Jap se pehle</span></div>
+          <div class="card-title">🕉️ <span data-i18n="beforeJap">Jap se pehle</span></div>
           <ul id="guidanceList"></ul>
         </div>
       </section>
@@ -104,14 +99,17 @@
             <button id="pauseBtn" class="secondary" data-i18n="pause">Pause</button>
             <button id="finishSessionBtn" class="secondary" data-i18n="finish">Finish</button>
           </div>
-          <button id="sessionSoundBtn" class="sound-chip" type="button">Sound Sound On</button>
+          <button id="sessionSoundBtn" class="sound-chip" type="button">🔔 Sound On</button>
           <p id="sessionStatus" class="tiny muted"></p>
+        </div>
+        <div class="card">
+          <div class="card-title">🙏 <span data-i18n="reminder">Smaran</span></div>
+          <p class="muted" data-i18n="countReminder">Ginti se zyada bhav aur niyamit Naam Smaran par dhyan dein.</p>
         </div>
       </section>
 
       <section id="naam" class="page">
         <div class="section-head"><h2 data-i18n="myNaam">My Naam</h2><button id="addNaamBtn" class="primary small" data-i18n="addNaam">+ Add</button></div>
-        <div class="card custom-naam-card"><div class="card-title"><span class="section-symbol">+</span><span data-i18n="customNaamHint">Apna Jap Naam khud likhein</span></div><p class="muted" data-i18n="customNaamHintText">Radha, Krishna, Ram ya apna koi bhi Naam add karke uska alag counter rakhein.</p></div>
         <div id="naamList" class="list"></div>
       </section>
 
@@ -134,7 +132,7 @@
             <button class="primary wide" type="submit" data-i18n="saveGoal">Save Sankalp</button>
           </form>
         </div>
-        <div id="goalList"></div><div class="card milestone-card"><div class="card-title"><span class="section-symbol">★</span><span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
+        <div id="goalList"></div><div class="card milestone-card"><div class="card-title">🏅 <span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
       </section>
 
       <section id="profile" class="page">
@@ -158,12 +156,8 @@
           <button class="profile-tab" data-profile-tab="certificates" data-i18n="certificate">Certificates</button>
         </div>
         <div id="profileSummaryTab" class="profile-panel active">
-          <div class="card"><div class="card-title"><span class="section-symbol">•</span><span data-i18n="naamSummary">Naam Jap Summary</span></div><div id="profileNaamSummary"></div></div>
-          <div class="card"><div class="card-title"><span class="section-symbol">◎</span><span data-i18n="goalSummary">Sankalp Summary</span></div><div id="profileGoalSummary"></div></div><div class="card"><div class="card-title"><span class="section-symbol">★</span><span data-i18n="certificateProgress">Certificate Progress</span></div><div id="profileCertificateProgress"></div></div>
-          <div class="row settings-shortcuts">
-            <button id="profileSankalpBtn" class="secondary" data-i18n="openSankalp">Sankalp</button>
-            <button id="profileSettingsBtn" class="secondary" data-i18n="openSettings">Settings</button>
-          </div>
+          <div class="card"><div class="card-title">📿 <span data-i18n="naamSummary">Naam Jap Summary</span></div><div id="profileNaamSummary"></div></div>
+          <div class="card"><div class="card-title">🎯 <span data-i18n="goalSummary">Sankalp Summary</span></div><div id="profileGoalSummary"></div></div><div class="card"><div class="card-title">🏅 <span data-i18n="certificateProgress">Certificate Progress</span></div><div id="profileCertificateProgress"></div></div>
           <button id="exportBtn" class="secondary wide" data-i18n="export">Export Backup</button>
         </div>
         <div id="profileHistoryTab" class="profile-panel"><div id="historyList"></div></div>
@@ -176,7 +170,6 @@
           <label data-i18n="language">Language</label>
           <select id="languageSelect">
             <option value="hi">हिन्दी</option>
-            <option value="bn">বাংলা</option>
             <option value="en">English</option>
           </select>
           <label data-i18n="defaultNaam">Default Jap Naam</label>
@@ -189,36 +182,19 @@
           </select>
         </div>
         <div class="card">
-          <label data-i18n="theme">Theme</label>
-          <select id="themeSelect">
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-            <option value="divine">Divine</option>
-          </select>
-          <div class="settings-grid">
-            <button id="hapticToggle" class="secondary small"></button>
-            <button id="wakeToggle" class="secondary small"></button>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title"><span class="section-symbol">?</span> <span data-i18n="support">Help & Support</span></div>
-          <p class="muted" data-i18n="supportText">Naam Jap, sound, backup, certificate ya settings ke liye yahan basic help dekhein.</p>
-          <button id="supportBtn" class="secondary wide" data-i18n="openSupport">Open Support</button>
-        </div>
-        <div class="card">
-          <div class="sound-toggle"><div><div class="card-title"><span class="section-symbol">♪</span><span data-i18n="sound">Jap Sound</span></div><div class="tiny muted">Customize tap and Mala sounds</div></div><button id="soundToggle" class="secondary small"></button></div>
-          <div class="sound-setting-row"><span>Mala Tap sound</span><button id="tapSoundToggle" class="secondary small"></button></div>
-          <div class="sound-setting-row"><span>ॐ Mala-complete sound</span><button id="malaSoundToggle" class="secondary small"></button></div>
-          <label for="soundVolume">Volume Sound volume</label>
+          <div class="sound-toggle"><div><div class="card-title">🔔 <span data-i18n="sound">Jap Sound</span></div><div class="tiny muted">Customize tap and Mala sounds</div></div><button id="soundToggle" class="secondary small"></button></div>
+          <div class="sound-setting-row"><span>📿 Tap sound</span><button id="tapSoundToggle" class="secondary small"></button></div>
+          <div class="sound-setting-row"><span>🪷 Mala-complete sound</span><button id="malaSoundToggle" class="secondary small"></button></div>
+          <label for="soundVolume">🔊 Sound volume</label>
           <input id="soundVolume" type="range" min="0" max="100" step="5" value="55">
           <div class="tiny muted" id="soundVolumeLabel">55%</div>
         </div>
         <div class="card">
-          <div class="card-title"><span class="section-symbol">•</span><span data-i18n="volumeNote">Volume buttons</span></div>
+          <div class="card-title">📿 <span data-i18n="volumeNote">Volume buttons</span></div>
           <p class="muted" data-i18n="volumeNoteText">Web preview cannot reliably capture Android volume keys. The native Android version can add this bridge later.</p>
         </div>
         <div class="card danger-card">
-          <div class="card-title"><span class="section-symbol">!</span><span data-i18n="data">Local Data</span></div>
+          <div class="card-title">⚠️ <span data-i18n="data">Local Data</span></div>
           <p class="muted" data-i18n="dataText">All practice data in this MVP stays on this device/browser.</p>
           <button id="resetDataBtn" class="danger" data-i18n="reset">Reset all local data</button>
         </div>
@@ -226,10 +202,12 @@
     </main>
 
     <nav class="bottom-nav">
-      <button data-page="home">⌂<span data-i18n="home">Home</span></button>
-      <button data-page="jap">●<span data-i18n="naamJap">Jap</span></button>
-      <button data-page="naam">✦<span data-i18n="naam">Naam</span></button>
-      <button data-page="profile">○<span data-i18n="profile">Profile</span></button>
+      <button data-page="home">🏠<span data-i18n="home">Home</span></button>
+      <button data-page="jap">📿<span data-i18n="naamJap">Jap</span></button>
+      <button data-page="naam">🔖<span data-i18n="naam">Naam</span></button>
+      <button data-page="profile">👤<span data-i18n="profile">Profile</span></button>
+      <button data-page="sankalp">🎯<span data-i18n="sankalp">Sankalp</span></button>
+      <button data-page="settings">⚙️<span data-i18n="settings">Settings</span></button>
     </nav>
   </div>
 
@@ -243,41 +221,28 @@
 </div>
 <script src="app.js"></script>
 <script>
-  // Some WebViews apply the viewport meta a beat late on cold start, which
-  // can briefly render everything at native/unscaled size until something
-  // forces a layout recompute. Re-asserting it right after load is a cheap,
-  // safe nudge that fixes that without waiting for a user tap.
-  window.addEventListener('load', function () {
-    var vp = document.querySelector('meta[name="viewport"]');
-    if (vp) vp.setAttribute('content', vp.getAttribute('content'));
-  });
-
-  // Service worker: install the current one, and clean up any service
-  // worker from an older copy of this app that might still be controlling
-  // this origin (that's what was serving the old small-font UI on first
-  // open — it owns the page until it's explicitly replaced). If we do
-  // find and remove a stale one, do a single reload so the fresh version
-  // takes over immediately instead of on the next open.
+  // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.getRegistrations().then(function (regs) {
-        var stale = regs.filter(function (r) {
-          var url = (r.active && r.active.scriptURL) || (r.waiting && r.waiting.scriptURL) || (r.installing && r.installing.scriptURL) || '';
-          return url && url.indexOf('service-worker.js') === -1;
-        });
-        var hadStale = stale.length > 0;
-        Promise.all(stale.map(function (r) { return r.unregister(); })).then(function () {
-          navigator.serviceWorker.register('service-worker.js').catch(function () {});
-          if (hadStale && !sessionStorage.getItem('nj-sw-reloaded')) {
-            sessionStorage.setItem('nj-sw-reloaded', '1');
-            location.reload();
-          }
-        });
-      }).catch(function () {
-        navigator.serviceWorker.register('service-worker.js').catch(function () {});
-      });
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
     });
   }
+  // When launched from the home-screen icon (standalone/fullscreen display),
+  // also ask the browser for real fullscreen (hides the status bar too on
+  // devices/browsers that support the Fullscreen API).
+  (function () {
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+      window.matchMedia('(display-mode: fullscreen)').matches ||
+      window.navigator.standalone === true;
+    if (isStandalone) {
+      var tryFullscreen = function () {
+        var el = document.documentElement;
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        document.removeEventListener('click', tryFullscreen);
+      };
+      document.addEventListener('click', tryFullscreen, { once: true });
+    }
+  })();
 </script>
 </body>
 </html>
