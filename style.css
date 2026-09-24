@@ -1725,3 +1725,25 @@ button,select,input,textarea,a{touch-action:manipulation!important}
     max-height:none!important;
   }
 }
+
+/* FINAL JAP CIRCLE — only the Jap counter circle is changed.
+   Optimized for 9:16 Android portrait screens. */
+#jap .jap-button{
+  width:96vw!important;
+  height:96vw!important;
+  max-width:none!important;
+  max-height:none!important;
+  min-width:0!important;
+  min-height:0!important;
+  aspect-ratio:1/1!important;
+  border-radius:50%!important;
+  box-sizing:border-box!important;
+  flex:0 0 auto!important;
+  margin:10px auto 18px!important;
+}
+@media (min-width:600px){
+  #jap .jap-button{
+    width:min(96vw,680px)!important;
+    height:min(96vw,680px)!important;
+  }
+}
