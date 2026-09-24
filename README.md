@@ -1,27 +1,12 @@
-# Naam Jap — Naam Smaran v39
+# Naam Jap — v41 Android/PWA Polish
 
-Mobile-first offline PWA for Naam Jap / Naam Smaran.
+- Large four-button bottom navigation: Home, Jap, Naam, Profile
+- 18px minimum readable user-facing typography
+- Enlarged Jap counter and controls
+- Vertical scrolling retained
+- Pull-to-refresh overscroll disabled via CSS overscroll behavior
+- Double-tap zoom prevented inside the app
+- Service worker cache bumped to v41
+- No JavaScript requestFullscreen() call; installed PWA uses manifest display mode
 
-## v39 additions
-- Divine / Light / Dark / System appearance themes
-- Naam-specific Jap themes: Auto, Radha, Krishna, Ram, Shiv, Divine Gold
-- Large scrollable mobile layout
-- Inspirational Naam Smaran section with rotating daily-style guidance
-- Haptic tap feedback toggle
-- Optional screen-awake mode during Jap
-- Startup renders state/themes/counters before the app shell is revealed
-- Offline service worker cache bumped to v39
-
-## Counting
-- Current Mala is always 0–108.
-- Every accepted tap = exactly 1 Jap.
-- 108 accepted Jap = 1 Mala.
-- Total Jap is lifetime Naam-wise subtotal and does not reset.
-- Large certificates remain at 1,008 / 10,008 / 1,08,000 / 10,00,000 and custom Sankalp targets.
-
-## Android use without Android Studio
-1. Upload all files to the repository root.
-2. Enable GitHub Pages from the `main` branch.
-3. Open the Pages URL in Chrome.
-4. Chrome menu → **Add to Home screen / Install app**.
-5. Launch Naam Jap from the Android Home Screen for the standalone app shell.
+For GitHub Pages, upload all files/folders to the repository root and commit the changes. After deployment, remove the old installed PWA once and install the new version again so Android refreshes the manifest/service worker.
