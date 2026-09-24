@@ -1,0 +1,1 @@
+Naam Jap v45: balanced mobile typography, 6-item bottom navigation fixed, fullscreen JS prompt removed, PWA standalone manifest, cache v45, scrolling preserved.

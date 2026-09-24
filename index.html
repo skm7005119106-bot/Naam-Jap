@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="style.css?v=45">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -227,22 +227,6 @@
       navigator.serviceWorker.register('service-worker.js').catch(() => {});
     });
   }
-  // When launched from the home-screen icon (standalone/fullscreen display),
-  // also ask the browser for real fullscreen (hides the status bar too on
-  // devices/browsers that support the Fullscreen API).
-  (function () {
-    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-      window.matchMedia('(display-mode: fullscreen)').matches ||
-      window.navigator.standalone === true;
-    if (isStandalone) {
-      var tryFullscreen = function () {
-        var el = document.documentElement;
-        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
-        document.removeEventListener('click', tryFullscreen);
-      };
-      document.addEventListener('click', tryFullscreen, { once: true });
-    }
-  })();
 </script>
 </body>
 </html>
