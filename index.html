@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" href="icons/icon-192.png">
   <title>Naam Jap</title>
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body><div id="splashScreen" class="splash-screen">
   <div class="splash-mark" aria-hidden="true"><span>ॐ</span></div>
@@ -44,10 +44,10 @@
   <div id="mainApp" class="hidden">
     <header class="topbar">
       <div>
-        <div class="brand">🪷 <span>Naam Jap</span></div>
+        <div class="brand"><span class="brand-mark">ॐ</span><span>Naam Jap</span></div>
         <div id="subtitle" class="tiny muted">Naam Smaran</div>
       </div>
-      <button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button>
+      <div class="top-actions"><button id="settingsTopBtn" class="icon-action" aria-label="Settings">⚙</button><button id="profileTopBtn" class="profile-mini" aria-label="Profile"><span id="profileMiniAvatar">A</span><span id="profileMiniName">Profile</span></button></div>
     </header>
 
     <main>
@@ -93,7 +93,7 @@
           <div class="session-count" id="sessionCount">0</div>
           <div class="muted"><span data-i18n="mala">Mala</span> <b id="sessionMala">0</b> · <span id="sessionRemain">0</span>/108</div>
           <div class="progress"><span id="sessionProgress"></span></div>
-          <button id="japButton" class="jap-button" aria-label="Count one Naam">राधे</button>
+          <button id="japButton" class="jap-button" aria-label="Count one Naam"><span>राधे</span><small>1 click = 1 Jap</small></button>
           <div class="jap-actions">
             <button id="undoBtn" class="secondary" data-i18n="undo">Undo</button>
             <button id="pauseBtn" class="secondary" data-i18n="pause">Pause</button>
@@ -114,7 +114,7 @@
       </section>
 
       <section id="sankalp" class="page">
-        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2></div>
+        <div class="section-head"><h2 data-i18n="sankalp">Sankalp</h2><button id="sankalpBackBtn" class="secondary small">← Profile</button></div>
         <div class="card">
           <form id="goalForm">
             <label data-i18n="goalNaam">Jap Naam</label>
@@ -132,7 +132,18 @@
             <button class="primary wide" type="submit" data-i18n="saveGoal">Save Sankalp</button>
           </form>
         </div>
-        <div id="goalList"></div><div class="card milestone-card"><div class="card-title">🏅 <span data-i18n="certificateSystem">Certificate Milestones</span></div><p class="muted" data-i18n="certificateSystemText">Certificates unlock automatically when the required Naam Jap total is genuinely completed.</p><div id="milestoneList"></div></div>
+        <div id="goalList"></div><div class="card milestone-card">
+  <div class="card-title"><span class="section-symbol">CERT</span> <span data-i18n="certificateSystem">Certificate Milestones</span></div>
+  <p class="muted certificate-explainer">Your certificates are earned separately for each Naam. The counter for the selected Naam is what unlocks that Naam's certificate.</p>
+  <div class="certificate-steps">
+    <div><b>108</b><span>First Mala</span></div>
+    <div><b>1,008</b><span>Sadhana Step</span></div>
+    <div><b>10,008</b><span>Deep Sadhana</span></div>
+    <div><b>1,08,000</b><span>Naam Sankalp</span></div>
+  </div>
+  <p class="tiny muted">When a milestone is reached, the app creates a unique certificate number and records your name, the exact Jap Naam, completed count and date. You can then Print / Save PDF from Profile → Certificates.</p>
+  <div id="milestoneList"></div>
+</div>
       </section>
 
       <section id="profile" class="page">
@@ -165,7 +176,7 @@
       </section>
 
       <section id="settings" class="page">
-        <div class="section-head"><h2 data-i18n="settings">Settings</h2></div>
+        <div class="section-head"><h2 data-i18n="settings">Settings</h2><button id="settingsBackBtn" class="secondary small">← Profile</button></div>
         <div class="card">
           <label data-i18n="language">Language</label>
           <select id="languageSelect">
@@ -201,13 +212,11 @@
       </section>
     </main>
 
-    <nav class="bottom-nav">
-      <button data-page="home">🏠<span data-i18n="home">Home</span></button>
-      <button data-page="jap">📿<span data-i18n="naamJap">Jap</span></button>
-      <button data-page="naam">🔖<span data-i18n="naam">Naam</span></button>
-      <button data-page="profile">👤<span data-i18n="profile">Profile</span></button>
-      <button data-page="sankalp">🎯<span data-i18n="sankalp">Sankalp</span></button>
-      <button data-page="settings">⚙️<span data-i18n="settings">Settings</span></button>
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button data-page="home"><span class="nav-icon">⌂</span><span data-i18n="home">Home</span><small>Today</small></button>
+      <button data-page="jap"><span class="nav-icon">◉</span><span data-i18n="naamJap">Jap</span><small>Start</small></button>
+      <button data-page="naam"><span class="nav-icon">✦</span><span data-i18n="naam">Naam</span><small>Choose</small></button>
+      <button data-page="profile"><span class="nav-icon">●</span><span data-i18n="profile">Profile</span><small>Progress</small></button>
     </nav>
   </div>
 
@@ -224,25 +233,13 @@
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+      navigator.serviceWorker.register('service-worker.js?v=34').catch(() => {});
     });
   }
-  // When launched from the home-screen icon (standalone/fullscreen display),
-  // also ask the browser for real fullscreen (hides the status bar too on
-  // devices/browsers that support the Fullscreen API).
-  (function () {
-    var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-      window.matchMedia('(display-mode: fullscreen)').matches ||
-      window.navigator.standalone === true;
-    if (isStandalone) {
-      var tryFullscreen = function () {
-        var el = document.documentElement;
-        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
-        document.removeEventListener('click', tryFullscreen);
-      };
-      document.addEventListener('click', tryFullscreen, { once: true });
-    }
-  })();
+  // Do not call requestFullscreen() from a normal click. Android Chrome shows
+  // a system "To exit full screen..." message when that API is used.
+  // Installed PWA fullscreen is controlled by manifest.json instead.
+
 </script>
 </body>
 </html>

@@ -280,3 +280,317 @@ select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blu
   .stats-grid .stat:last-child{grid-column:span 2}
   .bottom-nav button span{font-size:10px}
 }
+
+
+/* =========================================================
+   Naam Jap v32 — Full-screen mobile + large readable UI
+   Original visual language preserved; this layer only enlarges
+   the existing components and uses the available viewport.
+   ========================================================= */
+html,body{min-height:100%;min-height:100dvh}
+body{font-size:18px}
+#app,#mainApp,main{width:100%;min-width:0}
+.topbar{padding:14px 16px 10px;min-height:76px}
+.brand{font-size:28px}
+#subtitle{font-size:16px}
+.profile-mini{font-size:16px;min-height:50px}
+.profile-mini>span:first-child{width:42px;height:42px;font-size:18px}
+
+.page{
+  width:100%;
+  padding:18px 14px calc(124px + env(safe-area-inset-bottom));
+  min-height:calc(100dvh - 78px);
+}
+.hero-card,.jap-card,.card,.stat,.list-item,.goal-item,.cert-item,.history-item{
+  border-radius:20px;
+}
+.hero-card{padding:24px 18px}
+.eyebrow{font-size:16px}
+.hero-card h1{font-size:clamp(38px,10vw,54px)}
+.big-count{font-size:clamp(72px,23vw,108px);margin:12px 0 8px}
+.mala-row{font-size:19px;margin:18px 4px 12px}
+.mala-row b{font-size:22px}
+.card{padding:22px 18px;margin:16px 0}
+.card-title{font-size:21px;margin-bottom:11px}
+.card p,.card li{font-size:18px;line-height:1.65}
+.card li{margin:11px 0}
+.stats-grid{gap:12px;margin:16px 0}
+.stat{padding:19px 8px}
+.stat .muted{font-size:15px}
+.stat b{font-size:29px}
+
+.big-btn{font-size:22px;min-height:60px;padding:18px}
+.jap-card{
+  min-height:calc(100dvh - 170px);
+  padding:22px 10px 28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.jap-head{padding:0 2px;margin-bottom:10px}
+.jap-head .text-btn{font-size:18px}
+.pill{font-size:17px;padding:8px 16px}
+.jap-card .tiny{font-size:16px}
+.jap-card h2{font-size:clamp(36px,10vw,48px);margin:8px 0 4px}
+.session-count{font-size:clamp(72px,22vw,104px);margin:10px 0 8px}
+.jap-card .muted{font-size:18px}
+.jap-card .muted b{font-size:21px}
+.jap-card>.progress{width:min(92vw,560px);height:13px;margin:16px auto}
+.jap-button{
+  width:min(88vw,430px);
+  height:min(88vw,430px);
+  max-width:430px;
+  max-height:430px;
+  border-width:9px;
+  margin:20px auto 22px;
+  font-size:clamp(34px,10vw,48px);
+  box-shadow:0 18px 42px rgba(37,99,235,.22),0 0 0 8px rgba(37,99,235,.05);
+  position:relative;
+  overflow:hidden;
+}
+.jap-button:before{
+  content:"";
+  position:absolute;
+  inset:9%;
+  border:2px solid rgba(37,99,235,.20);
+  border-radius:50%;
+  pointer-events:none;
+}
+.jap-button:after{
+  content:"";
+  position:absolute;
+  width:25%;
+  height:25%;
+  left:18%;
+  top:14%;
+  border-radius:50%;
+  background:rgba(255,255,255,.34);
+  filter:blur(3px);
+  pointer-events:none;
+}
+.jap-button:active{transform:scale(.965)}
+.jap-actions{gap:12px;margin-top:4px}
+.jap-actions button{min-width:112px;min-height:52px;font-size:17px}
+.sound-chip{font-size:16px;padding:11px 18px;margin:16px auto 0}
+#sessionStatus{font-size:15px!important;margin-top:10px}
+#jap .card:last-child{font-size:18px}
+
+.list-main b{font-size:21px}
+.list-item{padding:17px}
+.list-item .tiny{font-size:15px}
+.goal-item .goal-top{font-size:19px}
+.milestone-main{font-size:18px}
+.milestone-main small{font-size:15px}
+.milestone-status{font-size:14px}
+.profile-name-wrap h2{font-size:30px}
+.profile-avatar{width:88px;height:88px;font-size:34px}
+.profile-tab{font-size:16px;min-height:52px}
+.summary-row{font-size:18px}
+.history-item{font-size:18px}
+.history-item b{font-size:20px}
+.card label{font-size:16px}
+select,input{font-size:18px;min-height:56px}
+.bottom-nav{
+  padding:7px 5px calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav button{
+  min-height:72px;
+  font-size:clamp(25px,7vw,31px);
+  border-radius:14px;
+}
+.bottom-nav button span{font-size:13px}
+.toast{font-size:17px;padding:14px 18px}
+
+@keyframes japTapPulse{
+  0%{box-shadow:0 18px 42px rgba(37,99,235,.22),0 0 0 0 rgba(37,99,235,.22)}
+  60%{box-shadow:0 18px 42px rgba(37,99,235,.22),0 0 0 18px rgba(37,99,235,0)}
+  100%{box-shadow:0 18px 42px rgba(37,99,235,.22),0 0 0 0 rgba(37,99,235,0)}
+}
+.jap-button.tap-flash{animation:japTapPulse .32s ease-out}
+
+@keyframes milestonePop{
+  0%{transform:scale(.72);opacity:0}
+  70%{transform:scale(1.04);opacity:1}
+  100%{transform:scale(1);opacity:1}
+}
+.milestone-celebration{animation:milestonePop .55s cubic-bezier(.2,.8,.2,1) both;text-align:center}
+.milestone-celebration .celebration-symbol{
+  width:104px;height:104px;margin:0 auto 14px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#fef3c7,#dcfce7);
+  border:4px solid #d59b2c;
+  color:#166534;font:700 42px Georgia,serif;
+  box-shadow:0 12px 34px rgba(213,155,44,.22);
+}
+.milestone-celebration h2{font-size:30px!important}
+.milestone-celebration .big-achievement{font-size:30px;font-weight:950;color:var(--blue-dark);margin:8px 0}
+.milestone-celebration .achievement-meta{font-size:18px;line-height:1.55}
+
+.premium-cert{
+  position:relative;
+  overflow:hidden;
+  padding:30px 22px 24px;
+  text-align:center;
+  border-radius:24px;
+  border:3px solid #c69a35;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(213,155,44,.15),transparent 25%),
+    radial-gradient(circle at 90% 90%,rgba(22,163,74,.10),transparent 28%),
+    linear-gradient(145deg,#fffdf6,#f7fbff 52%,#f4fff8);
+  box-shadow:0 18px 50px rgba(23,32,51,.13);
+}
+.premium-cert:before{
+  content:"";
+  position:absolute;inset:9px;border:1px solid #d9b866;border-radius:18px;pointer-events:none;
+}
+.premium-cert .cert-crown{
+  position:relative;font-size:34px;color:#a87412;letter-spacing:4px;
+}
+.premium-cert .cert-brand{
+  position:relative;font-size:13px;letter-spacing:3px;font-weight:900;color:#2563eb;margin-top:4px;
+}
+.premium-cert h3{
+  position:relative;font-family:Georgia,"Times New Roman",serif;font-size:31px;line-height:1.15;color:#17324d;margin:10px 0 4px;
+}
+.premium-cert .cert-subtitle{position:relative;font-size:17px;color:#15803d;font-weight:900;letter-spacing:.8px}
+.premium-cert .cert-intro{position:relative;font-size:15px;line-height:1.55;color:#5b6b85;margin:15px auto;max-width:500px}
+.premium-cert .cert-name{position:relative;font-size:32px;font-weight:950;color:#172033;margin:14px 0 8px}
+.premium-cert .cert-naam-label{position:relative;display:inline-block;padding:9px 16px;border-radius:999px;background:#dcfce7;color:#166534;font-size:17px;font-weight:950}
+.premium-cert .cert-count{position:relative;font-size:32px;font-weight:950;color:#b45309;margin:16px 0 4px}
+.premium-cert .cert-milestone{position:relative;font-size:18px;font-weight:900;color:#15803d}
+.premium-cert .cert-meta{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0}
+.premium-cert .cert-meta div{padding:11px 8px;border:1px solid #d9e2ef;border-radius:13px;background:rgba(255,255,255,.72)}
+.premium-cert .cert-meta small{display:block;font-size:12px;color:#64748b;margin-bottom:3px}
+.premium-cert .cert-meta b{font-size:15px;word-break:break-word}
+.premium-cert .cert-number{position:relative;font-size:13px;color:#475569;word-break:break-all;padding-top:9px;border-top:1px solid #e8e1ca}
+.premium-cert .cert-footer{position:relative;margin-top:13px;font-size:13px;font-weight:850;letter-spacing:1px;color:#2563eb}
+.premium-cert .printCert{position:relative;margin-top:16px;min-height:52px;font-size:16px}
+
+@media(min-width:700px){
+  .page{padding-left:24px;padding-right:24px}
+}
+@media(max-width:380px){
+  .jap-button{width:84vw;height:84vw}
+  .premium-cert .cert-meta{grid-template-columns:1fr}
+  .bottom-nav button span{font-size:12px}
+}
+
+/* =========================================================
+   Naam Jap v33 — FINAL GESTURE-AIR MOBILE POLISH
+   Stable sizing: no JS fullscreen reflow, no duplicate tap events.
+   ========================================================= */
+html,body{min-height:100dvh;overflow-x:hidden}
+body{overscroll-behavior-y:none}
+#mainApp{min-height:100dvh}
+main{min-height:calc(100dvh - 78px)}
+.topbar{min-height:76px;padding:12px 16px;box-shadow:0 3px 16px rgba(15,23,42,.06)}
+.brand{font-size:27px;letter-spacing:-.3px}
+#subtitle{font-size:15px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.icon-action{width:48px;height:48px;border-radius:16px;border:1px solid #dbe4f0;background:#f8fbff;color:#334155;font-size:25px;display:grid;place-items:center;box-shadow:0 5px 14px rgba(15,23,42,.06)}
+.profile-mini{min-height:48px;font-size:16px;padding:4px 8px 4px 4px;border-radius:16px;background:#f8fbff;border:1px solid #dbe4f0}
+.profile-mini>span:first-child{width:40px;height:40px;font-size:18px}
+.page{padding:20px 14px calc(112px + env(safe-area-inset-bottom));}
+.card{padding:21px;margin:16px 0;border-radius:22px}
+.card-title{font-size:20px;margin-bottom:11px}
+.card p,.card li{font-size:18px;line-height:1.62}
+.card li{margin:12px 0}
+.card label{font-size:17px;margin-top:15px}
+select,input{font-size:19px;min-height:58px;border-radius:15px}
+.hero-card{padding:28px 18px;border-radius:24px}
+.hero-card h1{font-size:clamp(40px,11vw,58px)}
+.big-count{font-size:clamp(78px,24vw,116px)}
+.big-btn{min-height:64px;font-size:21px;border-radius:17px}
+.stat{padding:20px 9px;border-radius:20px}
+.stat .muted{font-size:15px}.stat b{font-size:30px}
+
+/* Jap screen: large, centered, but always leaves room for controls. */
+#jap.page.active{padding-top:10px}
+.jap-card{min-height:calc(100dvh - 150px);padding:18px 10px 26px;justify-content:flex-start;overflow:visible}
+.jap-head{margin-bottom:4px}
+.jap-card .tiny{font-size:17px}
+.jap-card h2{font-size:clamp(38px,10vw,52px);margin:4px 0 0;line-height:1.08}
+.session-count{font-size:clamp(78px,21vw,108px);margin:6px 0 2px;line-height:.98}
+.jap-card .muted{font-size:19px}.jap-card .muted b{font-size:22px}
+.jap-card>.progress{width:min(92vw,560px);height:13px;margin:13px auto 5px}
+.jap-button{width:min(78vw,390px);height:min(78vw,390px);margin:14px auto 18px;border-width:9px;font-size:clamp(38px,10vw,54px);font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;}
+.jap-button span{position:relative;z-index:2;line-height:1.05}.jap-button small{position:relative;z-index:2;font-size:15px;font-weight:800;color:#49627e;letter-spacing:.2px}
+.jap-button:active{transform:scale(.975)}
+.jap-actions{gap:10px;margin:2px auto 0;width:min(94vw,520px)}
+.jap-actions button{flex:1;min-width:0;min-height:54px;font-size:17px;border-radius:16px}
+.sound-chip{font-size:16px;padding:11px 18px;margin:12px auto 0;border-radius:999px}
+#sessionStatus{font-size:16px!important;font-weight:650;max-width:92vw;text-align:center;line-height:1.45;margin:9px auto 0}
+#jap>.card{font-size:18px;margin-top:14px}
+
+/* Premium 4-tab navigation: merge Sankalp + Settings into Profile/gear. */
+.bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr));padding:7px 8px calc(8px + env(safe-area-inset-bottom));gap:6px;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);box-shadow:0 -10px 28px rgba(15,23,42,.10);border-top:1px solid #dbe4f0}
+.bottom-nav button{min-height:76px;border-radius:19px;padding:7px 3px;gap:2px;font-size:16px;color:#64748b;position:relative;transition:transform .16s ease,background .16s ease,color .16s ease}
+.bottom-nav button .nav-icon{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:#f1f5f9;color:#64748b;font-size:23px;font-weight:900;line-height:1}
+.bottom-nav button span:not(.nav-icon){font-size:14px;font-weight:850;line-height:1.05;white-space:nowrap}
+.bottom-nav button small{font-size:10px;font-weight:650;color:#94a3b8;line-height:1}
+.bottom-nav button.active{background:linear-gradient(145deg,#eef5ff,#e4efff);color:#1d4ed8;box-shadow:inset 0 0 0 1px #c8dcff,0 5px 14px rgba(37,99,235,.10)}
+.bottom-nav button.active .nav-icon{background:linear-gradient(145deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 6px 15px rgba(37,99,235,.24)}
+.bottom-nav button.active small{color:#2563eb}
+.bottom-nav button:active{transform:scale(.96)}
+
+/* Profile quick actions after merging navigation. */
+.profile-quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.quick-action{min-height:76px;border-radius:18px!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;text-align:left;padding:12px 15px!important;font-size:18px!important;font-weight:900}
+.quick-action small{font-size:12px;font-weight:650;opacity:.75}
+
+/* Settings remain comfortable/readable even when opened from the gear. */
+#settings .card{padding:22px}
+#settings .sound-setting-row{font-size:18px;padding:14px 0}
+#settings .tiny{font-size:15px}
+#settings button.small{min-height:48px;font-size:16px}
+
+/* Touch feedback: subtle and devotional, not game-like. */
+.jap-button.tap-flash{animation:japTapPulse .22s ease-out}
+.jap-button.tap-flash:before{border-color:rgba(37,99,235,.38)}
+
+@media(max-width:390px){
+  .brand{font-size:24px}.topbar{min-height:70px}
+  .icon-action{width:44px;height:44px}.profile-mini{min-height:44px}
+  .jap-button{width:76vw;height:76vw}
+  .bottom-nav button{min-height:72px}.bottom-nav button span:not(.nav-icon){font-size:13px}
+  .profile-quick-actions{grid-template-columns:1fr}
+}
+
+/* =========================================================
+   v34 — stable installed-app shell + live counter polish
+   ========================================================= */
+.brand-mark{width:34px;height:34px;border-radius:11px;display:inline-grid;place-items:center;background:linear-gradient(145deg,#2563eb,#16a34a);color:#fff;font-family:Georgia,serif;font-size:20px;box-shadow:0 5px 14px rgba(37,99,235,.18)}
+.certificate-explainer{font-size:18px!important;line-height:1.55!important}
+.certificate-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0}
+.certificate-steps>div{padding:14px;border:1px solid #d9e2ef;border-radius:16px;background:linear-gradient(145deg,#fff,#f7fbff);display:flex;flex-direction:column;gap:2px}
+.certificate-steps b{font-size:24px;color:#2563eb}
+.certificate-steps span{font-size:14px;font-weight:800;color:#475569}
+.milestone-context{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 14px;margin:12px 0;border-radius:15px;background:#f1f7ff;border:1px solid #dbeafe;font-size:16px}
+.milestone-context span{font-size:14px;color:#64748b;font-weight:700}
+.cert-rules{padding:14px;border-radius:15px;background:#f7fbff;border:1px solid #dbeafe;margin-bottom:10px}
+.cert-rules b{font-size:17px}
+.jap-button{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;cursor:pointer}
+@media(max-width:420px){.certificate-steps{grid-template-columns:1fr 1fr}.certificate-steps b{font-size:21px}.certificate-steps span{font-size:13px}.milestone-context{align-items:flex-start;flex-direction:column;gap:3px}}
+
+/* v34 audio + premium certificate polish */
+.sound-setting-row button,.sound-toggle button{font-size:16px;font-weight:950;min-width:96px;min-height:46px}
+.sound-chip{font-size:17px;font-weight:950;min-height:50px}
+.milestone-celebration{position:relative;overflow:hidden;padding:30px 18px 26px;border-radius:28px;background:radial-gradient(circle at 50% 18%,#fff8d9 0,#fff 38%,#eef9ff 100%);border:3px solid #d7aa39;box-shadow:0 25px 80px rgba(15,23,42,.24)}
+.milestone-celebration:before,.milestone-celebration:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(245,190,65,.16);filter:blur(8px);animation:divineGlow 1.8s ease-in-out infinite alternate}.milestone-celebration:before{top:-90px;left:-60px}.milestone-celebration:after{bottom:-100px;right:-60px}
+.milestone-celebration .celebration-symbol{position:relative;font-size:70px;color:#b77910;animation:celebratePulse .9s ease-in-out infinite alternate}
+.milestone-celebration h2{position:relative;font-size:34px!important;color:#17324d!important;margin:8px 0!important}
+.milestone-celebration .big-achievement{position:relative;font-size:42px!important;color:#b45309!important;font-weight:950;margin:10px 0}
+.milestone-celebration .achievement-meta{position:relative;font-size:19px;line-height:1.6}
+@keyframes celebratePulse{from{transform:scale(.94) rotate(-2deg)}to{transform:scale(1.08) rotate(2deg)}}
+@keyframes divineGlow{from{transform:scale(.8);opacity:.35}to{transform:scale(1.15);opacity:.75}}
+.premium-cert{padding:38px 24px 30px;border:5px solid #c99b2e;background:radial-gradient(circle at 50% 0,#fff7d7 0,#fffdf7 30%,#f2fbff 67%,#effcf3 100%);box-shadow:0 24px 70px rgba(15,23,42,.18)}
+.premium-cert .cert-crown{font-size:42px;color:#b77910}.premium-cert .cert-brand{font-size:15px;letter-spacing:4px;color:#1d4ed8}
+.premium-cert h3{font-size:38px;line-height:1.12;margin:13px 0 7px}.premium-cert .cert-subtitle{font-size:21px;color:#15803d}
+.premium-cert .cert-name{font-size:42px;line-height:1.15;color:#172033;margin:20px 0 12px}
+.premium-cert .cert-naam-label{display:block;width:fit-content;max-width:100%;margin:0 auto;padding:12px 22px;border-radius:18px;background:linear-gradient(135deg,#fff0b8,#dff7e9);border:2px solid #d2a33a;color:#7c4a03;font-size:25px;font-weight:1000;box-shadow:0 8px 25px rgba(213,155,44,.18)}
+.premium-cert .cert-count{font-size:42px;color:#b45309;margin:19px 0 5px}.premium-cert .cert-milestone{font-size:21px;color:#166534}.premium-cert .cert-meta div{padding:14px 9px}.premium-cert .cert-meta small{font-size:13px}.premium-cert .cert-meta b{font-size:17px}.premium-cert .cert-number{font-size:15px}.premium-cert .cert-footer{font-size:15px}
+@media(max-width:420px){.premium-cert{padding:30px 16px 24px}.premium-cert h3{font-size:32px}.premium-cert .cert-name{font-size:35px}.premium-cert .cert-naam-label{font-size:22px}.premium-cert .cert-count{font-size:36px}.milestone-celebration .big-achievement{font-size:36px!important}}
+
+.mala-celebration{position:relative;overflow:hidden;text-align:center;padding:30px 18px 26px;border-radius:28px;background:radial-gradient(circle at 50% 20%,#fff7d6,#fff 48%,#eff9ff);border:3px solid #d7aa39;box-shadow:0 22px 70px rgba(15,23,42,.20)}
+.mala-celebration .celebration-symbol{font-size:68px;color:#b77910;animation:celebratePulse .9s ease-in-out infinite alternate}.mala-celebration h2{font-size:31px!important;color:#17324d!important}.mala-celebration p{font-size:18px!important;line-height:1.55}

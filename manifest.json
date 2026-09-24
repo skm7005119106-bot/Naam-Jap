@@ -6,10 +6,12 @@
   "scope": "./",
   "id": "./index.html",
   "display": "standalone",
-  "display_override": ["fullscreen", "standalone", "minimal-ui"],
+  "display_override": [
+    "standalone"
+  ],
   "orientation": "portrait",
-  "background_color": "#f5f8fc",
-  "theme_color": "#2563eb",
+  "background_color": "#f7fbff",
+  "theme_color": "#f7fbff",
   "lang": "hi",
   "dir": "ltr",
   "icons": [
