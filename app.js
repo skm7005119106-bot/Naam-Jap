@@ -42,9 +42,9 @@ const thoughts={
 let state;
 let session={active:false,count:0,undone:0,lastTap:0,paused:false,start:0,history:[],lastMala:0};
 
-function defaultState(){return {version:7,onboarded:false,lang:"hi",selected:"radhe",customNaams:[],favourites:[],counts:{},daily:{},sessions:[],goals:[],certificates:[],profile:{name:"",joined:todayKey()},settings:{tapGuard:"strict",sound:true,tapSound:true,malaSound:true,soundVolume:55},milestoneCertificates:{}}}
+function defaultState(){return {version:8,onboarded:false,lang:"hi",selected:"radhe",customNaams:[],favourites:[],counts:{},daily:{},sessions:[],goals:[],certificates:[],profile:{name:"",joined:todayKey()},settings:{tapGuard:"off",sound:true,tapSound:true,malaSound:true,soundVolume:55},milestoneCertificates:{}}}
 function load(){try{state=JSON.parse(localStorage.getItem(KEY))||defaultState()}catch(e){state=defaultState()} normalize()}
-function normalize(){const d=defaultState();state={...d,...state,profile:{...d.profile,...(state.profile||{})},settings:{...d.settings,...(state.settings||{})},counts:state.counts||{},daily:state.daily||{},customNaams:state.customNaams||[],favourites:state.favourites||[],sessions:state.sessions||[],goals:state.goals||[],certificates:state.certificates||[],milestoneCertificates:state.milestoneCertificates||{}};if(!state.profile.name)state.profile.name=""}
+function normalize(){const d=defaultState();const oldVersion=Number(state&&state.version||0);state={...d,...state,profile:{...d.profile,...(state.profile||{})},settings:{...d.settings,...(state.settings||{})},counts:state.counts||{},daily:state.daily||{},customNaams:state.customNaams||[],favourites:state.favourites||[],sessions:state.sessions||[],goals:state.goals||[],certificates:state.certificates||[],milestoneCertificates:state.milestoneCertificates||{}};if(oldVersion<8)state.settings.tapGuard="off";state.version=8;if(!state.profile.name)state.profile.name=""}
 function save(){localStorage.setItem(KEY,JSON.stringify(state))}
 function allNaams(){return NAAMS.concat(state.customNaams)}
 function naamObj(id){return allNaams().find(n=>n.id===id)||NAAMS[1]}
@@ -63,7 +63,7 @@ function renderOnboard(){const sel=document.getElementById("onboardNaam");if(!se
 function renderSoundControls(){const on=state.settings.sound!==false;const tap=state.settings.tapSound!==false;const mala=state.settings.malaSound!==false;const vol=Math.max(0,Math.min(100,Number(state.settings.soundVolume??55)));const all=document.getElementById("soundToggle"),tapBtn=document.getElementById("tapSoundToggle"),malaBtn=document.getElementById("malaSoundToggle"),r=document.getElementById("soundVolume"),lab=document.getElementById("soundVolumeLabel");if(all){all.textContent=on?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");all.classList.toggle("off",!on)}if(tapBtn){tapBtn.textContent=(on&&tap)?"ON":"OFF";tapBtn.classList.toggle("off",!(on&&tap))}if(malaBtn){malaBtn.textContent=(on&&mala)?"ON":"OFF";malaBtn.classList.toggle("off",!(on&&mala))}if(r)r.value=vol;if(lab)lab.textContent=vol+"%"}
 function render(){renderSoundControls();renderOnboard();const n=naamObj(state.selected);document.getElementById("homeNaam").textContent=displayNaam(n);document.getElementById("japNaam").textContent=displayNaam(n);document.getElementById("todayCount").textContent=getToday(n.id).toLocaleString();document.getElementById("todayMala").textContent=Math.floor(getToday(n.id)/108);document.getElementById("todayRemain").textContent=getToday(n.id)%108;document.getElementById("malaProgress").style.width=`${(getToday(n.id)%108)/108*100}%`;document.getElementById("totalCount").textContent=totalFor(n.id).toLocaleString();document.getElementById("totalMala").textContent=Math.floor(totalFor(n.id)/108).toLocaleString();const g=state.goals.find(x=>x.active);document.getElementById("goalText").textContent=g?`${Math.min(totalFor(g.naamId),g.target).toLocaleString()}/${g.target.toLocaleString()}`:"—";document.getElementById("dailyThought").textContent=thoughts[state.lang][new Date().getDate()%thoughts[state.lang].length];document.getElementById("guidanceList").innerHTML=(state.lang==="hi"?["Jahan sambhav ho, saaf aur shaant sthaan chunen.","Mobile ko Jap ke dauran anuchit ya gandi jagah par na rakhein.","Notifications aur doosre distractions ko kam karein.","Ek chune hue Naam par man lagane ka abhyas karein.","Naam Jap ko competition ya dikhawa na banayein."]:["Where possible, choose a clean and quiet place.","Keep the phone in a clean and appropriate place during Jap.","Reduce notifications and other distractions.","Practice bringing the mind back to your chosen Naam.","Do not turn Naam Jap into competition or display."]).map(x=>`<li>${x}</li>`).join("");fillNaamSelect(document.getElementById("goalNaam"),state.selected);fillNaamSelect(document.getElementById("defaultNaamSelect"),state.selected);document.getElementById("languageSelect").value=state.lang;document.getElementById("tapGuardSelect").value=state.settings.tapGuard;renderNaamList();renderGoals();renderMilestones();renderHistory();renderCertificates();renderProfile();renderSession();}
 
-function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo(0,0)}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,left:0,behavior:"instant"});document.documentElement.scrollTop=0;document.body.scrollTop=0}
 function openModal(html){document.getElementById("modalContent").innerHTML=html;document.getElementById("modal").classList.remove("hidden")}
 function closeModal(){document.getElementById("modal").classList.add("hidden")}
 function addCustomNaam(){const inp=document.getElementById("newNaamInput");const text=inp.value.trim();if(!text){toast(state.lang==="hi"?"Naam likhiye":"Enter a Naam");return}const id="custom-"+Date.now();state.customNaams.push({id,hi:text,en:text,group:"Custom"});state.selected=id;save();closeModal();render();toast(state.lang==="hi"?"Naam add ho gaya":"Naam added")}
@@ -93,7 +93,7 @@ function switchProfileTab(tab){
  document.getElementById(id).classList.add("active");
 }
 
-function renderSession(){document.getElementById("sessionCount").textContent=session.count.toLocaleString();document.getElementById("sessionMala").textContent=Math.floor(session.count/108);document.getElementById("sessionRemain").textContent=session.count%108;document.getElementById("sessionProgress").style.width=`${session.count%108/108*100}%`;document.getElementById("sessionPill").textContent=session.count.toLocaleString();document.getElementById("pauseBtn").textContent=session.paused?(state.lang==="hi"?"Jari rakhein":"Resume"):t("pause");const ss=document.getElementById("sessionSoundBtn");if(ss){ss.textContent=state.settings.sound?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");ss.classList.toggle("off",!state.settings.sound)}document.getElementById("japButton").disabled=session.paused;document.getElementById("sessionStatus").textContent=session.paused?(state.lang==="hi"?"Jap filhaal roka gaya hai.":"Jap is paused."):session.active?(state.lang==="hi"?"Har sachet tap ko 1 Jap gina jayega.":"Each accepted tap counts as 1 Jap."):""}
+function renderSession(){document.getElementById("sessionCount").textContent=session.count.toLocaleString();document.getElementById("sessionMala").textContent=Math.floor(session.count/108);document.getElementById("sessionRemain").textContent=session.count%108;document.getElementById("sessionProgress").style.width=`${session.count%108/108*100}%`;document.getElementById("sessionPill").textContent=session.count.toLocaleString();document.getElementById("pauseBtn").textContent=session.paused?(state.lang==="hi"?"Jari rakhein":"Resume"):t("pause");const ss=document.getElementById("sessionSoundBtn");if(ss){ss.textContent=state.settings.sound?"🔔 "+t("soundOn"):"🔕 "+t("soundOff");ss.classList.toggle("off",!state.settings.sound)}const jb=document.getElementById("japButton");if(jb){jb.disabled=session.paused;const n=naamObj(state.selected);jb.innerHTML=`<span>${escapeHtml(displayNaam(n))}</span><small>${state.lang==="hi"?"1 click = 1 Jap":"1 click = 1 Jap"}</small>`;}document.getElementById("sessionStatus").textContent=session.paused?(state.lang==="hi"?"Jap filhaal roka gaya hai.":"Jap is paused."):session.active?(session.count===0?(state.lang==="hi"?"🙏 Abhi pehla Jap karein — har click 1 Jap hoga.":"🙏 Begin now — every click counts as 1 Jap."):(state.lang==="hi"?"✨ Bahut achha — Naam par dhyan rakhein. Agla click ek aur Jap.":"✨ Beautiful — stay with the Naam. The next click is one more Jap.")):""}
 
 let audioCtx=null;
 function ensureAudio(){
@@ -134,8 +134,9 @@ function acceptTap(){
  if(!session.active) startJap();
  if(session.paused)return;
  const now=Date.now();
- if(state.settings.tapGuard==="strict" && session.lastTap && now-session.lastTap<420)return;
- if(state.settings.tapGuard==="normal" && session.lastTap && now-session.lastTap<220)return;
+ // One physical/click activation = exactly one Jap. The UI uses a single click handler;
+ // this tiny event dedupe only protects against duplicate browser events from the same gesture.
+ if(session.lastTap && now-session.lastTap<70)return;
  session.lastTap=now;
  const jb=document.getElementById("japButton"); if(jb){jb.classList.remove("tap-flash"); void jb.offsetWidth; jb.classList.add("tap-flash");}
  session.count++;
@@ -248,7 +249,7 @@ function init(){
  document.getElementById("startJap").onclick=startJap;
  document.getElementById("backHome").onclick=()=>showPage("home");
  const japBtn=document.getElementById("japButton");
- if(japBtn){japBtn.onclick=acceptTap;japBtn.onpointerup=e=>{if(e.pointerType!=="mouse"){e.preventDefault();acceptTap()}}}
+ if(japBtn){japBtn.onclick=acceptTap;japBtn.onpointerup=null;japBtn.onpointerdown=null}
  document.getElementById("undoBtn").onclick=undo;
  document.getElementById("pauseBtn").onclick=()=>{if(session.active){session.paused=!session.paused;renderSession()}};
  document.getElementById("finishSessionBtn").onclick=finishSession;
@@ -260,7 +261,12 @@ function init(){
  // Navigation
  document.querySelectorAll(".bottom-nav button").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
  document.getElementById("profileTopBtn").onclick=()=>{showPage("profile");switchProfileTab("summary")};
+ document.getElementById("settingsTopBtn").onclick=()=>showPage("settings");
+ document.getElementById("sankalpBackBtn").onclick=()=>showPage("profile");
+ document.getElementById("settingsBackBtn").onclick=()=>showPage("profile");
  document.getElementById("editProfileBtn").onclick=editProfile;
+ document.getElementById("profileSankalpBtn").onclick=()=>showPage("sankalp");
+ document.getElementById("profileSettingsBtn").onclick=()=>showPage("settings");
  document.querySelectorAll(".profile-tab").forEach(b=>b.onclick=()=>switchProfileTab(b.dataset.profileTab));
 
  // Settings

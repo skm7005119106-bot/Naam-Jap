@@ -475,3 +475,84 @@ select,input{font-size:18px;min-height:56px}
   .premium-cert .cert-meta{grid-template-columns:1fr}
   .bottom-nav button span{font-size:12px}
 }
+
+/* =========================================================
+   Naam Jap v33 — FINAL GESTURE-AIR MOBILE POLISH
+   Stable sizing: no JS fullscreen reflow, no duplicate tap events.
+   ========================================================= */
+html,body{min-height:100dvh;overflow-x:hidden}
+body{overscroll-behavior-y:none}
+#mainApp{min-height:100dvh}
+main{min-height:calc(100dvh - 78px)}
+.topbar{min-height:76px;padding:12px 16px;box-shadow:0 3px 16px rgba(15,23,42,.06)}
+.brand{font-size:27px;letter-spacing:-.3px}
+#subtitle{font-size:15px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.icon-action{width:48px;height:48px;border-radius:16px;border:1px solid #dbe4f0;background:#f8fbff;color:#334155;font-size:25px;display:grid;place-items:center;box-shadow:0 5px 14px rgba(15,23,42,.06)}
+.profile-mini{min-height:48px;font-size:16px;padding:4px 8px 4px 4px;border-radius:16px;background:#f8fbff;border:1px solid #dbe4f0}
+.profile-mini>span:first-child{width:40px;height:40px;font-size:18px}
+.page{padding:20px 14px calc(112px + env(safe-area-inset-bottom));}
+.card{padding:21px;margin:16px 0;border-radius:22px}
+.card-title{font-size:20px;margin-bottom:11px}
+.card p,.card li{font-size:18px;line-height:1.62}
+.card li{margin:12px 0}
+.card label{font-size:17px;margin-top:15px}
+select,input{font-size:19px;min-height:58px;border-radius:15px}
+.hero-card{padding:28px 18px;border-radius:24px}
+.hero-card h1{font-size:clamp(40px,11vw,58px)}
+.big-count{font-size:clamp(78px,24vw,116px)}
+.big-btn{min-height:64px;font-size:21px;border-radius:17px}
+.stat{padding:20px 9px;border-radius:20px}
+.stat .muted{font-size:15px}.stat b{font-size:30px}
+
+/* Jap screen: large, centered, but always leaves room for controls. */
+#jap.page.active{padding-top:10px}
+.jap-card{min-height:calc(100dvh - 150px);padding:18px 10px 26px;justify-content:flex-start;overflow:visible}
+.jap-head{margin-bottom:4px}
+.jap-card .tiny{font-size:17px}
+.jap-card h2{font-size:clamp(38px,10vw,52px);margin:4px 0 0;line-height:1.08}
+.session-count{font-size:clamp(78px,21vw,108px);margin:6px 0 2px;line-height:.98}
+.jap-card .muted{font-size:19px}.jap-card .muted b{font-size:22px}
+.jap-card>.progress{width:min(92vw,560px);height:13px;margin:13px auto 5px}
+.jap-button{width:min(78vw,390px);height:min(78vw,390px);margin:14px auto 18px;border-width:9px;font-size:clamp(38px,10vw,54px);font-weight:900;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;}
+.jap-button span{position:relative;z-index:2;line-height:1.05}.jap-button small{position:relative;z-index:2;font-size:15px;font-weight:800;color:#49627e;letter-spacing:.2px}
+.jap-button:active{transform:scale(.975)}
+.jap-actions{gap:10px;margin:2px auto 0;width:min(94vw,520px)}
+.jap-actions button{flex:1;min-width:0;min-height:54px;font-size:17px;border-radius:16px}
+.sound-chip{font-size:16px;padding:11px 18px;margin:12px auto 0;border-radius:999px}
+#sessionStatus{font-size:16px!important;font-weight:650;max-width:92vw;text-align:center;line-height:1.45;margin:9px auto 0}
+#jap>.card{font-size:18px;margin-top:14px}
+
+/* Premium 4-tab navigation: merge Sankalp + Settings into Profile/gear. */
+.bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr));padding:7px 8px calc(8px + env(safe-area-inset-bottom));gap:6px;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);box-shadow:0 -10px 28px rgba(15,23,42,.10);border-top:1px solid #dbe4f0}
+.bottom-nav button{min-height:76px;border-radius:19px;padding:7px 3px;gap:2px;font-size:16px;color:#64748b;position:relative;transition:transform .16s ease,background .16s ease,color .16s ease}
+.bottom-nav button .nav-icon{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:#f1f5f9;color:#64748b;font-size:23px;font-weight:900;line-height:1}
+.bottom-nav button span:not(.nav-icon){font-size:14px;font-weight:850;line-height:1.05;white-space:nowrap}
+.bottom-nav button small{font-size:10px;font-weight:650;color:#94a3b8;line-height:1}
+.bottom-nav button.active{background:linear-gradient(145deg,#eef5ff,#e4efff);color:#1d4ed8;box-shadow:inset 0 0 0 1px #c8dcff,0 5px 14px rgba(37,99,235,.10)}
+.bottom-nav button.active .nav-icon{background:linear-gradient(145deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 6px 15px rgba(37,99,235,.24)}
+.bottom-nav button.active small{color:#2563eb}
+.bottom-nav button:active{transform:scale(.96)}
+
+/* Profile quick actions after merging navigation. */
+.profile-quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.quick-action{min-height:76px;border-radius:18px!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;text-align:left;padding:12px 15px!important;font-size:18px!important;font-weight:900}
+.quick-action small{font-size:12px;font-weight:650;opacity:.75}
+
+/* Settings remain comfortable/readable even when opened from the gear. */
+#settings .card{padding:22px}
+#settings .sound-setting-row{font-size:18px;padding:14px 0}
+#settings .tiny{font-size:15px}
+#settings button.small{min-height:48px;font-size:16px}
+
+/* Touch feedback: subtle and devotional, not game-like. */
+.jap-button.tap-flash{animation:japTapPulse .22s ease-out}
+.jap-button.tap-flash:before{border-color:rgba(37,99,235,.38)}
+
+@media(max-width:390px){
+  .brand{font-size:24px}.topbar{min-height:70px}
+  .icon-action{width:44px;height:44px}.profile-mini{min-height:44px}
+  .jap-button{width:76vw;height:76vw}
+  .bottom-nav button{min-height:72px}.bottom-nav button span:not(.nav-icon){font-size:13px}
+  .profile-quick-actions{grid-template-columns:1fr}
+}
