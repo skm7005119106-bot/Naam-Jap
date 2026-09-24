@@ -1,5 +1,5 @@
-const CACHE = 'naam-jap-v46-pwa';
-const ASSETS = ['./','./index.html','./style.css?v=46','./app.js','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png'];
+const CACHE = 'naam-jap-v47-pwa';
+const ASSETS = ['./','./index.html','./style.css?v=47','./app.js','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png'];
 
 self.addEventListener('install', e =>
   e.waitUntil(
