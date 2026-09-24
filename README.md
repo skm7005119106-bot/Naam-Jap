@@ -202,3 +202,18 @@ that → [your name] → has completed → [count] Jap → of → [Naam]" with t
 Naam shown in its own bold green pill, same visual weight as your name —
 previously the Naam line used an unstyled default heading and was easy to
 miss next to the large name.
+
+
+## v31 — Naam Smaran Divine Edition
+- Preserved the original v30 UI sizing and typography.
+- Four bottom tabs only: Home, Jap, Naam, Profile.
+- Settings gear in the top bar.
+- Hindi, Bangla and English language choices.
+- Light, Dark and Divine themes.
+- Separate app/tap/mala sound controls plus volume.
+- Optional haptic feedback and keep-screen-awake.
+- Custom Naam entry.
+- Jap circle itself shows 0→108 progress with a smooth tap ripple.
+- Milestone completion triggers a large animated celebration and immediately creates a unique certificate ID.
+- Certificates include user name, actual Jap Naam, milestone/target, completion date and unique Certificate ID; Print / Save PDF is available.
+- Removed unsupported emoji from the app UI.
