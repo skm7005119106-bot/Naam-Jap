@@ -136,10 +136,11 @@
   <div class="card-title"><span class="section-symbol">CERT</span> <span data-i18n="certificateSystem">Certificate Milestones</span></div>
   <p class="muted certificate-explainer">Your certificates are earned separately for each Naam. The counter for the selected Naam is what unlocks that Naam's certificate.</p>
   <div class="certificate-steps">
-    <div><b>108</b><span>First Mala</span></div>
-    <div><b>1,008</b><span>Sadhana Step</span></div>
+    <div><b>108</b><span>1 Mala Complete</span></div>
+    <div><b>1,008</b><span>Certificate Milestone</span></div>
     <div><b>10,008</b><span>Deep Sadhana</span></div>
-    <div><b>1,08,000</b><span>Naam Sankalp</span></div>
+    <div><b>1,08,000</b><span>Major Milestone</span></div>
+    <div><b>10,00,000</b><span>Mahasadhana</span></div>
   </div>
   <p class="tiny muted">When a milestone is reached, the app creates a unique certificate number and records your name, the exact Jap Naam, completed count and date. You can then Print / Save PDF from Profile → Certificates.</p>
   <div id="milestoneList"></div>
@@ -233,7 +234,7 @@
   // Register service worker so the app is installable and works offline.
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('service-worker.js?v=34').catch(() => {});
+      navigator.serviceWorker.register('service-worker.js?v=36').catch(() => {});
     });
   }
   // Do not call requestFullscreen() from a normal click. Android Chrome shows

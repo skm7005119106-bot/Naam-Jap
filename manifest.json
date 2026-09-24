@@ -2,9 +2,9 @@
   "name": "Naam Jap — Naam Smaran",
   "short_name": "Naam Jap",
   "description": "A simple offline companion for Naam Jap and Naam Smaran.",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
-  "id": "./index.html",
+  "id": "./",
   "display": "standalone",
   "display_override": [
     "standalone"
