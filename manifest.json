@@ -4,10 +4,9 @@
   "description": "A simple offline companion for Naam Jap and Naam Smaran.",
   "start_url": "./",
   "scope": "./",
-  "id": "./",
-  "display": "fullscreen",
+  "id": "./naam-jap",
+  "display": "standalone",
   "display_override": [
-    "fullscreen",
     "standalone"
   ],
   "orientation": "portrait",
@@ -40,5 +39,11 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "navigate-existing",
+      "auto"
+    ]
+  }
 }
