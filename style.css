@@ -1699,16 +1699,21 @@ body{font-size:40px!important;line-height:1.35!important}
 /* No accidental browser zoom on interactive controls. */
 button,select,input,textarea,a{touch-action:manipulation!important}
 
-/* V40 FINAL — Jap circle only: immersive 9:16 Android portrait tap area.
-   No other UI sizing/layout is changed. */
+/* V41 — Jap circle: capped by BOTH width AND height (min(vw,vh)) so it
+   always fits in one view on every Android aspect ratio — short/wide
+   phones included — without pushing into the counter above it or the
+   Undo/Pause/Finish buttons below it. Earlier duplicate 96vw-uncapped
+   rules above this are superseded by this single final rule. */
 #jap .jap-button{
-  width:min(96vw,620px)!important;
-  height:min(96vw,620px)!important;
-  max-width:620px!important;
-  max-height:620px!important;
+  width:min(78vw,42vh,380px)!important;
+  height:min(78vw,42vh,380px)!important;
+  max-width:none!important;
+  max-height:none!important;
+  min-width:0!important;
+  min-height:0!important;
   aspect-ratio:1/1!important;
   flex:0 0 auto!important;
-  margin:14px auto 20px!important;
+  margin:10px auto 18px!important;
   border-radius:50%!important;
   box-sizing:border-box!important;
   display:flex!important;
@@ -1716,34 +1721,77 @@ button,select,input,textarea,a{touch-action:manipulation!important}
   justify-content:center!important;
   flex-direction:column!important;
 }
-
-@media (max-width:430px){
-  #jap .jap-button{
-    width:96vw!important;
-    height:96vw!important;
-    max-width:none!important;
-    max-height:none!important;
-  }
-}
-
-/* FINAL JAP CIRCLE — only the Jap counter circle is changed.
-   Optimized for 9:16 Android portrait screens. */
-#jap .jap-button{
-  width:96vw!important;
-  height:96vw!important;
-  max-width:none!important;
-  max-height:none!important;
-  min-width:0!important;
-  min-height:0!important;
-  aspect-ratio:1/1!important;
-  border-radius:50%!important;
-  box-sizing:border-box!important;
-  flex:0 0 auto!important;
-  margin:10px auto 18px!important;
-}
 @media (min-width:600px){
   #jap .jap-button{
-    width:min(96vw,680px)!important;
-    height:min(96vw,680px)!important;
+    width:min(60vw,46vh,420px)!important;
+    height:min(60vw,46vh,420px)!important;
   }
+}
+
+/* =========================================================
+   Naam Jap v41 — FINAL overlap-proof responsive layer
+   Every selector below was previously re-declared 5-10+ times
+   across v30-v40 (same bug the v29 header warned about), each
+   time pushed a bit bigger, until small chips/pills/nav labels
+   were forced to the same size as headings and stopped fitting
+   their own boxes. This layer defines each of them ONCE with
+   clamp() so they scale smoothly on any width — no separate
+   fixed breakpoints to fall out of sync again. Large readable
+   content (counters, headings, main buttons) keeps its v40
+   size; only tight-container chrome is right-sized to fit.
+   ========================================================= */
+*,*:before,*:after{min-width:0}
+img,svg{max-width:100%}
+
+/* Top bar: brand + profile chip must never collide */
+.topbar{flex-wrap:nowrap!important;gap:6px!important}
+.brand{font-size:clamp(18px,5vw,26px)!important;min-width:0!important;overflow:hidden!important}
+.brand span:last-child{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+#subtitle{font-size:clamp(11px,2.8vw,14px)!important}
+.top-actions{flex-shrink:0!important}
+.icon-action{width:clamp(38px,9vw,46px)!important;height:clamp(38px,9vw,46px)!important;font-size:clamp(18px,4.6vw,23px)!important;flex-shrink:0!important;min-width:0!important}
+.profile-mini{font-size:clamp(12px,3vw,15px)!important;max-width:36vw!important;min-height:44px!important;flex-shrink:1!important}
+.profile-mini>span:first-child{width:clamp(30px,8vw,40px)!important;height:clamp(30px,8vw,40px)!important;font-size:clamp(13px,3.4vw,17px)!important;flex-shrink:0!important}
+.profile-mini span:last-child{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+
+/* Bottom navigation: 4 buttons, one row, never wraps or bleeds into content above */
+.bottom-nav{padding:6px 4px calc(6px + env(safe-area-inset-bottom))!important;min-height:auto!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
+.bottom-nav button{min-height:64px!important;padding:5px 2px!important;gap:2px!important;min-width:0!important}
+.bottom-nav button .nav-icon{width:clamp(26px,7vw,34px)!important;height:clamp(26px,7vw,34px)!important;font-size:clamp(15px,4vw,20px)!important;flex-shrink:0!important}
+.bottom-nav button span:not(.nav-icon){font-size:clamp(10px,2.6vw,12.5px)!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important;display:block!important}
+.bottom-nav button small{font-size:clamp(8.5px,2.2vw,10.5px)!important;display:block!important}
+.page{padding-bottom:calc(112px + env(safe-area-inset-bottom))!important}
+
+/* Rows that pair a label with a value — wrap instead of overlapping */
+.mala-row{font-size:clamp(14px,3.6vw,18px)!important;flex-wrap:wrap!important;row-gap:4px!important}
+.mala-row b{font-size:clamp(16px,4vw,20px)!important}
+.sound-setting-row,.settings-toggle-row{font-size:clamp(14px,3.6vw,16px)!important;flex-wrap:wrap!important;row-gap:6px!important}
+.sound-setting-row button,.settings-toggle-row button{font-size:clamp(13px,3.2vw,15px)!important;min-width:78px!important;min-height:40px!important;flex-shrink:0!important}
+.summary-row{font-size:clamp(14px,3.6vw,16px)!important;flex-wrap:wrap!important}
+.goal-item .goal-top{font-size:clamp(14px,3.6vw,17px)!important;flex-wrap:wrap!important}
+.history-item{font-size:clamp(14px,3.6vw,16px)!important}
+.history-item b{font-size:clamp(15px,3.8vw,17px)!important}
+
+/* Small chips/pills/badges: capped so they don't outgrow their own rounded box */
+.badge,.milestone-status{font-size:clamp(11px,2.8vw,13px)!important;padding:5px 9px!important;white-space:nowrap!important}
+.goal-chip{font-size:clamp(12px,3vw,14px)!important;min-height:38px!important;padding:8px 11px!important}
+.pill{font-size:clamp(13px,3.2vw,15px)!important;padding:6px 13px!important}
+.sound-chip{font-size:clamp(12px,3vw,14px)!important}
+.quick-action{font-size:clamp(14px,3.6vw,17px)!important;padding:11px 13px!important}
+.quick-action small{font-size:clamp(11px,2.8vw,12.5px)!important}
+.certificate-steps b{font-size:clamp(18px,5vw,25px)!important}
+.certificate-steps span{font-size:clamp(12px,3vw,14px)!important}
+.profile-tab{font-size:clamp(12px,3vw,14px)!important;min-height:46px!important;padding:10px 3px!important}
+.profile-name-wrap h2{font-size:clamp(19px,5.2vw,26px)!important;overflow-wrap:anywhere!important}
+
+/* Jap action row (Undo/Pause/Finish) — shrink to fit 3-across on narrow phones */
+.jap-actions{flex-wrap:nowrap!important;gap:8px!important}
+.jap-actions button{flex:1 1 0!important;min-width:0!important;font-size:clamp(12px,3.4vw,16px)!important;padding:10px 4px!important;white-space:nowrap!important}
+
+/* Certificates — long names/numbers wrap instead of spilling over the border */
+.premium-cert .cert-name,.cert-user-name,.premium-cert .cert-number,.cert .cert-num{overflow-wrap:anywhere!important}
+.premium-cert .cert-meta{grid-template-columns:1fr 1fr!important}
+@media(max-width:340px){
+  .premium-cert .cert-meta{grid-template-columns:1fr!important}
+  .profile-mini{max-width:30vw!important}
 }

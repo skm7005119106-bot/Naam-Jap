@@ -52,3 +52,16 @@ Mobile-first offline PWA for Naam Jap / Naam Smaran.
 - Browser double-tap/pinch zoom is suppressed through viewport/touch-action rules without disabling vertical scrolling.
 - Jap counter uses one pointer interaction per physical tap; no JavaScript Fullscreen API is used.
 - Service-worker cache version was bumped so GitHub Pages does not keep the old CSS/JS.
+
+## V41 — Overlap fix + real APK build
+- Consolidated 10 layers of stacked, conflicting `!important` font-size overrides (v30-v40) that had
+  drifted back into the exact bug the original v29 rewrite was meant to prevent — small chips/badges/
+  bottom-nav labels had been pushed up to heading-sized text and no longer fit their own boxes.
+  Every affected element is now sized once with `clamp()` so it scales cleanly on any Android width.
+- Jap counter circle is now capped by both width AND height (`min(vw,vh)`), so it can no longer grow
+  taller than the available screen space and overlap the counter/buttons around it, on any aspect ratio.
+- Added `.well-known/assetlinks.json` (placeholder) and `APK_BANANE_KA_TARIKA.md`: the real fix for the
+  address-bar line is a Digital Asset Links file, not app code — see that guide for exact steps via
+  pwabuilder.com to get a real, signed, installable `.apk`.
+- Cache-busting version bumped to `v41-overlap-fix-1` so GitHub Pages / the installed app pick up the
+  new CSS instead of serving the old cached one.
