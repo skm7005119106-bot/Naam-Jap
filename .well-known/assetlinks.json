@@ -2,7 +2,7 @@
       "relation": ["delegate_permission/common.handle_all_urls"],
       "target": {
         "namespace": "android_app",
-        "package_name": "io.github.skm7005119106_bot.twa",
-        "sha256_cert_fingerprints": ["AF:B5:56:24:1B:88:C9:AA:11:DB:B8:46:9B:6B:43:6C:CF:48:37:6D:7A:A1:36:AC:9C:B2:6B:D4:6B:15:EA:D4"]
+        "package_name": "com.naamjap.twa",
+        "sha256_cert_fingerprints": ["0A:FE:61:1F:BE:50:D8:0C:DD:32:13:4A:17:28:4B:BA:2E:50:1C:44:CF:1F:84:93:EF:5F:5A:52:57:61:3C:4C"]
       }
     }]
